@@ -1,7 +1,6 @@
+package com.rezvi.SpringProjectB.repository;
 
-package com.rezvi.SpringProjectA.repository;
-
-import com.rezvi.SpringProjectA.entity.Student;
+import com.rezvi.SpringProjectB.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
