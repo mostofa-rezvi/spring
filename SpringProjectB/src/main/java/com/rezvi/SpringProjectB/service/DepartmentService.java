@@ -1,7 +1,9 @@
 package com.rezvi.SpringProjectB.service;
 
 import com.rezvi.SpringProjectB.entity.Department;
+import com.rezvi.SpringProjectB.entity.Faculty;
 import com.rezvi.SpringProjectB.repository.DepartmentRepository;
+import com.rezvi.SpringProjectB.repository.FacultyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,20 @@ public class DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
+    @Autowired
+    private FacultyRepository facultyRepository;
+
     public void saveDepartment(Department department) {
+
+        Faculty faculty = facultyRepository.findById(department.getFaculty().getId())
+                .orElseThrow(
+                        ()-> new RuntimeException("Faculty not found"
+                                + department.getFaculty().getId())
+                );
+        department.setFaculty(faculty);
+
         departmentRepository.save(department);
     }
-
 
     public List<Department> getAllDepartment() {
         return departmentRepository.findAll();

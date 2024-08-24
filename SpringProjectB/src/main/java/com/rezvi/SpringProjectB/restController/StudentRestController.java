@@ -3,6 +3,8 @@ package com.rezvi.SpringProjectB.restController;
 import com.rezvi.SpringProjectB.entity.Student;
 import com.rezvi.SpringProjectB.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,13 +16,15 @@ public class StudentRestController {
     private StudentService studentService;
 
     @GetMapping("/")
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    public ResponseEntity<List<Student>> getAllStudents() {
+        List<Student> students = studentService.getAllStudents();
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
     @PostMapping("/save")
-    public void saveStudent(@RequestBody Student student) {
+    public ResponseEntity<String> saveStudent(@RequestBody Student student) {
         studentService.saveStudent(student);
+        return new ResponseEntity<>("Student Created", HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

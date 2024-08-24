@@ -19,8 +19,8 @@ public class FacultyService {
     private DepartmentRepository departmentRepository;
 
     public void saveFaculty(Faculty faculty) {
-        Department nDepartment = departmentRepository.findById(faculty.getDepartments().getId()).get();
-        faculty.setDepartments(nDepartment);
+//        Department nDepartment = departmentRepository.findById(faculty.getDepartments().getId()).get();
+//        faculty.setDepartments(nDepartment);
         facultyRepository.save(faculty);
     }
 

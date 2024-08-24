@@ -18,4 +18,7 @@ public class Department {
     @Column(length = 60, nullable = false, unique = true)
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "facultyId")
+    private Faculty faculty;
 }
