@@ -6,3 +6,6 @@ https://github.com/kazishuvo22/Angular-Spring-Boot-Project
 
 https://github.com/akg07/Health-care-system-SB-Angular
 
+
+
+how to calculate hospital bill project in angular and spring boot

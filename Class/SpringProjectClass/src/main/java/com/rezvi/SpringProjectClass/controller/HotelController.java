@@ -35,7 +35,9 @@ public class HotelController {
     }
 
     @GetMapping("/h/searchhotel")
-    public ResponseEntity<List<HotelEntity>> findHotelByLocationName(@RequestParam(value = "locationName") String locationName){
+    public ResponseEntity<List<HotelEntity>> findHotelByLocationName(
+            @RequestParam(value = "locationName") String locationName
+     ){
         List<HotelEntity> hotelEntities = hotelService.findHotelByLocationName(locationName);
         return ResponseEntity.ok(hotelEntities);
     }
