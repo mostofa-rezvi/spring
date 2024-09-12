@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,4 +29,10 @@ public class AuthenticationController {
     ){
         return ResponseEntity.ok(authService.authenticate(user));
     }
+
+    public ResponseEntity<String> activateUser(@RequestParam("id") long id) {
+        String response = authService.activateUser(id);
+        return ResponseEntity.ok(response);
+    }
+
 }

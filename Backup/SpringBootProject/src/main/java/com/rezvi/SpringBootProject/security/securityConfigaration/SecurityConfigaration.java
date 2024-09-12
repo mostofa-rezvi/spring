@@ -40,7 +40,7 @@ public class SecurityConfigaration {
 
                                 .requestMatchers("api/doctor/{id}", "api/patient/{id}")
                                 //.hasAuthority("ADMIN", "DOCTOR")
-                                .hasAuthority("ADMIN")
+                                .hasAnyAuthority("ADMIN", "USER")
                 )
                 .userDetailsService(userService)
                 .sessionManagement(

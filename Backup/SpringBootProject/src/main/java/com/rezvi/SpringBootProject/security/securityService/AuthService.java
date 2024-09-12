@@ -1,10 +1,12 @@
 package com.rezvi.SpringBootProject.security.securityService;
 
 import com.rezvi.SpringBootProject.security.securityEntity.AuthenticationResponse;
+import com.rezvi.SpringBootProject.security.securityEntity.Role;
 import com.rezvi.SpringBootProject.security.securityEntity.Token;
 import com.rezvi.SpringBootProject.security.securityEntity.User;
 import com.rezvi.SpringBootProject.security.securityRepository.TokenRepository;
 import com.rezvi.SpringBootProject.security.securityRepository.UserRepository;
+import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +25,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final TokenRepository tokenRepository;
     private final AuthenticationManager authenticationManager;
+    private final EmailService emailService;
 
     private void saveUserToken(String jwt, User user) {
         Token tokenEntity = new Token();
@@ -46,6 +50,23 @@ public class AuthService {
         tokenRepository.saveAll(validTokens);
     }
 
+
+
+
+
+
+
+    // When u create multiple user watch video - Spring Boot Project Part 13
+
+
+
+
+
+
+
+
+
+
     public AuthenticationResponse register(User user) {
 
         // Check if the user already exists
@@ -55,6 +76,9 @@ public class AuthService {
 
         // Create a new user entity and save it to the database
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.valueOf("USER"));
+        user.setActive(false);
+
         userRepository.save(user);
 
         // Generate JWT Token for the newly registered user
@@ -62,9 +86,11 @@ public class AuthService {
 
         // Save the token to the token repository
         saveUserToken(jwt, user);
+        sendActivationEmail(user);
 
         return new AuthenticationResponse(jwt, "User registration is successful.");
     }
+
 
     public AuthenticationResponse authenticate(User user) {
         authenticationManager.authenticate(
@@ -83,5 +109,44 @@ public class AuthService {
         saveUserToken(jwt, user);
 
         return new AuthenticationResponse(jwt, "User authentication is successful.");
+    }
+
+    private void sendActivationEmail(User user) {
+        String activationUrl = "http://localhost:8080/activate/" + user.getId();
+
+        String mailText = "<h3>Dear "
+                + user.getName()
+                + ",</h3>"
+                + "<p>Please click on the following link to confirm your account:</p>"
+                + "<a href=\"" + activationUrl + "\">Activate Account</a>"
+                + "<br><br>Regards,<br>Hotel Booking";
+
+
+        String subject = "Activation Email";
+
+        try {
+            emailService.sendSimpleMail(user.getEmail(), subject, activationUrl);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String activateUser(long id) {
+
+        User userOptional = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found."));
+
+        if (userOptional != null) {
+
+            userOptional.setActive(true);
+
+            userRepository.save(userOptional);
+
+//            user.setActivationToken(null);
+
+            return "User activated successfully";
+        } else {
+            return "Invalid activation token";
+        }
     }
 }
