@@ -28,6 +28,8 @@ public class User implements UserDetails {
     private Boolean gender;
     private String image;
 
+    private boolean active;
+
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
@@ -67,6 +69,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return active;
     }
 }
