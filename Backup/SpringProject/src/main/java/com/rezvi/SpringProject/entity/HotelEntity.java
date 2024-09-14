@@ -15,14 +15,16 @@ public class HotelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
+
     private String address;
-    private String city;
-    private String state;
+
     private String rating;
-    private String image;
-    private String minPrice;
-    private String maxPrice;
+
+    private int startPrice;
+
+    private String images;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "locationId")

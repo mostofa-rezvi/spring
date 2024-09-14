@@ -1,9 +1,8 @@
-package com.rezvi.SpringProjectClass.controller;
+package com.rezvi.SpringProjectClass.restController;
 
 import com.rezvi.SpringProjectClass.entity.HotelEntity;
 import com.rezvi.SpringProjectClass.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class HotelController {
 
     @PostMapping("/save")
     public ResponseEntity<String> saveHotel(
-            @RequestPart HotelEntity hotelEntity,
+            @RequestPart(value = "hotel") HotelEntity hotelEntity,
             @RequestParam(value = "image", required = true) MultipartFile imageFile
             ) throws IOException {
         hotelService.saveHotel(hotelEntity, imageFile);

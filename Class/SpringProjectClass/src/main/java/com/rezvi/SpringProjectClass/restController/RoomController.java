@@ -1,7 +1,7 @@
-package com.rezvi.SpringProject.restController;
+package com.rezvi.SpringProjectClass.restController;
 
-import com.rezvi.SpringProject.entity.RoomEntity;
-import com.rezvi.SpringProject.service.RoomService;
+import com.rezvi.SpringProjectClass.entity.RoomEntity;
+import com.rezvi.SpringProjectClass.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class RoomController {
     public ResponseEntity<String> saveRoom(
             @RequestPart(value = "room")RoomEntity roomEntity,
             @RequestParam(value = "image", required = true) MultipartFile imageFile
-    ) throws IOException {
+            ) throws IOException {
         roomService.saveRoom(roomEntity, imageFile);
         return new ResponseEntity<>("Room added successfully with image.", HttpStatus.OK);
     }
