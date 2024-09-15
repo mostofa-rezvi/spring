@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
- @Table(name = "rooms")
+@Table(name = "rooms")
 public class RoomEntity {
 
     @Id
@@ -23,7 +23,7 @@ public class RoomEntity {
     private int childNo;
     private boolean availability;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private HotelEntity hotelEntity;
 
 }

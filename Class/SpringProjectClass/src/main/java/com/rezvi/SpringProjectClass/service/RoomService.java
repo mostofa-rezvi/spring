@@ -22,9 +22,6 @@ public class RoomService {
     @Autowired
     private RoomRepository roomRepository;
 
-    @Autowired
-    private RoomService roomService;
-
     @Value("src/main/resources/static/images")
     private String uploadDir;
     @Autowired

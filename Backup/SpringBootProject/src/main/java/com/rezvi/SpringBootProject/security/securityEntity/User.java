@@ -29,7 +29,7 @@ public class User implements UserDetails {
     private String image;
 
     private boolean active;
-    private boolean lock;
+    private boolean locked;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
@@ -60,7 +60,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return lock;
+        return locked;
     }
 
     @Override
