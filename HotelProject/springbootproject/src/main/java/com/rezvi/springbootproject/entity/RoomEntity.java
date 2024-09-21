@@ -21,7 +21,7 @@ public class RoomEntity {
     private  int area;
     private  int adultNo;
     private  int childNo;
-    private boolean avilability;
+    private boolean availability;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotelId")
