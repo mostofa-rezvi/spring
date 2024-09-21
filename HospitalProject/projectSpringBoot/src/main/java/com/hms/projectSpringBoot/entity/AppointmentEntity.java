@@ -29,11 +29,15 @@ public class AppointmentEntity {
     private String notes;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "deparatmentId")
+    @JoinColumn(name = "deparatments")
     private DepartmentEntity department;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userID")
+    @JoinColumn(name = "users")
     private UserEntity user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "doctors")
+    private UserEntity doctor;
 
 }

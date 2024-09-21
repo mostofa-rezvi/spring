@@ -27,7 +27,7 @@ public class BillEntity {
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userID")
-    private UserEntity user;
+    @JoinColumn(name = "patients")
+    private UserEntity patient;
 
 }

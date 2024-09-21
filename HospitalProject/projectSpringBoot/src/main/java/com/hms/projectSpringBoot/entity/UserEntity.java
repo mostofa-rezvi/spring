@@ -19,6 +19,7 @@ public class UserEntity {
     private Date birthday;
     private String address;
     private String image;
+
     private String doctorDegree;
     private String doctorSpeciality;
     private String doctorLicense;
@@ -27,6 +28,9 @@ public class UserEntity {
     private String nurseLicense;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "departmentId")
+    @JoinColumn(name = "departments")
     private DepartmentEntity department;
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 }

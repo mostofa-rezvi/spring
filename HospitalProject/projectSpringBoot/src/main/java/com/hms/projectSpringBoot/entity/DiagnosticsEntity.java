@@ -21,12 +21,10 @@ public class DiagnosticsEntity {
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userdoctor")
-    private UserEntity userDoctor;
+    @JoinColumn(name = "doctors")
+    private UserEntity doctor;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userpatient")
-    private UserEntity userPatient;
-
-    // Relation with patient, doctor
+    @JoinColumn(name = "patients")
+    private UserEntity patient;
 }

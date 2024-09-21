@@ -1,9 +1,9 @@
 package com.hms.projectSpringBoot.entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class PrescriptionEntity {
@@ -11,6 +11,7 @@ public class PrescriptionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private Date prescriptionDate;
     private String notes;
 
@@ -18,12 +19,14 @@ public class PrescriptionEntity {
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userdoctor")
-    private UserEntity userDoctor;
+    @JoinColumn(name = "doctors")
+    private UserEntity doctor;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userpatient")
-    private UserEntity userPatient;
+    @JoinColumn(name = "patients")
+    private UserEntity patient;
 
-    // Relation with Patient and Doctor;
+    @OneToMany(mappedBy = "prescriptionEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<MedicineEntity> medicines; // List of medicines in this prescription
+
 }
