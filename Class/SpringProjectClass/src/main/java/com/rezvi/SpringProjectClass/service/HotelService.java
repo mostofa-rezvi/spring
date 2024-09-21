@@ -37,7 +37,7 @@ public class HotelService {
 
         if (multipartFile != null && !multipartFile.isEmpty()) {
             String imageFileName = saveImage(multipartFile, hotelEntity);
-            hotelEntity.setImages(imageFileName);
+            hotelEntity.setImage(imageFileName);
         }
 
         hotelEntity.setLocationEntity(locationEntity);
