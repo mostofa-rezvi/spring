@@ -24,7 +24,7 @@ public class HotelEntity {
 
     private int startPrice;
 
-    private String images;
+    private String image;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "locationId")
