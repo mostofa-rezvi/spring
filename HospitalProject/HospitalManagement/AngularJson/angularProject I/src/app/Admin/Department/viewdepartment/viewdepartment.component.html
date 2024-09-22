@@ -1,0 +1,48 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col-sm-4 col-3">
+        <h4 class="page-title">Departments</h4>
+      </div>
+      <div class="col-sm-8 col-9 text-right m-b-20">
+        <a href="adddepartment" class="btn btn-primary btn-rounded float-end text-white m-1">
+          <i class="fa fa-plus"></i><span> Add Department</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="department-list">
+      <h2>Departments List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Head</th>
+            <th>Location</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Doctors</th>
+            <th>Nurses</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let department of departments">
+            <td>{{ department.name }}</td>
+            <td>{{ department.headOfDepartment }}</td>
+            <td>{{ department.location }}</td>
+            <td>{{ department.phone }}</td>
+            <td>{{ department.email }}</td>
+            <td>{{ department.numberOfDoctors }}</td>
+            <td>{{ department.numberOfNurses }}</td>
+            <td>
+              <a [routerLink]="['/updatedepartment', department.id]" class="btn btn-primary m-1">Edit</a>
+              <button (click)="deleteDepartment(department.id)" class="btn btn-danger m-1">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

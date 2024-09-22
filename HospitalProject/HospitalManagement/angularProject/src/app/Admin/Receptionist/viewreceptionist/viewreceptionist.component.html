@@ -1,0 +1,46 @@
+<div class="page-wrapper">
+    <div class="content">
+      <div class="row">
+        <div class="col-sm-4 col-3">
+          <h4 class="page-title">Receptionists</h4>
+        </div>
+        <div class="col-sm-8 col-9 text-right m-b-20">
+          <a href="addrecep" class="btn btn-primary btn-rounded float-end text-white m-1">
+            <i class="fa fa-plus"></i><span> Add Receptionist</span>
+          </a>
+        </div>
+      </div>
+  
+      <div class="receptionist-list">
+        <h2>Receptionists List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Shift</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let receptionist of receptionists">
+              <td>{{ receptionist.name }}</td>
+              <td>{{ receptionist.phone }}</td>
+              <td>{{ receptionist.email }}</td>
+              <td>{{ receptionist.gender ? 'Male' : 'Female' }}</td>
+              <td>{{ receptionist.shift ? 'Morning' : 'Evening' }}</td>
+              <td>{{ receptionist.status }}</td>
+              <td>
+                <button (click)="updateReceptionist(receptionist.id)">Update</button>
+                <button (click)="deleteReceptionist(receptionist.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

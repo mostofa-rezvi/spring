@@ -1,0 +1,29 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="nurse-list">
+            <h2>Nurses List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nurse Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Gender</th>
+                        <th>Specialization</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let nurse of nurses">
+                        <td>{{nurse.firstname}} {{nurse.lastname}}</td>
+                        <td>{{nurse.email}}</td>
+                        <td>{{nurse.phone}}</td>
+                        <td>{{nurse.gender ? 'Male' : 'Female'}}</td>
+                        <td>{{nurse.specialization}}</td>
+                        <td>{{nurse.department}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
