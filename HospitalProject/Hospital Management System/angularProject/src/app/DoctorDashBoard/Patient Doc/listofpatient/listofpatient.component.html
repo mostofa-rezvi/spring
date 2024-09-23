@@ -1,0 +1,42 @@
+<div class="page-wrapper">
+    <div class="content mt-5">
+      <div class="row">
+        <div class="col-sm-4 col-3">
+          <h4 class="page-title">Patients</h4>
+        </div>
+        
+      </div>
+  
+      <div class="patient-details">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Date of Birth</th>
+              <th>Contact</th>
+              <th>Address</th>
+              <th>Medical History</th>
+              <th>Reason</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of patients">
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.age }}</td>
+              <td>{{ patient.gender }}</td>
+              <td>{{ patient.dateOfBirth | date }}</td>
+              <td>{{ patient.contact }}</td>
+              <td>{{ patient.address }}</td>
+              <td>{{ patient.medicalHistory }}</td>
+              <td>{{ patient.reason }}</td>
+              <td>{{ patient.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
