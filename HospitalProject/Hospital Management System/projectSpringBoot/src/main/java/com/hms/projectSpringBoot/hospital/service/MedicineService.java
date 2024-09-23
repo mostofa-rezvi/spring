@@ -52,9 +52,9 @@ public class MedicineService {
         return medicineRepository.findByManufacturer_Id(manufacturerId);
     }
 
-    public List<Medicine> getMedicinesByPrescription(Long prescriptionId) {
-        return medicineRepository.findByPrescription_Id(prescriptionId);
-    }
+//    public List<Medicine> getMedicinesByPrescription(Long prescriptionId) {
+//        return medicineRepository.findByPrescription_Id(prescriptionId);
+//    }
 
     public List<Medicine> searchMedicinesByName(String medicineName) {
         return medicineRepository.findByMedicineNameContainingIgnoreCase(medicineName);

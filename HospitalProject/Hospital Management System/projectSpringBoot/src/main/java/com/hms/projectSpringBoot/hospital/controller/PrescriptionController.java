@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,11 +30,46 @@ public class PrescriptionController {
         return prescription.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+//    @PostMapping
+//    public ResponseEntity<Prescription> createOrUpdatePrescription(@RequestBody Prescription prescription) {
+//        Prescription savedPrescription = prescriptionService.saveOrUpdatePrescription(prescription);
+//        return ResponseEntity.ok(savedPrescription);
+//    }
+
+//    @PostMapping
+//    public ResponseEntity<Prescription> createOrUpdatePrescription(@RequestBody Prescription prescription) {
+//        if (prescription == null) {
+//            return ResponseEntity.badRequest().body(null);
+//        }
+//
+//        if (prescription.getDoctor() == null) {
+//            return ResponseEntity.badRequest().body(null);
+//        }
+//        if (prescription.getPatient() == null) {
+//            return ResponseEntity.badRequest().body(null);
+//        }
+//
+//        Prescription savedPrescription = prescriptionService.saveOrUpdatePrescription(prescription);
+//        return ResponseEntity.ok(savedPrescription);
+//    }
+
+
     @PostMapping
-    public ResponseEntity<Prescription> createOrUpdatePrescription(@RequestBody Prescription prescription) {
-        Prescription savedPrescription = prescriptionService.saveOrUpdatePrescription(prescription);
-        return ResponseEntity.ok(savedPrescription);
+    public ResponseEntity<Prescription> createPrescription(@RequestBody Prescription prescription) {
+        Prescription createdPrescription = prescriptionService.createPrescription(prescription);
+        return ResponseEntity.status(201).body(createdPrescription);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Prescription> updatePrescription(@PathVariable Long id, @RequestBody Prescription updatedPrescription) {
+        try {
+            Prescription prescription = prescriptionService.updatePrescription(id, updatedPrescription);
+            return ResponseEntity.ok(prescription);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePrescription(@PathVariable Long id) {
@@ -54,7 +90,7 @@ public class PrescriptionController {
     }
 
     @GetMapping("/date")
-    public ResponseEntity<List<Prescription>> getPrescriptionsByDate(@RequestParam java.util.Date date) {
+    public ResponseEntity<List<Prescription>> getPrescriptionsByDate(@RequestParam Date date) {
         List<Prescription> prescriptions = prescriptionService.getPrescriptionsByDate(date);
         return ResponseEntity.ok(prescriptions);
     }

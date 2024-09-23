@@ -1,5 +1,6 @@
 package com.hms.projectSpringBoot.hospital.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hms.projectSpringBoot.security.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,7 +19,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name = "diagnostics")
 public class Diagnostics {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +32,18 @@ public class Diagnostics {
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "doctor_id", nullable = false)
     private User doctor;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patient_id", nullable = false)
     private User patient;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "diagnostics", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TestEntity> tests;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "diagnostics", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Report> reports;
 }

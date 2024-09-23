@@ -1,0 +1,28 @@
+ withInterceptorsFromDi()
+
+
+Manufacturer
+Medicine
+Department
+
+Diagnostics:
+	User Doctor, Patient
+	List Tests
+	List Reposts
+
+Appointment: 
+	User doctor, RequestedBy
+
+Report:
+	Diagnostics
+	User CreateBy
+
+Test:
+	Diagonstics
+
+Prescription:
+	User Doctor, Patient
+	Medicine
+
+Bill:
+	User Doctor, Patient, Pharmacist

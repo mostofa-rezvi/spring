@@ -5,6 +5,7 @@ import com.hms.projectSpringBoot.hospital.repository.DiagnosticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,8 @@ public class DiagnosticsService {
     }
 
     public Diagnostics createDiagnostics(Diagnostics diagnostics) {
+        diagnostics.setCreatedAt(LocalDateTime.now());
+        diagnostics.setUpdatedAt(LocalDateTime.now());
         return diagnosticsRepository.save(diagnostics);
     }
 
@@ -31,8 +34,7 @@ public class DiagnosticsService {
             diagnostics.setTestDate(updatedDiagnostics.getTestDate());
             diagnostics.setTestResult(updatedDiagnostics.getTestResult());
             diagnostics.setPrice(updatedDiagnostics.getPrice());
-            diagnostics.setCreatedAt(updatedDiagnostics.getCreatedAt());
-            diagnostics.setUpdatedAt(updatedDiagnostics.getUpdatedAt());
+            diagnostics.setUpdatedAt(LocalDateTime.now()); // Update the timestamp
             diagnostics.setDoctor(updatedDiagnostics.getDoctor());
             diagnostics.setPatient(updatedDiagnostics.getPatient());
             return diagnosticsRepository.save(diagnostics);

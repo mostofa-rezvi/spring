@@ -29,8 +29,9 @@ public class DiagnosticsController {
     }
 
     @PostMapping
-    public Diagnostics createDiagnostics(@RequestBody Diagnostics diagnostics) {
-        return diagnosticsService.createDiagnostics(diagnostics);
+    public ResponseEntity<Diagnostics> createDiagnostics(@RequestBody Diagnostics diagnostics) {
+        Diagnostics createdDiagnostics = diagnosticsService.createDiagnostics(diagnostics);
+        return ResponseEntity.status(201).body(createdDiagnostics);
     }
 
     @PutMapping("/{id}")

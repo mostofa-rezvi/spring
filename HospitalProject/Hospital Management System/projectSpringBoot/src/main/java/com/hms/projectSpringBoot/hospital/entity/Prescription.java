@@ -1,5 +1,6 @@
 package com.hms.projectSpringBoot.hospital.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hms.projectSpringBoot.security.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,5 +37,11 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id")
     private User patient;
+
+    // new add
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "prescription_id")
+    private List<Medicine> medicines;
 
 }

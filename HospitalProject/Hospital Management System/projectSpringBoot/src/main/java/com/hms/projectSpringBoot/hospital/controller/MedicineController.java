@@ -54,11 +54,11 @@ public class MedicineController {
         return ResponseEntity.ok(medicines);
     }
 
-    @GetMapping("/prescription/{prescriptionId}")
-    public ResponseEntity<List<Medicine>> getMedicinesByPrescription(@PathVariable Long prescriptionId) {
-        List<Medicine> medicines = medicineService.getMedicinesByPrescription(prescriptionId);
-        return ResponseEntity.ok(medicines);
-    }
+//    @GetMapping("/prescription/{prescriptionId}")
+//    public ResponseEntity<List<Medicine>> getMedicinesByPrescription(@PathVariable Long prescriptionId) {
+//        List<Medicine> medicines = medicineService.getMedicinesByPrescription(prescriptionId);
+//        return ResponseEntity.ok(medicines);
+//    }
 
     @GetMapping("/search")
     public ResponseEntity<List<Medicine>> searchMedicinesByName(@RequestParam String name) {

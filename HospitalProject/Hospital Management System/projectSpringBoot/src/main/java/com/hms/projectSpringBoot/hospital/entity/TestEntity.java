@@ -13,28 +13,23 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "medicines")
-public class Medicine {
+@Table(name = "tests")
+public class TestEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String medicineName;
-    private String dosageForm;
+    private String testName;
+    private String description;
+    private String result;
     private String instructions;
-    private String medicineStrength;
-    private int price;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "diagnostics_id", nullable = false)
+    private Diagnostics diagnostics;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "manufacturer_id")
-    private Manufacturer manufacturer;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "prescription_id")
-//    private Prescription prescription;
 
 }
