@@ -1,10 +1,12 @@
 package com.hms.projectSpringBoot.hospital.service;
 
+import com.hms.projectSpringBoot.hospital.entity.Manufacturer;
 import com.hms.projectSpringBoot.hospital.entity.Medicine;
 import com.hms.projectSpringBoot.hospital.repository.MedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +24,23 @@ public class MedicineService {
         return medicineRepository.findById(id);
     }
 
-    public Medicine saveOrUpdateMedicine(Medicine medicine) {
+    public Medicine saveMedicine(Medicine medicine) {
+        medicine.setCreatedAt(LocalDateTime.now());
+        return medicineRepository.save(medicine);
+    }
+
+    public Medicine updateMedicine(Long id, Medicine medicineDetails) {
+        Medicine medicine = medicineRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Manufacturer not found"));
+
+        medicine.setMedicineName(medicineDetails.getMedicineName());
+        medicine.setDosageForm(medicineDetails.getDosageForm());
+        medicine.setInstructions(medicineDetails.getInstructions());
+        medicine.setMedicineStrength(medicineDetails.getMedicineStrength());
+        medicine.setPrice(medicineDetails.getPrice());
+
+        medicine.setUpdatedAt(LocalDateTime.now());
+
         return medicineRepository.save(medicine);
     }
 

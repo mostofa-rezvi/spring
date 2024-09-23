@@ -1,5 +1,6 @@
 package com.hms.projectSpringBoot.hospital.controller;
 
+import com.hms.projectSpringBoot.hospital.entity.Manufacturer;
 import com.hms.projectSpringBoot.hospital.entity.Medicine;
 import com.hms.projectSpringBoot.hospital.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,15 @@ public class MedicineController {
     }
 
     @PostMapping
-    public ResponseEntity<Medicine> createOrUpdateMedicine(@RequestBody Medicine medicine) {
-        Medicine savedMedicine = medicineService.saveOrUpdateMedicine(medicine);
+    public ResponseEntity<Medicine> createMedicine(@RequestBody Medicine medicine) {
+        Medicine savedMedicine = medicineService.saveMedicine(medicine);
         return ResponseEntity.ok(savedMedicine);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Medicine> updateMedicine(@PathVariable Long id, @RequestBody Medicine medicine) {
+        Medicine updatedMedicine = medicineService.updateMedicine(id, medicine);
+        return ResponseEntity.ok(updatedMedicine);
     }
 
     @DeleteMapping("/{id}")

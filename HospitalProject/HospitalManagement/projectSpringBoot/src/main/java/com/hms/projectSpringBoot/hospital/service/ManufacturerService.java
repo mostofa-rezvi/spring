@@ -46,7 +46,6 @@ public class ManufacturerService {
         Manufacturer manufacturer = manufacturerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Manufacturer not found"));
 
-        manufacturer.setDeletedAt(LocalDateTime.now());
-        manufacturerRepository.save(manufacturer); // Soft delete by setting deletedAt
+        manufacturerRepository.save(manufacturer);
     }
 }
