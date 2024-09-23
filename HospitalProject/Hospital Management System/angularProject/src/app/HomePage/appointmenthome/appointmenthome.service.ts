@@ -7,7 +7,7 @@ import { RecepAppointment } from '../../ReceptionistDashBoard/Model/recepappoint
   providedIn: 'root'
 })
 export class AppointmenthomeService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
