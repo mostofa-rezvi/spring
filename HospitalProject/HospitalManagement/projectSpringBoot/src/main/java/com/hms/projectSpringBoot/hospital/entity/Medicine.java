@@ -31,10 +31,10 @@ public class Medicine {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manufacturer_id")
-    private Manufacturer manufacturer; // References the manufacturer of the medicine
+    private Manufacturer manufacturer;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "prescription_id")
-    private Prescription prescription; // References the associated prescription
+    private Prescription prescription;
 
 }

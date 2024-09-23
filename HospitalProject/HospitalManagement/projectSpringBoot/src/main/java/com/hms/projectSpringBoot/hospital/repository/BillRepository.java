@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Long> {
-    List<Bill> findByPatientId(Long patientId);  // Find bills by patient ID
-    List<Bill> findByDoctorId(Long doctorId);    // Find bills by doctor ID
-    List<Bill> findByPharmacistId(Long pharmacistId);  // Find bills by pharmacist ID
+    List<Bill> findByPatientId(Long patientId);
+    List<Bill> findByDoctorId(Long doctorId);
+    List<Bill> findByPharmacistId(Long pharmacistId);
 }

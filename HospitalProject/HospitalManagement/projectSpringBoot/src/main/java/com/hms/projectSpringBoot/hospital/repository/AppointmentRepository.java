@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
-    List<Appointment> findByRequestedById(Long userId);  // Custom method to find appointments by user ID
-    List<Appointment> findByDoctorId(Long doctorId);  // Custom method to find appointments by doctor ID
+    List<Appointment> findByRequestedById(Long userId);
+    List<Appointment> findByDoctorId(Long doctorId);
 }

@@ -33,6 +33,6 @@ public class Manufacturer {
 
     @JsonIgnore
     @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Medicine> medicines; // List of medicines produced by this manufacturer
+    private List<Medicine> medicines;
 
 }
