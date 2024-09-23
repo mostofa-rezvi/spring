@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-5 bg-info text-white">
+            <div class="card">
+                <div class="card-body bg-light text-dark">
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div class="text-center mb-4">
+                            <img src="../../../assets/img/logo-dark.png" alt="Logo" class="img-fluid" width="100">
+                        </div>
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input id="name" type="text" formControlName="name" class="form-control" />
+                        </div>
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input id="email" type="email" formControlName="email" class="form-control" />
+                        </div>
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input id="password" type="password" formControlName="password" class="form-control" />
+                        </div>
+                        <!-- Cell -->
+                        <div class="mb-3">
+                            <label for="cell" class="form-label">Mobile Number</label>
+                            <input id="cell" type="text" formControlName="cell" class="form-control" />
+                        </div>
+                        <!-- Age -->
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Age</label>
+                            <input id="age" type="number" formControlName="age" class="form-control" />
+                        </div>
+                        <!-- Gender -->
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select id="gender" formControlName="gender" class="form-select">
+                                <option value="MALE">Male</option>
+                                <option value="FEMALE">Female</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                        <!-- Birthday -->
+                        <div class="mb-3">
+                            <label for="birthday" class="form-label">Birthday</label>
+                            <input id="birthday" type="date" formControlName="birthday" class="form-control" />
+                        </div>
+                        <!-- Address -->
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input id="address" type="text" formControlName="address" class="form-control" />
+                        </div>
+                        <!-- Image -->
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Profile Image</label>
+                            <input id="image" type="file" formControlName="image" class="form-control" />
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button class="btn btn-primary" type="submit">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

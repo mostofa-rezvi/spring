@@ -29,7 +29,8 @@ public class AppointmentService {
     }
 
     public Appointment createAppointment(Appointment appointment) {
-        User user = userRepository.findById(appointment.getRequestedBy().getId()).orElse(null);
+        User user = userRepository.findById(appointment.getRequestedBy().getId()).orElseThrow(
+                () -> new RuntimeException("User Not Found"));
 
         if (user == null || user.getRole() == null) {
             throw new IllegalArgumentException("User must have a valid role and must exist.");

@@ -1,0 +1,29 @@
+<div class="page-wrapper">
+    <div class="content">  
+      <div class="appointment-list">
+        <h2>Appointments List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Patient Name</th>
+              <th>Department</th>
+              <th>Doctor</th>
+              <th>Date</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let appointment of appointments">
+              <td>{{appointment.patientName}}</td>
+              <td>{{appointment.department.name}}</td>
+              <td>{{appointment.doctor.firstname}} {{appointment.doctor.lastname}}</td>
+              <td>{{appointment.appointmentDate}}</td>
+              <td>{{appointment.appointmentTime}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  </div>
+  

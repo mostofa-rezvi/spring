@@ -49,8 +49,10 @@ import { RoleGuard } from './security/guard/role.guard';
 import { LastappointmentComponent } from './HomePage/lastappointment/lastappointment.component';
 import { WelcomepageComponent } from './Registration/welcomepage/welcomepage.component';
 import { ListofpatientComponent } from './DoctorDashBoard/Patient Doc/listofpatient/listofpatient.component';
-import {UserFormComponent} from "./user/user-form/user-form.component";
-import {UserListComponent} from "./user/user-list/user-list.component";
+import { UserFormComponent } from "./user/user-form/user-form.component";
+import { UserListComponent } from "./user/user-list/user-list.component";
+import { RegisterComponent } from './security/register/register.component';
+import { AppointmentCreateComponent } from './Component/appointment-create/appointment-create.component';
 
 const routes: Routes = [
   { path: 'activities', component: ActivitiesComponent },
@@ -232,6 +234,9 @@ const routes: Routes = [
   // Auth Part
   { path: 'login', component: LoginComponent },
 
+  { path: 'register', component: RegisterComponent },
+
+  {path: 'doappointment', component: AppointmentCreateComponent}
 
 
 ];

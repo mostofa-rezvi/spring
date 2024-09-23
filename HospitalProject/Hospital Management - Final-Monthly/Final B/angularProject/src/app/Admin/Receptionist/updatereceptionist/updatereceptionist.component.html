@@ -1,0 +1,50 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-6 col-6">
+            <h4 class="page-title text-left">Update Receptionist:</h4>
+        </div>
+        <div class="col-sm-6 col-6 text-right m-b-20">
+            <a href="viewrecep" class="btn btn-primary btn-rounded float-end text-white m-1">
+                <i class="fa fa-arrow-left"></i><span> Back </span>
+            </a>
+        </div>
+    </div>
+    <form (ngSubmit)="updateReceptionist()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" type="text" [(ngModel)]="receptionist.name" name="name" required />
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input id="phone" type="text" [(ngModel)]="receptionist.phone" name="phone" required />
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input id="email" type="email" [(ngModel)]="receptionist.email" name="email" required />
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" [(ngModel)]="receptionist.gender" name="gender" required>
+                <option [value]="true">Male</option>
+                <option [value]="false">Female</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="shift">Shift:</label>
+            <select id="shift" [(ngModel)]="receptionist.shift" name="shift" required>
+                <option [value]="true">Morning</option>
+                <option [value]="false">Evening</option>
+                <option [value]="false">Night</option>
+            </select>
+        </div>
+        <!-- <div class="form-group">
+            <label for="shift">Shift:</label>
+            <input id="shift" type="text" [(ngModel)]="receptionist.shift" name="shift" required />
+        </div> -->
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input id="status" type="text" [(ngModel)]="receptionist.status" name="status" required />
+        </div>
+        <button class="m-3" type="submit">Update Receptionist</button>
+    </form>
+</div>

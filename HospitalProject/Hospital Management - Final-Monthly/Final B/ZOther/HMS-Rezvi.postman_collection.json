@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "f557ca73-be35-49d9-9458-1567445b9ca8",
+		"name": "HMS-Rezvi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11960070"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jwt = pm.response.json().data.jwt;\r",
+							"pm.collectionVariables.set(\"jwt\", jwt);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/auth/login?email=test@test.com&password=123",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "test@test.com"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user",
+							"value": "{\n    \"name\": \"Doctor 1\",\n    \"email\": \"test@test.com\",\n    \"cell\": 1700000000,\n    \"age\": 23,\n    \"gender\": \"Male\",\n    \"birthday\": null,\n    \"address\": null,\n    \"image\": null,\n    \"doctorDegree\": null,\n    \"doctorSpeciality\": null,\n    \"doctorLicense\": null,\n    \"nurseDegree\": null,\n    \"nurseSpeciality\": null,\n    \"nurseLicense\": null,\n    \"department\": null,\n    \"role\": \"DOCTOR\"\n}",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"contentType": "multipart/form-data",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/user/saveUser",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"saveUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user",
+							"value": "{\n    \"name\": \"Doctor 1\",\n    \"email\": \"test@test.com\",\n    \"cell\": 1700000000,\n    \"age\": 23,\n    \"gender\": \"Male\",\n    \"birthday\": null,\n    \"address\": null,\n    \"image\": null,\n    \"doctorDegree\": null,\n    \"doctorSpeciality\": null,\n    \"doctorLicense\": null,\n    \"nurseDegree\": null,\n    \"nurseSpeciality\": null,\n    \"nurseLicense\": null,\n    \"department\": null,\n    \"role\": \"DOCTOR\"\n}",
+							"contentType": "application/json",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "image",
+							"contentType": "multipart/form-data",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/user/deleteById/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"deleteById",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/findAllUsers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"findAllUsers"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "jwt",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

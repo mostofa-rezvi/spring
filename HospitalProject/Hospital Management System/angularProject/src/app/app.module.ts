@@ -86,6 +86,8 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import {AuthInterceptor} from "./security/interceptor/auth.interceptor";
 import {StorageUtil} from "./util/storage.util";
 import {AuthService} from "./security/service/auth.service";
+import { RegisterComponent } from './security/register/register.component';
+import { AppointmentCreateComponent } from './Component/appointment-create/appointment-create.component';
 
 @NgModule({
   declarations: [
@@ -152,6 +154,8 @@ import {AuthService} from "./security/service/auth.service";
     ListofpatientComponent,
     UserFormComponent,
     UserListComponent,
+    RegisterComponent,
+    AppointmentCreateComponent,
   ],
   imports: [
     BrowserModule,
