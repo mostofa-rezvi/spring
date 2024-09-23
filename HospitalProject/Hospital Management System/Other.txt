@@ -15,7 +15,7 @@ Appointment:
 
 Report:
 	Diagnostics
-	User CreateBy
+	User CreateBy (LABORATORIST)
 
 Test:
 	Diagonstics
