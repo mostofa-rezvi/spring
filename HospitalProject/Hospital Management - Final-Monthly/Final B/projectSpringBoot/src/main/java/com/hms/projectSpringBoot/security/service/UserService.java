@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,6 +35,22 @@ public class UserService implements UserDetailsService {
         ApiResponse response = new ApiResponse();
         try {
             List<User> users = userRepository.findAll();
+            if (users.isEmpty()) {
+                return response.error("No users found");
+            }
+            response.setData("users", users);
+            response.success("Successfully retrieved users");
+            return response;
+        } catch (Exception e) {
+            return response.error(e.getMessage());
+        }
+    }
+
+    public ApiResponse findUsersByRole(String role) {
+        ApiResponse response = new ApiResponse();
+        try {
+            List<User> users = userRepository.findAllByRole(Role.valueOf(role.toUpperCase()))
+                    .orElse(new ArrayList<>());
             if (users.isEmpty()) {
                 return response.error("No users found");
             }

@@ -2,6 +2,7 @@ package com.hms.projectSpringBoot.hospital.service;
 
 import com.hms.projectSpringBoot.hospital.entity.Report;
 import com.hms.projectSpringBoot.hospital.repository.ReportRepository;
+import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,35 +16,96 @@ public class ReportService {
     @Autowired
     private ReportRepository reportRepository;
 
-    public List<Report> getAllReports() {
-        return reportRepository.findAll();
+    public ApiResponse getAllReports() {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            List<Report> reports = reportRepository.findAll();
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Reports fetched successfully.");
+            apiResponse.setData("reports", reports);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public Optional<Report> getReportById(Long id) {
-        return reportRepository.findById(id);
+    public ApiResponse getReportById(Long id) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            Optional<Report> report = reportRepository.findById(id);
+            if (report.isPresent()) {
+                apiResponse.setSuccessful(true);
+                apiResponse.setMessage("Report fetched successfully.");
+                apiResponse.setData("report", report.get());
+            } else {
+                apiResponse.setMessage("Report not found.");
+            }
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public Report createReport(Report report) {
-        report.setCreatedAt(LocalDateTime.now());
-        return reportRepository.save(report);
+    public ApiResponse createReport(Report report) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            report.setCreatedAt(LocalDateTime.now());
+            Report createdReport = reportRepository.save(report);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Report created successfully.");
+            apiResponse.setData("report", createdReport);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public Report updateReport(Long id, Report updatedReport) {
-        return reportRepository.findById(id).map(report -> {
-            report.setReportName(updatedReport.getReportName());
-            report.setDescription(updatedReport.getDescription());
-            report.setSummary(updatedReport.getSummary());
-            report.setDiagnostics(updatedReport.getDiagnostics());
-            report.setCreatedBy(updatedReport.getCreatedBy());
-            report.setFinalized(updatedReport.isFinalized());
+    public ApiResponse updateReport(Long id, Report updatedReport) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            Optional<Report> report = reportRepository.findById(id);
+            if (report.isPresent()) {
+                Report existingReport = report.get();
+                existingReport.setReportName(updatedReport.getReportName());
+                existingReport.setDescription(updatedReport.getDescription());
+                existingReport.setSummary(updatedReport.getSummary());
+                existingReport.setDiagnostics(updatedReport.getDiagnostics());
+                existingReport.setCreatedBy(updatedReport.getCreatedBy());
+                existingReport.setFinalized(updatedReport.isFinalized());
+                existingReport.setUpdatedAt(LocalDateTime.now());
 
-            report.setUpdatedAt(LocalDateTime.now());
-            return reportRepository.save(report);
-        }).orElseThrow(() -> new RuntimeException("Report not found"));
+                reportRepository.save(existingReport);
+                apiResponse.setSuccessful(true);
+                apiResponse.setMessage("Report updated successfully.");
+                apiResponse.setData("report", existingReport);
+            } else {
+                apiResponse.setMessage("Report not found.");
+            }
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public void deleteReport(Long id) {
-        reportRepository.deleteById(id);
+    public ApiResponse deleteReport(Long id) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            if (reportRepository.existsById(id)) {
+                reportRepository.deleteById(id);
+                apiResponse.setSuccessful(true);
+                apiResponse.setMessage("Report deleted successfully.");
+            } else {
+                apiResponse.setMessage("Report not found.");
+            }
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
     public List<Report> getReportsByDiagnosticsId(Long diagnosticsId) {

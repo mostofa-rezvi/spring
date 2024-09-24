@@ -3,91 +3,97 @@ import {BrowserModule, provideClientHydration} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {NavbarComponent} from './navbar/navbar.component';
-import {SidebarComponent} from './sidebar/sidebar.component';
-import {ActivitiesComponent} from './dashboard/activities/activities.component';
+import {NavbarComponent} from './Login-Page/navbar/navbar.component';
+import {SidebarComponent} from './Login-Page/sidebar/sidebar.component';
+import {ActivitiesComponent} from './shared/activities/activities.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, provideHttpClient, withFetch} from '@angular/common/http';
-import {AdddoctorComponent} from './Doctors/adddoctor/adddoctor.component';
-import {ViewdoctorComponent} from './Doctors/viewdoctor/viewdoctor.component';
-import {UpdatedoctorComponent} from './Doctors/updatedoctor/updatedoctor.component';
-import {LoginComponent} from './security/login/login.component';
-import {AppointmenthomeComponent} from './HomePage/appointmenthome/appointmenthome.component';
-import {BodyhomeComponent} from './HomePage/bodyhome/bodyhome.component';
-import {FooterhomeComponent} from './HomePage/footerhome/footerhome.component';
-import {NavbarhomeComponent} from './HomePage/navbarhome/navbarhome.component';
-import {SalarysettingsComponent} from './Admin/Settings/salarysettings/salarysettings.component';
-import {LeavetypeComponent} from './Admin/Settings/leavetype/leavetype.component';
-import {ChngpassComponent} from './Admin/Settings/chngpass/chngpass.component';
-import {AdminpayrollComponent} from './Admin/adminpayroll/adminpayroll.component';
-import {ViewdepartmentComponent} from './Admin/Department/viewdepartment/viewdepartment.component';
-import {AdddepartmentComponent} from './Admin/Department/adddepartment/adddepartment.component';
-import {UpdatedepartmentComponent} from './Admin/Department/updatedepartment/updatedepartment.component';
-import {ViewReceptionistComponent} from './Admin/Receptionist/viewreceptionist/viewreceptionist.component';
-import {UpdateReceptionistComponent} from './Admin/Receptionist/updatereceptionist/updatereceptionist.component';
-import {AddReceptionistComponent} from './Admin/Receptionist/addreceptionist/addreceptionist.component';
-import {MyprofileComponent} from './Admin/Profile/myprofile/myprofile.component';
-import {EditprofileComponent} from './Admin/Profile/editprofile/editprofile.component';
-import {AdmindashboardComponent} from './dashboard/admindashboard/admindashboard.component';
-import {DepartmenthomeComponent} from './HomePage/departmenthome/departmenthome.component';
-import {DoctorshomeComponent} from './HomePage/DoctorsDepartment/doctorshome/doctorshome.component';
-import {DoctorpntComponent} from './PatientDashBoard/doctorpnt/doctorpnt.component';
-import {AppointmentpntComponent} from './PatientDashBoard/appointmentpnt/appointmentpnt.component';
-import {PaymentpntComponent} from './PatientDashBoard/paymentpnt/paymentpnt.component';
-import {SettingspntComponent} from './PatientDashBoard/settingspnt/settingspnt.component';
-import {ReportpntComponent} from './PatientDashBoard/reportpnt/reportpnt.component';
-import {AddpatientdocComponent} from './DoctorDashBoard/Patient Doc/addpatientdoc/addpatientdoc.component';
-import {UpdatepatientdocComponent} from './DoctorDashBoard/Patient Doc/updatepatientdoc/updatepatientdoc.component';
-import {ViewpatientdocComponent} from './DoctorDashBoard/Patient Doc/viewpatientdoc/viewpatientdoc.component';
-import {AddreportdocComponent} from './DoctorDashBoard/Report Doc/addreportdoc/addreportdoc.component';
-import {UpdatereportdocComponent} from './DoctorDashBoard/Report Doc/updatereportdoc/updatereportdoc.component';
-import {ViewreportdocComponent} from './DoctorDashBoard/Report Doc/viewreportdoc/viewreportdoc.component';
-import {MyprofilenrsComponent} from './NurseDashBoard/NurseProfile/myprofilenrs/myprofilenrs.component';
-import {EditprofilenrsComponent} from './NurseDashBoard/NurseProfile/editprofilenrs/editprofilenrs.component';
-import {MyprofilepntComponent} from './PatientDashBoard/PatientProfile/myprofilepnt/myprofilepnt.component';
-import {EditprofilepntComponent} from './PatientDashBoard/PatientProfile/editprofilepnt/editprofilepnt.component';
-import {
-  MyprofilerecepComponent
-} from './ReceptionistDashBoard/ReceptionistProfile/myprofilerecep/myprofilerecep.component';
-import {
-  EditprofilerecepComponent
-} from './ReceptionistDashBoard/ReceptionistProfile/editprofilerecep/editprofilerecep.component';
-import {DoctorlistadminComponent} from './Doctors/doctorlistadmin/doctorlistadmin.component';
-import {
-  ReceptionistlistadminComponent
-} from './Admin/Receptionist/receptionistlistadmin/receptionistlistadmin.component';
-import {MyprofiledocComponent} from './DoctorDashBoard/DoctorProfile/myprofiledoc/myprofiledoc.component';
-import {EditprofiledocComponent} from './DoctorDashBoard/DoctorProfile/editprofiledoc/editprofiledoc.component';
-import {
-  AddappointmentComponent
-} from './ReceptionistDashBoard/ReceptionistAppointment/addappointment/addappointment.component';
-import {
-  UpdateappointmentComponent
-} from './ReceptionistDashBoard/ReceptionistAppointment/updateappointment/updateappointment.component';
-import {
-  ViewappointmentComponent
-} from './ReceptionistDashBoard/ReceptionistAppointment/viewappointment/viewappointment.component';
-import {
-  ListofappointmentComponent
-} from './ReceptionistDashBoard/ReceptionistAppointment/listofappointment/listofappointment.component';
-import {ChilddepartmentComponent} from './HomePage/DoctorsDepartment/childdepartment/childdepartment.component';
-import {GeneraldepartmentComponent} from './HomePage/DoctorsDepartment/generaldepartment/generaldepartment.component';
+import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
+import {LoginComponent} from './Login-Page/login/login.component';
+import {AppointmenthomeComponent} from './Home-Page/appointmenthome/appointmenthome.component';
+import {BodyhomeComponent} from './Home-Page/bodyhome/bodyhome.component';
+import {FooterhomeComponent} from './Home-Page/footerhome/footerhome.component';
+import {NavbarhomeComponent} from './Home-Page/navbarhome/navbarhome.component';
+import {AdmindashboardComponent} from './Component/AdminDashBoard/dashboard/admindashboard.component';
+import {DepartmenthomeComponent} from './Home-Page/departmenthome/departmenthome.component';
+import {DoctorshomeComponent} from './Home-Page/DoctorsDepartment/doctorshome/doctorshome.component';
+import {ChilddepartmentComponent} from './Home-Page/DoctorsDepartment/childdepartment/childdepartment.component';
+import {GeneraldepartmentComponent} from './Home-Page/DoctorsDepartment/generaldepartment/generaldepartment.component';
 import {
   OrthopedicsdepartmentComponent
-} from './HomePage/DoctorsDepartment/orthopedicsdepartment/orthopedicsdepartment.component';
-import {NeurodepartmentComponent} from './HomePage/DoctorsDepartment/neurodepartment/neurodepartment.component';
-import {CardiacdepartmentComponent} from './HomePage/DoctorsDepartment/cardiacdepartment/cardiacdepartment.component';
-import {LastappointmentComponent} from './HomePage/lastappointment/lastappointment.component';
-import {UserporfileComponent} from './Registration/userporfile/userporfile.component';
-import {WelcomepageComponent} from './Registration/welcomepage/welcomepage.component';
-import {ListofpatientComponent} from './DoctorDashBoard/Patient Doc/listofpatient/listofpatient.component';
-import { UserFormComponent } from './user/user-form/user-form.component';
-import { UserListComponent } from './user/user-list/user-list.component';
+} from './Home-Page/DoctorsDepartment/orthopedicsdepartment/orthopedicsdepartment.component';
+import {NeurodepartmentComponent} from './Home-Page/DoctorsDepartment/neurodepartment/neurodepartment.component';
+import {CardiacdepartmentComponent} from './Home-Page/DoctorsDepartment/cardiacdepartment/cardiacdepartment.component';
+import {LastappointmentComponent} from './Home-Page/lastappointment/lastappointment.component';
+import {WelcomepageComponent} from './Login-Page/welcomepage/welcomepage.component';
+import {UserFormComponent} from './user/user-form/user-form.component';
+import {UserListComponent} from './user/user-list/user-list.component';
 import {AuthInterceptor} from "./security/interceptor/auth.interceptor";
 import {StorageUtil} from "./util/storage.util";
 import {AuthService} from "./security/service/auth.service";
-import { RegisterComponent } from './security/register/register.component';
-import { AppointmentCreateComponent } from './Component/appointment/appointment-create/appointment-create.component';
+import {RegisterComponent} from './Login-Page/register/register.component';
+import {AppointmentCreateComponent} from './shared/appointment/appointment-create/appointment-create.component';
+import {AdddoctorComponent} from "./Component/AdminDashBoard/Doctors/adddoctor/adddoctor.component";
+import {ViewdoctorComponent} from "./Component/AdminDashBoard/Doctors/viewdoctor/viewdoctor.component";
+import {UpdatedoctorComponent} from "./Component/AdminDashBoard/Doctors/updatedoctor/updatedoctor.component";
+import {SalarysettingsComponent} from "./shared/Settings/salarysettings/salarysettings.component";
+import {LeavetypeComponent} from "./shared/Settings/leavetype/leavetype.component";
+import {ChngpassComponent} from "./shared/Settings/chngpass/chngpass.component";
+import {AdminpayrollComponent} from "./shared/payroll/adminpayroll.component";
+import {ViewdepartmentComponent} from "./Component/AdminDashBoard/Department/viewdepartment/viewdepartment.component";
+import {AdddepartmentComponent} from "./Component/AdminDashBoard/Department/adddepartment/adddepartment.component";
+import {
+  UpdatedepartmentComponent
+} from "./Component/AdminDashBoard/Department/updatedepartment/updatedepartment.component";
+import {
+  ViewReceptionistComponent
+} from "./Component/AdminDashBoard/Receptionist/viewreceptionist/viewreceptionist.component";
+import {
+  UpdateReceptionistComponent
+} from "./Component/AdminDashBoard/Receptionist/updatereceptionist/updatereceptionist.component";
+import {
+  AddReceptionistComponent
+} from "./Component/AdminDashBoard/Receptionist/addreceptionist/addreceptionist.component";
+import {MyprofileComponent} from "./Component/AdminDashBoard/Profile/myprofile/myprofile.component";
+import {EditprofileComponent} from "./Component/AdminDashBoard/Profile/editprofile/editprofile.component";
+import {
+  ListofappointmentComponent
+} from "./Component/ReceptionistDashBoard/ReceptionistAppointment/listofappointment/listofappointment.component";
+import {
+  ViewappointmentComponent
+} from "./Component/ReceptionistDashBoard/ReceptionistAppointment/viewappointment/viewappointment.component";
+import {
+  UpdateappointmentComponent
+} from "./Component/ReceptionistDashBoard/ReceptionistAppointment/updateappointment/updateappointment.component";
+import {
+  AddappointmentComponent
+} from "./Component/ReceptionistDashBoard/ReceptionistAppointment/addappointment/addappointment.component";
+import {ListofpatientComponent} from "./Component/DoctorDashBoard/Patient Doc/listofpatient/listofpatient.component";
+import {
+  EditprofiledocComponent
+} from "./Component/DoctorDashBoard/DoctorProfile/editprofiledoc/editprofiledoc.component";
+import {MyprofiledocComponent} from "./Component/DoctorDashBoard/DoctorProfile/myprofiledoc/myprofiledoc.component";
+import {
+  ReceptionistlistadminComponent
+} from "./Component/AdminDashBoard/Receptionist/receptionistlistadmin/receptionistlistadmin.component";
+import {DoctorlistadminComponent} from "./Component/AdminDashBoard/Doctors/doctorlistadmin/doctorlistadmin.component";
+import {
+  EditprofilerecepComponent
+} from "./Component/ReceptionistDashBoard/ReceptionistProfile/editprofilerecep/editprofilerecep.component";
+import {
+  MyprofilerecepComponent
+} from "./Component/ReceptionistDashBoard/ReceptionistProfile/myprofilerecep/myprofilerecep.component";
+import {
+  EditprofilepntComponent
+} from "./Component/PatientDashBoard/PatientProfile/editprofilepnt/editprofilepnt.component";
+import {MyprofilepntComponent} from "./Component/PatientDashBoard/PatientProfile/myprofilepnt/myprofilepnt.component";
+import {EditprofilenrsComponent} from "./Component/NurseDashBoard/NurseProfile/editprofilenrs/editprofilenrs.component";
+import {MyprofilenrsComponent} from "./Component/NurseDashBoard/NurseProfile/myprofilenrs/myprofilenrs.component";
+import {ViewpatientdocComponent} from "./Component/DoctorDashBoard/Patient Doc/viewpatientdoc/viewpatientdoc.component";
+import {
+  UpdatepatientdocComponent
+} from "./Component/DoctorDashBoard/Patient Doc/updatepatientdoc/updatepatientdoc.component";
+import {AddpatientdocComponent} from "./Component/DoctorDashBoard/Patient Doc/addpatientdoc/addpatientdoc.component";
+import { AppointmentListComponent } from './shared/appointment/appointment-list/appointment-list.component';
 
 @NgModule({
   declarations: [
@@ -118,17 +124,9 @@ import { AppointmentCreateComponent } from './Component/appointment/appointment-
     AdmindashboardComponent,
     DepartmenthomeComponent,
     DoctorshomeComponent,
-    DoctorpntComponent,
-    AppointmentpntComponent,
-    PaymentpntComponent,
-    SettingspntComponent,
-    ReportpntComponent,
     AddpatientdocComponent,
     UpdatepatientdocComponent,
     ViewpatientdocComponent,
-    AddreportdocComponent,
-    UpdatereportdocComponent,
-    ViewreportdocComponent,
     MyprofilenrsComponent,
     EditprofilenrsComponent,
     MyprofilepntComponent,
@@ -149,13 +147,13 @@ import { AppointmentCreateComponent } from './Component/appointment/appointment-
     NeurodepartmentComponent,
     CardiacdepartmentComponent,
     LastappointmentComponent,
-    UserporfileComponent,
     WelcomepageComponent,
     ListofpatientComponent,
     UserFormComponent,
     UserListComponent,
     RegisterComponent,
     AppointmentCreateComponent,
+    AppointmentListComponent,
   ],
   imports: [
     BrowserModule,
@@ -165,7 +163,7 @@ import { AppointmentCreateComponent } from './Component/appointment/appointment-
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptorsFromDi()),
     AuthService,
     StorageUtil,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

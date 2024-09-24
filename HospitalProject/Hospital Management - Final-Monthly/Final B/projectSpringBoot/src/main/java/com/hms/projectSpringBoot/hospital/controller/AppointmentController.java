@@ -2,11 +2,8 @@ package com.hms.projectSpringBoot.hospital.controller;
 
 import com.hms.projectSpringBoot.hospital.entity.Appointment;
 import com.hms.projectSpringBoot.hospital.service.AppointmentService;
-import com.hms.projectSpringBoot.security.entity.User;
-import com.hms.projectSpringBoot.security.service.UserService;
 import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,4 +51,10 @@ public class AppointmentController {
     public ApiResponse getAppointmentsByDoctorId(@RequestParam Long doctorId) {
         return appointmentService.getAppointmentsByDoctorId(doctorId);
     }
+
+    @GetMapping("/searchByName")
+    public ApiResponse getAppointmentsByName(@RequestParam String name) {
+        return appointmentService.getAppointmentsByName(name);
+    }
+
 }

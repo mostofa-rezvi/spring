@@ -2,6 +2,7 @@ package com.hms.projectSpringBoot.hospital.service;
 
 import com.hms.projectSpringBoot.hospital.entity.Diagnostics;
 import com.hms.projectSpringBoot.hospital.repository.DiagnosticsRepository;
+import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,34 +16,95 @@ public class DiagnosticsService {
     @Autowired
     private DiagnosticsRepository diagnosticsRepository;
 
-    public List<Diagnostics> getAllDiagnostics() {
-        return diagnosticsRepository.findAll();
+    public ApiResponse getAllDiagnostics() {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            List<Diagnostics> diagnosticsList = diagnosticsRepository.findAll();
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Diagnostics fetched successfully.");
+            apiResponse.setData("diagnostics", diagnosticsList);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public Optional<Diagnostics> getDiagnosticsById(Long id) {
-        return diagnosticsRepository.findById(id);
+    public ApiResponse getDiagnosticsById(Long id) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            Optional<Diagnostics> diagnostics = diagnosticsRepository.findById(id);
+            if (diagnostics.isPresent()) {
+                apiResponse.setSuccessful(true);
+                apiResponse.setMessage("Diagnostics fetched successfully.");
+                apiResponse.setData("diagnostics", diagnostics.get());
+            } else {
+                apiResponse.setMessage("Diagnostics not found.");
+            }
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public Diagnostics createDiagnostics(Diagnostics diagnostics) {
-        diagnostics.setCreatedAt(LocalDateTime.now());
-        diagnostics.setUpdatedAt(LocalDateTime.now());
-        return diagnosticsRepository.save(diagnostics);
+    public ApiResponse createDiagnostics(Diagnostics diagnostics) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            diagnostics.setCreatedAt(LocalDateTime.now());
+            diagnostics.setUpdatedAt(LocalDateTime.now());
+            Diagnostics savedDiagnostics = diagnosticsRepository.save(diagnostics);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Diagnostics created successfully.");
+            apiResponse.setData("diagnostics", savedDiagnostics);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public Diagnostics updateDiagnostics(Long id, Diagnostics updatedDiagnostics) {
-        return diagnosticsRepository.findById(id).map(diagnostics -> {
-            diagnostics.setTestDate(updatedDiagnostics.getTestDate());
-            diagnostics.setTestResult(updatedDiagnostics.getTestResult());
-            diagnostics.setPrice(updatedDiagnostics.getPrice());
-            diagnostics.setUpdatedAt(LocalDateTime.now()); // Update the timestamp
-            diagnostics.setDoctor(updatedDiagnostics.getDoctor());
-            diagnostics.setPatient(updatedDiagnostics.getPatient());
-            return diagnosticsRepository.save(diagnostics);
-        }).orElseThrow(() -> new RuntimeException("Diagnostics not found"));
+    public ApiResponse updateDiagnostics(Long id, Diagnostics updatedDiagnostics) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            return diagnosticsRepository.findById(id).map(diagnostics -> {
+                diagnostics.setTestDate(updatedDiagnostics.getTestDate());
+                diagnostics.setTestResult(updatedDiagnostics.getTestResult());
+                diagnostics.setPrice(updatedDiagnostics.getPrice());
+                diagnostics.setUpdatedAt(LocalDateTime.now());
+                diagnostics.setDoctor(updatedDiagnostics.getDoctor());
+                diagnostics.setPatient(updatedDiagnostics.getPatient());
+                Diagnostics savedDiagnostics = diagnosticsRepository.save(diagnostics);
+
+                apiResponse.setSuccessful(true);
+                apiResponse.setMessage("Diagnostics updated successfully.");
+                apiResponse.setData("diagnostics", savedDiagnostics);
+                return apiResponse;
+            }).orElseGet(() -> {
+                apiResponse.setMessage("Diagnostics not found.");
+                return apiResponse;
+            });
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public void deleteDiagnostics(Long id) {
-        diagnosticsRepository.deleteById(id);
+    public ApiResponse deleteDiagnostics(Long id) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            if (!diagnosticsRepository.existsById(id)) {
+                apiResponse.setMessage("Diagnostics not found.");
+                return apiResponse;
+            }
+            diagnosticsRepository.deleteById(id);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Diagnostics deleted successfully.");
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
     public List<Diagnostics> getDiagnosticsByPatientId(Long patientId) {

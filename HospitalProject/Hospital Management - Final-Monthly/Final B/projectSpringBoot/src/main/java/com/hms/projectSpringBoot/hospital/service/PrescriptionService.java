@@ -2,6 +2,7 @@ package com.hms.projectSpringBoot.hospital.service;
 
 import com.hms.projectSpringBoot.hospital.entity.Prescription;
 import com.hms.projectSpringBoot.hospital.repository.PrescriptionRepository;
+import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,64 +17,126 @@ public class PrescriptionService {
     @Autowired
     private PrescriptionRepository prescriptionRepository;
 
-    public List<Prescription> getAllPrescriptions() {
-        return prescriptionRepository.findAll();
+    public ApiResponse getAllPrescriptions() {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            List<Prescription> prescriptions = prescriptionRepository.findAll();
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Prescriptions fetched successfully.");
+            apiResponse.setData("prescriptions", prescriptions);
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+        }
+        return apiResponse;
     }
 
-    public Optional<Prescription> getPrescriptionById(Long id) {
-        return prescriptionRepository.findById(id);
+    public ApiResponse getPrescriptionById(Long id) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            Prescription prescription = prescriptionRepository.findById(id).orElse(null);
+            if (prescription == null) {
+                apiResponse.setMessage("Prescription not found.");
+                return apiResponse;
+            }
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Prescription fetched successfully.");
+            apiResponse.setData("prescription", prescription);
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+        }
+        return apiResponse;
     }
 
-//    public Prescription saveOrUpdatePrescription(Prescription prescription) {
-//        return prescriptionRepository.save(prescription);
-//    }
-
-//    public Prescription saveOrUpdatePrescription(Prescription prescription) {
-//        if (prescription == null) {
-//            throw new IllegalArgumentException("Prescription cannot be null");
-//        }
-//
-//        if (prescription.getDoctor() == null) {
-//            throw new IllegalArgumentException("Doctor must be specified");
-//        }
-//        if (prescription.getPatient() == null) {
-//            throw new IllegalArgumentException("Patient must be specified");
-//        }
-//
-//        return prescriptionRepository.save(prescription);
-//    }
-
-    public Prescription createPrescription(Prescription prescription) {
-        prescription.setCreatedAt(LocalDateTime.now());
-        return prescriptionRepository.save(prescription);
+    public ApiResponse createPrescription(Prescription prescription) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            prescription.setCreatedAt(LocalDateTime.now());
+            Prescription createdPrescription = prescriptionRepository.save(prescription);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Prescription created successfully.");
+            apiResponse.setData("prescription", createdPrescription);
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+        }
+        return apiResponse;
     }
 
-    public Prescription updatePrescription(Long id, Prescription updatedPrescription) {
-        return prescriptionRepository.findById(id).map(prescription -> {
+    public ApiResponse updatePrescription(Long id, Prescription updatedPrescription) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            Prescription prescription = prescriptionRepository.findById(id).orElse(null);
+            if (prescription == null) {
+                apiResponse.setMessage("Prescription not found.");
+                return apiResponse;
+            }
             prescription.setPrescriptionDate(updatedPrescription.getPrescriptionDate());
             prescription.setNotes(updatedPrescription.getNotes());
             prescription.setDoctor(updatedPrescription.getDoctor());
             prescription.setPatient(updatedPrescription.getPatient());
             prescription.setMedicines(updatedPrescription.getMedicines());
-
             prescription.setUpdatedAt(LocalDateTime.now());
-            return prescriptionRepository.save(prescription);
-        }).orElseThrow(() -> new RuntimeException("Prescription not found"));
+            Prescription savedPrescription = prescriptionRepository.save(prescription);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Prescription updated successfully.");
+            apiResponse.setData("prescription", savedPrescription);
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+        }
+        return apiResponse;
     }
 
-    public void deletePrescription(Long id) {
-        prescriptionRepository.deleteById(id);
+    public ApiResponse deletePrescription(Long id) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            if (!prescriptionRepository.existsById(id)) {
+                apiResponse.setMessage("Prescription not found.");
+                return apiResponse;
+            }
+            prescriptionRepository.deleteById(id);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Prescription deleted successfully.");
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+        }
+        return apiResponse;
     }
 
-    public List<Prescription> getPrescriptionsByDoctor(Long doctorId) {
-        return prescriptionRepository.findByDoctor_Id(doctorId);
+    public ApiResponse getPrescriptionsByDoctor(Long doctorId) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            List<Prescription> prescriptions = prescriptionRepository.findByDoctor_Id(doctorId);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Prescriptions fetched successfully.");
+            apiResponse.setData("prescriptions", prescriptions);
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+        }
+        return apiResponse;
     }
 
-    public List<Prescription> getPrescriptionsByPatient(Long patientId) {
-        return prescriptionRepository.findByPatient_Id(patientId);
+    public ApiResponse getPrescriptionsByPatient(Long patientId) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            List<Prescription> prescriptions = prescriptionRepository.findByPatient_Id(patientId);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Prescriptions fetched successfully.");
+            apiResponse.setData("prescriptions", prescriptions);
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+        }
+        return apiResponse;
     }
 
-    public List<Prescription> getPrescriptionsByDate(Date prescriptionDate) {
-        return prescriptionRepository.findByPrescriptionDate(prescriptionDate);
+    public ApiResponse getPrescriptionsByDate(Date prescriptionDate) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            List<Prescription> prescriptions = prescriptionRepository.findByPrescriptionDate(prescriptionDate);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Prescriptions fetched successfully.");
+            apiResponse.setData("prescriptions", prescriptions);
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+        }
+        return apiResponse;
     }
 }

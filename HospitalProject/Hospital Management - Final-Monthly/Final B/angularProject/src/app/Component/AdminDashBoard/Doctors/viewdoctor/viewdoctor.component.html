@@ -1,0 +1,48 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col-sm-4 col-3">
+        <h4 class="page-title">Doctor</h4>
+      </div>
+      <div class="col-sm-8 col-9 text-right m-b-20">
+        <a href="adddoctor" class="btn btn-primary btn-rounded float-end text-white m-1"><i class="fa fa-plus"></i><span>
+            Add Doctors</span></a>
+        <!-- <a href="" class="btn btn-primary btn-rounded float-end text-white m-1"><i class="fa fa-list"><span>  Doctors List </span></i></a> -->
+      </div>
+    </div>
+
+    <div class="doctor-list">
+      <h2>Doctors List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Dr ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Specialization</th>
+            <th>Department</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let doctor of doctors">
+            <td>{{ doctor.firstname }}</td>
+            <td>{{ doctor.lastname }}</td>
+            <td>{{ doctor.email }}</td>
+            <td>{{ doctor.phone }}</td>
+            <td>{{ doctor.specialization }}</td>
+            <td>{{ doctor.department }}</td>
+            <td>
+              <button (click)="updatedoctor(doctor.id)">Update</button>
+              <button (click)="deleteDoctor(doctor.id)">Delete</button>
+              <!-- <a [routerLink]="['/update-doctor', doctor.id]">Edit</a> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

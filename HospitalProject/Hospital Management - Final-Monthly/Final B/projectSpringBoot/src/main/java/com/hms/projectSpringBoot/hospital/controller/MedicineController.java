@@ -1,14 +1,13 @@
 package com.hms.projectSpringBoot.hospital.controller;
 
-import com.hms.projectSpringBoot.hospital.entity.Manufacturer;
 import com.hms.projectSpringBoot.hospital.entity.Medicine;
 import com.hms.projectSpringBoot.hospital.service.MedicineService;
+import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/medicines")
@@ -19,50 +18,37 @@ public class MedicineController {
     private MedicineService medicineService;
 
     @GetMapping
-    public ResponseEntity<List<Medicine>> getAllMedicines() {
-        List<Medicine> medicines = medicineService.getAllMedicines();
-        return ResponseEntity.ok(medicines);
+    public ApiResponse getAllMedicines() {
+        return medicineService.getAllMedicines();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Medicine> getMedicineById(@PathVariable Long id) {
-        Optional<Medicine> medicine = medicineService.getMedicineById(id);
-        return medicine.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public ApiResponse getMedicineById(@PathVariable Long id) {
+        return medicineService.getMedicineById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Medicine> createMedicine(@RequestBody Medicine medicine) {
-        Medicine savedMedicine = medicineService.saveMedicine(medicine);
-        return ResponseEntity.ok(savedMedicine);
+    public ApiResponse createMedicine(@RequestBody Medicine medicine) {
+        return medicineService.saveMedicine(medicine);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Medicine> updateMedicine(@PathVariable Long id, @RequestBody Medicine medicine) {
-        Medicine updatedMedicine = medicineService.updateMedicine(id, medicine);
-        return ResponseEntity.ok(updatedMedicine);
+    public ApiResponse updateMedicine(@PathVariable Long id, @RequestBody Medicine medicine) {
+        return medicineService.updateMedicine(id, medicine);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMedicine(@PathVariable Long id) {
-        medicineService.deleteMedicine(id);
-        return ResponseEntity.noContent().build();
+    public ApiResponse deleteMedicine(@PathVariable Long id) {
+        return medicineService.deleteMedicine(id);
     }
 
     @GetMapping("/manufacturer/{manufacturerId}")
-    public ResponseEntity<List<Medicine>> getMedicinesByManufacturer(@PathVariable Long manufacturerId) {
-        List<Medicine> medicines = medicineService.getMedicinesByManufacturer(manufacturerId);
-        return ResponseEntity.ok(medicines);
+    public ApiResponse getMedicinesByManufacturer(@PathVariable Long manufacturerId) {
+        return medicineService.getMedicinesByManufacturer(manufacturerId);
     }
 
-//    @GetMapping("/prescription/{prescriptionId}")
-//    public ResponseEntity<List<Medicine>> getMedicinesByPrescription(@PathVariable Long prescriptionId) {
-//        List<Medicine> medicines = medicineService.getMedicinesByPrescription(prescriptionId);
-//        return ResponseEntity.ok(medicines);
-//    }
-
     @GetMapping("/search")
-    public ResponseEntity<List<Medicine>> searchMedicinesByName(@RequestParam String name) {
-        List<Medicine> medicines = medicineService.searchMedicinesByName(name);
-        return ResponseEntity.ok(medicines);
+    public ApiResponse searchMedicinesByName(@RequestParam String name) {
+        return medicineService.searchMedicinesByName(name);
     }
 }

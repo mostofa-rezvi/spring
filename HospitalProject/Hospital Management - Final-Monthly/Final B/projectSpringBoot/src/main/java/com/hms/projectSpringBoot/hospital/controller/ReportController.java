@@ -2,12 +2,11 @@ package com.hms.projectSpringBoot.hospital.controller;
 
 import com.hms.projectSpringBoot.hospital.entity.Report;
 import com.hms.projectSpringBoot.hospital.service.ReportService;
+import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reports")
@@ -17,37 +16,28 @@ public class ReportController {
     private ReportService reportService;
 
     @GetMapping
-    public List<Report> getAllReports() {
+    public ApiResponse getAllReports() {
         return reportService.getAllReports();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Report> getReportById(@PathVariable Long id) {
-        Optional<Report> report = reportService.getReportById(id);
-        return report.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ApiResponse getReportById(@PathVariable Long id) {
+        return reportService.getReportById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Report> createReport(@RequestBody Report report) {
-        Report createdReport = reportService.createReport(report);
-        return ResponseEntity.status(201).body(createdReport);
+    public ApiResponse createReport(@RequestBody Report report) {
+        return reportService.createReport(report);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Report> updateReport(@PathVariable Long id, @RequestBody Report updatedReport) {
-        try {
-            Report report = reportService.updateReport(id, updatedReport);
-            return ResponseEntity.ok(report);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ApiResponse updateReport(@PathVariable Long id, @RequestBody Report updatedReport) {
+        return reportService.updateReport(id, updatedReport);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReport(@PathVariable Long id) {
-        reportService.deleteReport(id);
-        return ResponseEntity.noContent().build();
+    public ApiResponse deleteReport(@PathVariable Long id) {
+        return reportService.deleteReport(id);
     }
 
     @GetMapping("/diagnostics/{diagnosticsId}")

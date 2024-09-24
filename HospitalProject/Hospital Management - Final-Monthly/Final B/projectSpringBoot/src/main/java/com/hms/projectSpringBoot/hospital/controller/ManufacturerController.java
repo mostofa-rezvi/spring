@@ -2,11 +2,11 @@ package com.hms.projectSpringBoot.hospital.controller;
 
 import com.hms.projectSpringBoot.hospital.entity.Manufacturer;
 import com.hms.projectSpringBoot.hospital.service.ManufacturerService;
+import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -18,32 +18,27 @@ public class ManufacturerController {
     private ManufacturerService manufacturerService;
 
     @GetMapping
-    public List<Manufacturer> getAllManufacturers() {
+    public ApiResponse getAllManufacturers() {
         return manufacturerService.getAllManufacturers();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Manufacturer> getManufacturerById(@PathVariable Long id) {
-        Optional<Manufacturer> manufacturer = manufacturerService.getManufacturerById(id);
-        return manufacturer.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ApiResponse getManufacturerById(@PathVariable Long id) {
+        return manufacturerService.getManufacturerById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Manufacturer> createManufacturer(@RequestBody Manufacturer manufacturer) {
-        Manufacturer createdManufacturer = manufacturerService.createManufacturer(manufacturer);
-        return ResponseEntity.ok(createdManufacturer);
+    public ApiResponse createManufacturer(@RequestBody Manufacturer manufacturer) {
+        return manufacturerService.createManufacturer(manufacturer);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Manufacturer> updateManufacturer(@PathVariable Long id, @RequestBody Manufacturer manufacturerDetails) {
-        Manufacturer updatedManufacturer = manufacturerService.updateManufacturer(id, manufacturerDetails);
-        return ResponseEntity.ok(updatedManufacturer);
+    public ApiResponse updateManufacturer(@PathVariable Long id, @RequestBody Manufacturer manufacturerDetails) {
+        return manufacturerService.updateManufacturer(id, manufacturerDetails);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteManufacturer(@PathVariable Long id) {
-        manufacturerService.deleteManufacturer(id);
-        return ResponseEntity.noContent().build();
+    public ApiResponse deleteManufacturer(@PathVariable Long id) {
+        return manufacturerService.deleteManufacturer(id);
     }
 }

@@ -2,12 +2,12 @@ package com.hms.projectSpringBoot.hospital.controller;
 
 import com.hms.projectSpringBoot.hospital.entity.Diagnostics;
 import com.hms.projectSpringBoot.hospital.service.DiagnosticsService;
+import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/diagnostics")
@@ -17,37 +17,28 @@ public class DiagnosticsController {
     private DiagnosticsService diagnosticsService;
 
     @GetMapping
-    public List<Diagnostics> getAllDiagnostics() {
+    public ApiResponse getAllDiagnostics() {
         return diagnosticsService.getAllDiagnostics();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Diagnostics> getDiagnosticsById(@PathVariable Long id) {
-        Optional<Diagnostics> diagnostics = diagnosticsService.getDiagnosticsById(id);
-        return diagnostics.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ApiResponse getDiagnosticsById(@PathVariable Long id) {
+        return diagnosticsService.getDiagnosticsById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Diagnostics> createDiagnostics(@RequestBody Diagnostics diagnostics) {
-        Diagnostics createdDiagnostics = diagnosticsService.createDiagnostics(diagnostics);
-        return ResponseEntity.status(201).body(createdDiagnostics);
+    public ApiResponse createDiagnostics(@RequestBody Diagnostics diagnostics) {
+        return diagnosticsService.createDiagnostics(diagnostics);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Diagnostics> updateDiagnostics(@PathVariable Long id, @RequestBody Diagnostics updatedDiagnostics) {
-        try {
-            Diagnostics diagnostics = diagnosticsService.updateDiagnostics(id, updatedDiagnostics);
-            return ResponseEntity.ok(diagnostics);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ApiResponse updateDiagnostics(@PathVariable Long id, @RequestBody Diagnostics updatedDiagnostics) {
+        return diagnosticsService.updateDiagnostics(id, updatedDiagnostics);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDiagnostics(@PathVariable Long id) {
-        diagnosticsService.deleteDiagnostics(id);
-        return ResponseEntity.noContent().build();
+    public ApiResponse deleteDiagnostics(@PathVariable Long id) {
+        return diagnosticsService.deleteDiagnostics(id);
     }
 
     @GetMapping("/patient/{patientId}")

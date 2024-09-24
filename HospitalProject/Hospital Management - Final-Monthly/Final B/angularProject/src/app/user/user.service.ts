@@ -25,6 +25,10 @@ export class UserService {
     return this.http.get<ApiResponse>(this.apiUrl + '/findAllUsers', { headers: this.getAuthHeaders() });
   }
 
+  findUsersByRole(role: string): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.apiUrl + '/findUsersByRole?role=' + role);
+  }
+
   findById(id: number): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(`${this.apiUrl}/findById/${id}`, { headers: this.getAuthHeaders() });
   }

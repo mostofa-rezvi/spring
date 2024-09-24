@@ -10,7 +10,6 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('loooooooooooool');
     const jwt = StorageUtil.getFromLocalStorage('jwt');
     console.log(jwt);
     if (jwt) {

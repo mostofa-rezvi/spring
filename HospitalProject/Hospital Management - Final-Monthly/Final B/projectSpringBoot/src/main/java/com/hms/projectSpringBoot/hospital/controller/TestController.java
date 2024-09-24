@@ -2,12 +2,11 @@ package com.hms.projectSpringBoot.hospital.controller;
 
 import com.hms.projectSpringBoot.hospital.entity.TestEntity;
 import com.hms.projectSpringBoot.hospital.service.TestService;
+import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/tests")
@@ -17,37 +16,28 @@ public class TestController {
     private TestService testService;
 
     @GetMapping
-    public List<TestEntity> getAllTests() {
+    public ApiResponse getAllTests() {
         return testService.getAllTests();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TestEntity> getTestById(@PathVariable Long id) {
-        Optional<TestEntity> test = testService.getTestById(id);
-        return test.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ApiResponse getTestById(@PathVariable Long id) {
+        return testService.getTestById(id);
     }
 
     @PostMapping
-    public ResponseEntity<TestEntity> createTest(@RequestBody TestEntity testEntity) {
-        TestEntity createdTest = testService.createTest(testEntity);
-        return ResponseEntity.status(201).body(createdTest);
+    public ApiResponse createTest(@RequestBody TestEntity testEntity) {
+        return testService.createTest(testEntity);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TestEntity> updateTest(@PathVariable Long id, @RequestBody TestEntity updatedTest) {
-        try {
-            TestEntity test = testService.updateTest(id, updatedTest);
-            return ResponseEntity.ok(test);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ApiResponse updateTest(@PathVariable Long id, @RequestBody TestEntity updatedTest) {
+        return testService.updateTest(id, updatedTest);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTest(@PathVariable Long id) {
-        testService.deleteTest(id);
-        return ResponseEntity.noContent().build();
+    public ApiResponse deleteTest(@PathVariable Long id) {
+        return testService.deleteTest(id);
     }
 
     @GetMapping("/diagnostics/{diagnosticsId}")

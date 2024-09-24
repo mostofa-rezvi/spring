@@ -1,14 +1,13 @@
 package com.hms.projectSpringBoot.hospital.service;
 
-import com.hms.projectSpringBoot.hospital.entity.Manufacturer;
 import com.hms.projectSpringBoot.hospital.entity.Medicine;
 import com.hms.projectSpringBoot.hospital.repository.MedicineRepository;
+import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MedicineService {
@@ -16,47 +15,115 @@ public class MedicineService {
     @Autowired
     private MedicineRepository medicineRepository;
 
-    public List<Medicine> getAllMedicines() {
-        return medicineRepository.findAll();
+    public ApiResponse getAllMedicines() {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            List<Medicine> medicines = medicineRepository.findAll();
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Medicines fetched successfully.");
+            apiResponse.setData("medicines", medicines);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public Optional<Medicine> getMedicineById(Long id) {
-        return medicineRepository.findById(id);
+    public ApiResponse getMedicineById(Long id) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            Medicine medicine = medicineRepository.findById(id).orElse(null);
+            if (medicine == null) {
+                apiResponse.setMessage("Medicine not found.");
+                return apiResponse;
+            }
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Medicine fetched successfully.");
+            apiResponse.setData("medicine", medicine);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public Medicine saveMedicine(Medicine medicine) {
-        medicine.setCreatedAt(LocalDateTime.now());
-        return medicineRepository.save(medicine);
+    public ApiResponse saveMedicine(Medicine medicine) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            medicine.setCreatedAt(LocalDateTime.now());
+            Medicine savedMedicine = medicineRepository.save(medicine);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Medicine created successfully.");
+            apiResponse.setData("medicine", savedMedicine);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public Medicine updateMedicine(Long id, Medicine medicineDetails) {
-        Medicine medicine = medicineRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Manufacturer not found"));
+    public ApiResponse updateMedicine(Long id, Medicine medicineDetails) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            Medicine medicine = medicineRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Medicine not found"));
 
-        medicine.setMedicineName(medicineDetails.getMedicineName());
-        medicine.setDosageForm(medicineDetails.getDosageForm());
-        medicine.setInstructions(medicineDetails.getInstructions());
-        medicine.setMedicineStrength(medicineDetails.getMedicineStrength());
-        medicine.setPrice(medicineDetails.getPrice());
+            medicine.setMedicineName(medicineDetails.getMedicineName());
+            medicine.setDosageForm(medicineDetails.getDosageForm());
+            medicine.setInstructions(medicineDetails.getInstructions());
+            medicine.setMedicineStrength(medicineDetails.getMedicineStrength());
+            medicine.setPrice(medicineDetails.getPrice());
+            medicine.setUpdatedAt(LocalDateTime.now());
 
-        medicine.setUpdatedAt(LocalDateTime.now());
-
-        return medicineRepository.save(medicine);
+            Medicine updatedMedicine = medicineRepository.save(medicine);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Medicine updated successfully.");
+            apiResponse.setData("medicine", updatedMedicine);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public void deleteMedicine(Long id) {
-        medicineRepository.deleteById(id);
+    public ApiResponse deleteMedicine(Long id) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            medicineRepository.deleteById(id);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Medicine deleted successfully.");
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-    public List<Medicine> getMedicinesByManufacturer(Long manufacturerId) {
-        return medicineRepository.findByManufacturer_Id(manufacturerId);
+    public ApiResponse getMedicinesByManufacturer(Long manufacturerId) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            List<Medicine> medicines = medicineRepository.findByManufacturer_Id(manufacturerId);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Medicines fetched by manufacturer successfully.");
+            apiResponse.setData("medicines", medicines);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
-//    public List<Medicine> getMedicinesByPrescription(Long prescriptionId) {
-//        return medicineRepository.findByPrescription_Id(prescriptionId);
-//    }
-
-    public List<Medicine> searchMedicinesByName(String medicineName) {
-        return medicineRepository.findByMedicineNameContainingIgnoreCase(medicineName);
+    public ApiResponse searchMedicinesByName(String medicineName) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            List<Medicine> medicines = medicineRepository.findByMedicineNameContainingIgnoreCase(medicineName);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Medicines searched successfully.");
+            apiResponse.setData("medicines", medicines);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.hms.projectSpringBoot.hospital.controller;
 
 import com.hms.projectSpringBoot.hospital.entity.Bill;
 import com.hms.projectSpringBoot.hospital.service.BillService;
+import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,56 +12,49 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/bills")
+@CrossOrigin
 public class BillController {
 
     @Autowired
     private BillService billService;
 
     @GetMapping
-    public List<Bill> getAllBills() {
+    public ApiResponse getAllBills() {
         return billService.getAllBills();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Bill> getBillById(@PathVariable Long id) {
-        Optional<Bill> bill = billService.getBillById(id);
-        return bill.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ApiResponse getBillById(@PathVariable Long id) {
+        return billService.getBillById(id);
     }
 
     @PostMapping
-    public Bill createBill(@RequestBody Bill bill) {
+    public ApiResponse createBill(@RequestBody Bill bill) {
         return billService.createBill(bill);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Bill> updateBill(@PathVariable Long id, @RequestBody Bill updatedBill) {
-        try {
-            Bill bill = billService.updateBill(id, updatedBill);
-            return ResponseEntity.ok(bill);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ApiResponse updateBill(@RequestBody Bill bill) {
+        return billService.updateBill(bill);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBill(@PathVariable Long id) {
-        billService.deleteBill(id);
-        return ResponseEntity.noContent().build();
+    public ApiResponse deleteBill(@PathVariable Long id) {
+        return billService.deleteBill(id);
     }
 
-    @GetMapping("/patient/{patientId}")
-    public List<Bill> getBillsByPatientId(@PathVariable Long patientId) {
+    @GetMapping("/getBillsByPatientId")
+    public ApiResponse getBillsByPatientId(@RequestParam Long patientId) {
         return billService.getBillsByPatientId(patientId);
     }
 
-    @GetMapping("/doctor/{doctorId}")
-    public List<Bill> getBillsByDoctorId(@PathVariable Long doctorId) {
+    @GetMapping("/getBillsByDoctorId")
+    public ApiResponse getBillsByDoctorId(@PathVariable Long doctorId) {
         return billService.getBillsByDoctorId(doctorId);
     }
 
-    @GetMapping("/pharmacist/{pharmacistId}")
-    public List<Bill> getBillsByPharmacistId(@PathVariable Long pharmacistId) {
+    @GetMapping("/getBillsByPharmacistId")
+    public ApiResponse getBillsByPharmacistId(@PathVariable Long pharmacistId) {
         return billService.getBillsByPharmacistId(pharmacistId);
     }
 }

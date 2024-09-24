@@ -4,7 +4,6 @@ import com.hms.projectSpringBoot.hospital.entity.Appointment;
 import com.hms.projectSpringBoot.hospital.repository.AppointmentRepository;
 import com.hms.projectSpringBoot.security.entity.User;
 import com.hms.projectSpringBoot.security.repository.UserRepository;
-import com.hms.projectSpringBoot.security.service.UserService;
 import com.hms.projectSpringBoot.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -131,6 +130,20 @@ public class AppointmentService {
         ApiResponse apiResponse = new ApiResponse(false);
         try {
             List<Appointment> appointments = appointmentRepository.findByDoctorId(doctorId);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Appointments fetched successfully.");
+            apiResponse.setData("appointments", appointments);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
+    }
+
+    public ApiResponse getAppointmentsByName(String name) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            List<Appointment> appointments = appointmentRepository.findByNameContaining(name);
             apiResponse.setSuccessful(true);
             apiResponse.setMessage("Appointments fetched successfully.");
             apiResponse.setData("appointments", appointments);

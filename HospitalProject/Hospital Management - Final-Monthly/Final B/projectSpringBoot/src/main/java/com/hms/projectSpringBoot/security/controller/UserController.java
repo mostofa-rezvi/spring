@@ -21,6 +21,11 @@ public class UserController {
         return userService.findAll();
     }
 
+    @GetMapping("/findUsersByRole")
+    public ApiResponse findUsersByRole(@RequestParam String role) {
+        return userService.findUsersByRole(role);
+    }
+
     @GetMapping("/findById/{id}")
     public ApiResponse findById(@PathVariable Long id) {
         return userService.findById(id);
