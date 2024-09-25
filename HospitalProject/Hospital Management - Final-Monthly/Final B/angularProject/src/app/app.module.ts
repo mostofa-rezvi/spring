@@ -86,6 +86,12 @@ import { AppointmentListComponent } from './shared/appointment/appointment-list/
 import { DepartmentListComponent } from './shared/department/department-list/department-list.component';
 import { DepartmentAddComponent } from './shared/department/department-add/department-add.component';
 import { DepartmentUpdateComponent } from './shared/department/department-update/department-update.component';
+import { ManufacturerAddComponent } from './Component/pharmacist/manufacturer/manufacturer-add/manufacturer-add.component';
+import { ManufacturerListComponent } from './Component/pharmacist/manufacturer/manufacturer-list/manufacturer-list.component';
+import { ManufacturerUpdateComponent } from './Component/pharmacist/manufacturer/manufacturer-update/manufacturer-update.component';
+import { MedicineAddComponent } from './Component/pharmacist/medicine/medicine-add/medicine-add.component';
+import { MedicineListComponent } from './Component/pharmacist/medicine/medicine-list/medicine-list.component';
+import { MedicineUpdateComponent } from './Component/pharmacist/medicine/medicine-update/medicine-update.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +148,12 @@ import { DepartmentUpdateComponent } from './shared/department/department-update
     DepartmentListComponent,
     DepartmentAddComponent,
     DepartmentUpdateComponent,
+    ManufacturerAddComponent,
+    ManufacturerListComponent,
+    ManufacturerUpdateComponent,
+    MedicineAddComponent,
+    MedicineListComponent,
+    MedicineUpdateComponent,
   ],
   imports: [
     BrowserModule,

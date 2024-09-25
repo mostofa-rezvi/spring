@@ -1,6 +1,7 @@
 package com.hms.projectSpringBoot.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hms.projectSpringBoot.hospital.entity.Department;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,7 +32,7 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     private int cell;
@@ -57,16 +58,19 @@ public class User implements UserDetails {
     @Column(name = "role", nullable = false)
     private Role role;
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() {
         return password;
     }
 
+    @JsonIgnore
     @Override
     public String getUsername() {
         return email;

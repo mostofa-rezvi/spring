@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -72,9 +73,6 @@ public class UserService implements UserDetailsService {
                 return response.error("Email already exists");
             }
 
-            // Default role set as USER (or adjust to your needs)
-            user.setRole(Role.PATIENT);
-
             if (avatar != null && !avatar.isEmpty()) {
                 Path directoryPath = Paths.get(imagesDir);
                 if (!Files.exists(directoryPath)) {
@@ -92,6 +90,7 @@ public class UserService implements UserDetailsService {
                 user.setImage("imagesDir/" + randomFileName);
             }
 
+            user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
             userRepository.save(user);
 
             response.setData("user", user);
@@ -136,6 +135,7 @@ public class UserService implements UserDetailsService {
                 user.setImage(oldUser.getImage());
             }
 
+            user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
             userRepository.save(user);
 
             response.setData("user", user);
@@ -149,11 +149,11 @@ public class UserService implements UserDetailsService {
     public ApiResponse findById(Long id) {
         ApiResponse response = new ApiResponse();
         try {
-            Optional<User> user = userRepository.findById(id);
-            if (user.isEmpty()) {
+            User user = userRepository.findById(id).orElse(null);
+            if (user == null) {
                 return response.error("User not found");
             }
-            response.setData("user", user.get());
+            response.setData("user", user);
             response.success("Successfully retrieved user");
             return response;
         } catch (Exception e) {

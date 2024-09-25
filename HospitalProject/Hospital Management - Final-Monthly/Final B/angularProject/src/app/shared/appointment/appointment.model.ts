@@ -13,6 +13,6 @@ export class AppointmentModel {
   time!: string;
   notes!: string;
 
-  requestedBy!: UserModel | null | undefined;
-  doctor!: UserModel | null | undefined;
+  requestedBy: UserModel = new UserModel();
+  doctor: UserModel = new UserModel();
 }

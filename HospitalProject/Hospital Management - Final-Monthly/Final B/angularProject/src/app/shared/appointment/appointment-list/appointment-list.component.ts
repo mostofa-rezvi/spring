@@ -5,6 +5,7 @@ import { AuthService } from '../../../security/service/auth.service';
 import { AppointmentModel } from '../appointment.model';
 import { UserModel } from '../../../user/user.model';
 import { ApiResponse } from '../../../util/api.response.model';
+import {app} from "../../../../../server";
 
 @Component({
   selector: 'app-appointment-list',
@@ -15,7 +16,6 @@ export class AppointmentListComponent implements OnInit {
   appointments: AppointmentModel[] = [];
   filteredAppointments: AppointmentModel[] = [];
   doctors: UserModel[] = [];
-  selectedDoctorId!: number;
   isLoading = true;
   searchTerm: string = ''; // Added search term for filtering
 
@@ -65,13 +65,18 @@ export class AppointmentListComponent implements OnInit {
     });
   }
 
-  assignDoctor(appointment: AppointmentModel, doctorId: number): void {
-    if (!doctorId) {
+  onDoctorSelect(appointment: AppointmentModel, event: any) {
+    const selectedDoctorId = event.target.value;
+    let doctor = new UserModel();
+    doctor.id = selectedDoctorId;
+    appointment.doctor = doctor;
+  }
+
+  assignDoctor(appointment: AppointmentModel): void {
+    if (!appointment.doctor || !appointment.doctor.id) {
       alert('Please select a doctor');
       return;
     }
-    appointment.doctor = this.doctors.find(doctor => doctor.id === doctorId) || null;
-
     this.appointmentService.updateAppointment(appointment).subscribe({
       next: (response: ApiResponse) => {
         if (response.successful) {

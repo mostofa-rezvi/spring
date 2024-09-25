@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>Manufacturer List</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Contact Number</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let manufacturer of manufacturers">
+      <td>{{ manufacturer.id }}</td>
+      <td>{{ manufacturer.manufacturerName }}</td>
+      <td>{{ manufacturer.address }}</td>
+      <td>{{ manufacturer.contactNumber }}</td>
+      <td>{{ manufacturer.email }}</td>
+      <td>
+        <button (click)="deleteManufacturer(manufacturer.id)" class="btn btn-danger">
+          Delete
+        </button>
+        <a [routerLink]="['/manufacturers/edit', manufacturer.id]" class="btn btn-warning">
+          Edit
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

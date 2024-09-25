@@ -77,11 +77,13 @@ public class AppointmentService {
     public ApiResponse updateAppointment(Appointment appointment) {
         ApiResponse apiResponse = new ApiResponse(false);
         try {
-            User user = userRepository.findById(appointment.getRequestedBy().getId()).orElse(null);
+            if (appointment.getRequestedBy() != null && appointment.getRequestedBy().getId() != null) {
+                User user = userRepository.findById(appointment.getRequestedBy().getId()).orElse(null);
 
-            if (user == null || user.getRole() == null) {
-                apiResponse.setMessage("User must have a valid role and must exist.");
-                return apiResponse;
+                if (user == null || user.getRole() == null) {
+                    apiResponse.setMessage("User must have a valid role and must exist.");
+                    return apiResponse;
+                }
             }
             appointmentRepository.save(appointment);
             apiResponse.setSuccessful(true);

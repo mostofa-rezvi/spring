@@ -5,6 +5,7 @@ import { UserService } from "../user.service";
 import { Observable } from "rxjs";
 import { ApiResponse } from "../../util/api.response.model";
 import {DepartmentService} from "../../shared/department/department.service";
+import {DepartmentModel} from "../../shared/department/department.model";
 
 @Component({
   selector: 'app-user-form',
@@ -16,6 +17,8 @@ export class UserFormComponent implements OnInit {
   user: UserModel = new UserModel();
   id?: number;
   imageFile?: File;
+
+  departments: DepartmentModel[] = [];
 
   userRoleOptions = UserRoleMap;
 
@@ -43,6 +46,8 @@ export class UserFormComponent implements OnInit {
         }
       });
     }
+
+    this.fetchDepartments();
   }
 
   onImagePicked(event: Event): void {
@@ -85,7 +90,7 @@ export class UserFormComponent implements OnInit {
   fetchDepartments(): void {
     this.departmentService.getDepartments().subscribe(response => {
       if (response.successful) {
-        this.departmentService = response.data.departments; // Store departments
+        this.departments = response.data.departments; // Store departments
       } else {
         alert('Error fetching departments: ' + response.message);
       }

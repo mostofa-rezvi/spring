@@ -77,7 +77,8 @@
             <a href="patientprofile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
           </li>
           <li>
-              <a href="doappointment"><i class="fa fa-dashboard"></i> <span>Appointment</span></a>
+            <a href="doappointment"><i class="fa fa-calendar-check-o"></i>
+              <span>Appointment</span></a>
           </li>
 
 
@@ -105,6 +106,7 @@
           <li>
             <a href="adminprofile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
           </li>
+
           <li class="submenu">
             <a href="#"><i class="fa fa-user-md"></i> <span> User </span> <span
               class="menu-arrow"></span></a>
@@ -113,14 +115,19 @@
               <a [routerLink]="['/user-list']"><i class="fa fa-list-ul"></i> <span> User List</span></a>
             </ul>
           </li>
-          <li>
-            <a href="doappointment"><i class="fa fa-calendar-check-o"></i>
-              <span>Appointment</span></a>
+
+          <li class="submenu">
+            <a href="#"><i class="fa fa-user-md"></i> <span> Appointment </span> <span
+              class="menu-arrow"></span></a>
+            <ul style="display: none;">
+              <a [routerLink]="['/doappointment']"><i class="fa fa-user-md"></i> <span>Create Appointment </span></a>
+              <a [routerLink]="['/appointment-list']"><i class="fa fa-list-ul"></i> <span> Assign Appointment</span></a>
+            </ul>
           </li>
+
           <li>
             <a href="departments"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
           </li>
-
 
 
           <li class="submenu">
@@ -151,8 +158,6 @@
               <a href="#"><i class="fa fa-list-ul"></i> <span> Patient List</span></a>
             </ul>
           </li>
-
-
 
 
           <li>

@@ -7,7 +7,7 @@
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
-  
+
   /* Card Styling */
   .card {
     background-color: #ffffff;
@@ -15,7 +15,7 @@
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
   }
-  
+
   .card-header {
     background-color: #4e73df;
     color: #ffffff;
@@ -23,16 +23,16 @@
     border-radius: 12px 12px 0 0;
     text-align: center;
   }
-  
+
   .card-header h3 {
     margin: 0;
     font-weight: 600;
   }
-  
+
   .card-body {
     padding: 20px;
   }
-  
+
   /* Label Styling */
   label {
     font-weight: 500;
@@ -40,14 +40,14 @@
     display: block;
     margin-bottom: 10px;
   }
-  
+
   /* Available Dates & Time Box Styling */
   .d-flex {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
   }
-  
+
   button {
     padding: 12px 20px;
     border: 2px solid #4e73df;
@@ -59,18 +59,18 @@
     transition: all 0.3s ease;
     cursor: pointer;
   }
-  
+
   button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
-  
+
   /* Available Date/Time selected state */
   button.selected {
     background-color: #4e73df;
     color: #ffffff;
   }
-  
+
   /* Disabled Button Styling */
   button:disabled {
     background-color: #d1d3e2;
@@ -78,7 +78,7 @@
     color: #6c757d;
     cursor: not-allowed;
   }
-  
+
   /* Form Control Styling */
   .form-control {
     border: 1px solid #d1d3e2;
@@ -87,16 +87,16 @@
     transition: all 0.2s ease;
     font-size: 14px;
   }
-  
+
   .form-control:focus {
     border-color: #4e73df;
     box-shadow: 0 0 5px rgba(78, 115, 223, 0.5);
   }
-  
+
   textarea {
     resize: none;
   }
-  
+
   /* Submit Button */
   .btn-primary {
     background-color: #4e73df;
@@ -106,25 +106,25 @@
     font-weight: 600;
     border-radius: 8px;
   }
-  
+
   .btn-primary:hover {
     background-color: #2e59d9;
     border-color: #2653d4;
   }
-  
+
   /* Responsive Layout for Small Screens */
   @media (max-width: 768px) {
     .form-row {
       display: flex;
       flex-direction: column;
     }
-  
+
     .form-group {
       margin-bottom: 15px;
     }
   }
 
-  
+
   /* Submit Button */
 /* .btn-primary {
   background-color: #4e73df;

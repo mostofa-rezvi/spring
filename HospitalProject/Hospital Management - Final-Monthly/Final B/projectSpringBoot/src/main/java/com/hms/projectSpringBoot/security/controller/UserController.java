@@ -33,13 +33,13 @@ public class UserController {
 
     @PostMapping("/saveUser")
     public ApiResponse saveUser(@RequestPart("user") User user,
-                            @RequestPart(value = "image", required = false) MultipartFile image) {
+                            @RequestPart(value = "imageFile", required = false) MultipartFile image) {
         return userService.save(user, image);
     }
 
     @PutMapping("/updateUser")
     public ApiResponse updateUser(@RequestPart("user") User user,
-                              @RequestPart(value = "image", required = false) MultipartFile image) {
+                              @RequestPart(value = "imageFile", required = false) MultipartFile image) {
         return userService.update(user, image);
     }
 

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -37,5 +38,8 @@ public class Bill {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pharmacist_id")
     private User pharmacist;
+
+    @ManyToMany
+    private List<Medicine> medicineList;
 
 }

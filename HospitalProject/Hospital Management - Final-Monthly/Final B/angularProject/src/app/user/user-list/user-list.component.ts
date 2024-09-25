@@ -98,7 +98,7 @@ export class UserListComponent implements OnInit {
   }
 
   editUser(id: number): void {
-    this.router.navigate(['edit-user', id]);
+    this.router.navigate(['user-update', id]);
   }
 
   // searchUsers() {

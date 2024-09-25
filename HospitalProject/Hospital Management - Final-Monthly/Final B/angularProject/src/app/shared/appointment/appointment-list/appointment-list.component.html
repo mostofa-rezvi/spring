@@ -34,15 +34,17 @@
         <div>{{ appointment.phone }}</div>
         <div>{{ appointment.date | date: 'shortDate' }}</div>
         <div>{{ appointment.time }}</div>
-        <div>{{ appointment.doctor?.name || 'Not Assigned' }}</div>
-        <div>
-          <select [(ngModel)]="selectedDoctorId" class="form-control">
+        <div>{{ appointment.notes }}</div>
+        <div>{{ appointment.doctor.name || 'Not Assigned' }}</div>
+        <div class="assign-doctor">
+          <select class="form-control" (change)="onDoctorSelect(appointment, $event)">
             <option value="">Select Doctor</option>
             <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.name }}</option>
           </select>
-          <button (click)="assignDoctor(appointment, selectedDoctorId)" class="btn btn-primary mt-2">Assign</button>
+          <button (click)="assignDoctor(appointment)" class="btn btn-primary mt-2">Assign</button>
         </div>
       </div>
+
     </div>
   </div>
 </div>

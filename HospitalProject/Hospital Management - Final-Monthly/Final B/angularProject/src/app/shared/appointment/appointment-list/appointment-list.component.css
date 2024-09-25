@@ -1,92 +1,142 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background-color: #f4f7fa;
-    color: #333;
-}
-
+/* General container styling */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  font-family: Arial, sans-serif;
 }
 
+/* Styling for headings */
 h2 {
-    margin-bottom: 20px;
-    color: #007bff;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
 }
 
-.text-center {
-    text-align: center;
+/* Search bar */
+.mb-4 input[type="text"] {
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
 }
 
+.mb-4 input[type="text"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.mb-4 button {
+  padding: 8px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mb-4 button:hover {
+  background-color: #0056b3;
+}
+
+/* Loading text */
+.text-center p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* Appointment table container */
 .appointment-table {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling on smaller screens */
+}
+
+.appointment-header,
+.appointment-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(150px, 1fr));
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: nowrap; /* Prevent text from wrapping */
 }
 
 .appointment-header {
-    background-color: #007bff;
-    color: #fff;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    padding: 10px;
-    text-align: center;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
 }
 
 .appointment-row {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    padding: 10px;
-    border-bottom: 1px solid #eaeaea;
-    transition: background-color 0.2s;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease;
 }
 
 .appointment-row:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
-.appointment-row:last-child {
-    border-bottom: none;
+.appointment-row .assign-doctor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Space between the select and button */
+  margin-left: 80px;
 }
 
-.appointment-row div {
-    padding: 10px;
+/* Increase size of select dropdown */
+.appointment-row select {
+  padding: 10px 15px; /* Increase padding for a bigger box */
+  width: 180px; /* Increase width of select box */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem; /* Increase font size */
 }
 
-.form-control {
-    width: calc(100% - 60px);
-    padding: 5px;
-    margin-right: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+/* Increase size of assign button */
+.appointment-row button {
+  padding: 10px 15px; /* Increase padding for a bigger button */
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem; /* Increase font size */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.appointment-row button:hover {
+  background-color: #218838;
 }
 
-.btn:hover {
-    background-color: #0056b3;
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .appointment-header,
+  .appointment-row {
+    grid-template-columns: repeat(7, minmax(120px, 1fr)); /* Reduce the min width for smaller screens */
+  }
 }
 
-.mt-2 {
-    margin-top: 10px;
-}
+@media (max-width: 576px) {
+  .mb-4 input[type="text"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 
-.mt-5 {
-    margin-top: 50px;
+  .mb-4 button {
+    width: 100%;
+  }
+
+  .appointment-header,
+  .appointment-row {
+    grid-template-columns: repeat(7, minmax(100px, 1fr)); /* Further reduce for mobile */
+  }
 }

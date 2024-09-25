@@ -66,6 +66,9 @@ import {AppointmentListComponent} from './shared/appointment/appointment-list/ap
 import {DepartmentUpdateComponent} from "./shared/department/department-update/department-update.component";
 import {DepartmentAddComponent} from "./shared/department/department-add/department-add.component";
 import {DepartmentListComponent} from "./shared/department/department-list/department-list.component";
+import {
+  ManufacturerListComponent
+} from "./Component/pharmacist/manufacturer/manufacturer-list/manufacturer-list.component";
 
 const routes: Routes = [
   {path: 'activities', component: ActivitiesComponent},
@@ -218,9 +221,9 @@ const routes: Routes = [
 
   { path: 'departments', component: DepartmentListComponent },
   { path: 'departments/add', component: DepartmentAddComponent },
-  { path: 'departments/update/:id', component: DepartmentUpdateComponent }
+  { path: 'departments/update/:id', component: DepartmentUpdateComponent },
 
-
+  {path: 'manufacturer', component: ManufacturerListComponent}
 
 
 ];

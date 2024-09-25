@@ -14,7 +14,7 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-    @GetMapping
+    @GetMapping("/")
     public ApiResponse getAllDepartments() {
         return departmentService.getAllDepartments();
     }
