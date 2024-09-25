@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "../user.service";
 import { Observable } from "rxjs";
 import { ApiResponse } from "../../util/api.response.model";
+import {DepartmentService} from "../../shared/department/department.service";
 
 @Component({
   selector: 'app-user-form',
@@ -77,4 +78,16 @@ export class UserFormComponent implements OnInit {
   isNurse(): boolean {
     return this.user.role === Role.NURSE;
   }
+
+  // New method to fetch departments
+  fetchDepartments(): void {
+    this.departmentService.getDepartments().subscribe(response => {
+      if (response.successful) {
+        this.departments = response.data.departments; // Store departments
+      } else {
+        alert('Error fetching departments: ' + response.message);
+      }
+    });
+  }
+
 }

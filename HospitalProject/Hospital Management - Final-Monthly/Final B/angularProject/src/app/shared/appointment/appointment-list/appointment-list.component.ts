@@ -1,28 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentService } from '../service/appointment.service';
+import { AppointmentService } from '../appointment.service';
 import { UserService } from '../../../user/user.service';
 import { AuthService } from '../../../security/service/auth.service';
-import { AppointmentModel } from '../model/appointment.model';
+import { AppointmentModel } from '../appointment.model';
 import { UserModel } from '../../../user/user.model';
 import { ApiResponse } from '../../../util/api.response.model';
 
 @Component({
   selector: 'app-appointment-list',
   templateUrl: './appointment-list.component.html',
-  styleUrl: './appointment-list.component.css'
+  styleUrls: ['./appointment-list.component.css'] // Fixed typo from styleUrl to styleUrls
 })
 export class AppointmentListComponent implements OnInit {
-
   appointments: AppointmentModel[] = [];
+  filteredAppointments: AppointmentModel[] = [];
   doctors: UserModel[] = [];
   selectedDoctorId!: number;
   isLoading = true;
+  searchTerm: string = ''; // Added search term for filtering
 
   constructor(
     private appointmentService: AppointmentService,
     private userService: UserService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.fetchAppointments();
@@ -32,9 +33,9 @@ export class AppointmentListComponent implements OnInit {
   fetchAppointments(): void {
     this.appointmentService.getAllAppointments().subscribe({
       next: (response: ApiResponse) => {
-        console.log(response)
         if (response.successful) {
           this.appointments = response.data['appointments'];
+          this.filteredAppointments = this.appointments; // Initialize filtered appointments
         } else {
           alert(response.message || 'Failed to load appointments');
         }
@@ -51,7 +52,6 @@ export class AppointmentListComponent implements OnInit {
   fetchDoctors(): void {
     this.userService.findUsersByRole('DOCTOR').subscribe({
       next: (response: ApiResponse) => {
-        console.log(response)
         if (response.successful) {
           this.doctors = response.data['users'];
         } else {
@@ -76,7 +76,7 @@ export class AppointmentListComponent implements OnInit {
       next: (response: ApiResponse) => {
         if (response.successful) {
           alert('Doctor assigned successfully');
-          this.fetchAppointments();
+          this.fetchAppointments(); // Refresh appointments after assignment
         } else {
           alert(response.message || 'Failed to assign doctor');
         }
@@ -86,5 +86,17 @@ export class AppointmentListComponent implements OnInit {
         alert('Error assigning doctor');
       }
     });
+  }
+
+  // New search functionality
+  searchAppointments(): void {
+    if (this.searchTerm) {
+      this.filteredAppointments = this.appointments.filter(appointment =>
+        appointment.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        (appointment.doctor?.name?.toLowerCase().includes(this.searchTerm.toLowerCase()) || false)
+      );
+    } else {
+      this.filteredAppointments = this.appointments; // Reset to all appointments if search term is empty
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentModel } from '../model/appointment.model';
-import { AppointmentService } from '../service/appointment.service';
+import { AppointmentModel } from '../appointment.model';
+import { AppointmentService } from '../appointment.service';
 import { AuthService } from "../../../security/service/auth.service";
 import { UserModel } from "../../../user/user.model";
 

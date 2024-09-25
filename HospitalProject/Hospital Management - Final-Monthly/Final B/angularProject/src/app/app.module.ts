@@ -7,7 +7,13 @@ import {NavbarComponent} from './Login-Page/navbar/navbar.component';
 import {SidebarComponent} from './Login-Page/sidebar/sidebar.component';
 import {ActivitiesComponent} from './shared/activities/activities.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+  withInterceptorsFromDi
+} from '@angular/common/http';
 import {LoginComponent} from './Login-Page/login/login.component';
 import {AppointmenthomeComponent} from './Home-Page/appointmenthome/appointmenthome.component';
 import {BodyhomeComponent} from './Home-Page/bodyhome/bodyhome.component';
@@ -39,11 +45,6 @@ import {SalarysettingsComponent} from "./shared/Settings/salarysettings/salaryse
 import {LeavetypeComponent} from "./shared/Settings/leavetype/leavetype.component";
 import {ChngpassComponent} from "./shared/Settings/chngpass/chngpass.component";
 import {AdminpayrollComponent} from "./shared/payroll/adminpayroll.component";
-import {ViewdepartmentComponent} from "./Component/AdminDashBoard/Department/viewdepartment/viewdepartment.component";
-import {AdddepartmentComponent} from "./Component/AdminDashBoard/Department/adddepartment/adddepartment.component";
-import {
-  UpdatedepartmentComponent
-} from "./Component/AdminDashBoard/Department/updatedepartment/updatedepartment.component";
 import {
   ViewReceptionistComponent
 } from "./Component/AdminDashBoard/Receptionist/viewreceptionist/viewreceptionist.component";
@@ -55,18 +56,6 @@ import {
 } from "./Component/AdminDashBoard/Receptionist/addreceptionist/addreceptionist.component";
 import {MyprofileComponent} from "./Component/AdminDashBoard/Profile/myprofile/myprofile.component";
 import {EditprofileComponent} from "./Component/AdminDashBoard/Profile/editprofile/editprofile.component";
-import {
-  ListofappointmentComponent
-} from "./Component/ReceptionistDashBoard/ReceptionistAppointment/listofappointment/listofappointment.component";
-import {
-  ViewappointmentComponent
-} from "./Component/ReceptionistDashBoard/ReceptionistAppointment/viewappointment/viewappointment.component";
-import {
-  UpdateappointmentComponent
-} from "./Component/ReceptionistDashBoard/ReceptionistAppointment/updateappointment/updateappointment.component";
-import {
-  AddappointmentComponent
-} from "./Component/ReceptionistDashBoard/ReceptionistAppointment/addappointment/addappointment.component";
 import {ListofpatientComponent} from "./Component/DoctorDashBoard/Patient Doc/listofpatient/listofpatient.component";
 import {
   EditprofiledocComponent
@@ -94,6 +83,9 @@ import {
 } from "./Component/DoctorDashBoard/Patient Doc/updatepatientdoc/updatepatientdoc.component";
 import {AddpatientdocComponent} from "./Component/DoctorDashBoard/Patient Doc/addpatientdoc/addpatientdoc.component";
 import { AppointmentListComponent } from './shared/appointment/appointment-list/appointment-list.component';
+import { DepartmentListComponent } from './shared/department/department-list/department-list.component';
+import { DepartmentAddComponent } from './shared/department/department-add/department-add.component';
+import { DepartmentUpdateComponent } from './shared/department/department-update/department-update.component';
 
 @NgModule({
   declarations: [
@@ -113,9 +105,6 @@ import { AppointmentListComponent } from './shared/appointment/appointment-list/
     LeavetypeComponent,
     ChngpassComponent,
     AdminpayrollComponent,
-    ViewdepartmentComponent,
-    AdddepartmentComponent,
-    UpdatedepartmentComponent,
     ViewReceptionistComponent,
     UpdateReceptionistComponent,
     AddReceptionistComponent,
@@ -137,10 +126,6 @@ import { AppointmentListComponent } from './shared/appointment/appointment-list/
     ReceptionistlistadminComponent,
     MyprofiledocComponent,
     EditprofiledocComponent,
-    AddappointmentComponent,
-    UpdateappointmentComponent,
-    ViewappointmentComponent,
-    ListofappointmentComponent,
     ChilddepartmentComponent,
     GeneraldepartmentComponent,
     OrthopedicsdepartmentComponent,
@@ -154,12 +139,16 @@ import { AppointmentListComponent } from './shared/appointment/appointment-list/
     RegisterComponent,
     AppointmentCreateComponent,
     AppointmentListComponent,
+    DepartmentListComponent,
+    DepartmentAddComponent,
+    DepartmentUpdateComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),

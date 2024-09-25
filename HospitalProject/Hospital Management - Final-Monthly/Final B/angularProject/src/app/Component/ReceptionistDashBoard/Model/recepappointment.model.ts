@@ -1,4 +1,4 @@
-import {DepartmentModel} from "../../AdminDashBoard/Department/Model/department.model";
+
 import {DoctorModel} from "../../AdminDashBoard/Doctors/Model/doctor.model";
 
 
@@ -9,7 +9,6 @@ export class RecepAppointment {
     appointmentDate!: string; // ISO format date string
     appointmentTime!: string; // ISO format time string
 
-    department: DepartmentModel = new DepartmentModel();
     doctor: DoctorModel = new DoctorModel();
 
 }

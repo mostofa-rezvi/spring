@@ -69,17 +69,26 @@
         <input [(ngModel)]="user.doctorLicense" class="form-control" id="doctorLicense" name="doctorLicense"
                type="text"/>
       </div>
+<!--      <div class="form-group">-->
+<!--        <label for="department">Department:</label>-->
+<!--        <select [(ngModel)]="user.departmentId" class="form-control" id="department" name="department" type="text">-->
+<!--          <option value=" "> </option>-->
+<!--          <option value="Child Development">CHILD DEVELOPMENT</option>-->
+<!--          <option value="General Surgery">GENERAL SURGERY</option>-->
+<!--          <option value="Orthopedics Development">ORTHOPEDICS DEVELOPMENT</option>-->
+<!--          <option value="Neuro Surgery">NEURO SURGERY</option>-->
+<!--          <option value="Cardiac & Vascular Surgery">CARDIAC & VASCULAR SURGERY</option>-->
+<!--        </select>-->
+<!--      </div>-->
+
+      <!-- Department selection -->
       <div class="form-group">
         <label for="department">Department:</label>
-        <select [(ngModel)]="user.departmentId" class="form-control" id="department" name="department" type="text">
-          <option value=" "> </option>
-          <option value="Child Development">CHILD DEVELOPMENT</option>
-          <option value="General Surgery">GENERAL SURGERY</option>
-          <option value="Orthopedics Development">ORTHOPEDICS DEVELOPMENT</option>
-          <option value="Neuro Surgery">NEURO SURGERY</option>
-          <option value="Cardiac & Vascular Surgery">CARDIAC & VASCULAR SURGERY</option>
+        <select [(ngModel)]="user.departmentId" class="form-control" id="department" name="department">
+          <option *ngFor="let department of departments" [value]="department.id">{{ department.departmentName }}</option>
         </select>
       </div>
+
     </div>
     <div *ngIf="isNurse()">
       <div class="form-group">

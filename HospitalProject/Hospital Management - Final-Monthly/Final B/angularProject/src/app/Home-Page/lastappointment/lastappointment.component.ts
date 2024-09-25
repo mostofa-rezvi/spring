@@ -34,7 +34,7 @@ export class LastappointmentComponent implements OnInit {
           // Identify the specific appointment for "Emran"
           this.latestAppointment = this.appointments.find(appointment =>
             appointment.patientName &&
-            appointment.department.name &&
+            // appointment.department.name &&
             appointment.doctor.firstname && appointment.doctor.lastname &&
             appointment.appointmentDate &&
             appointment.appointmentTime

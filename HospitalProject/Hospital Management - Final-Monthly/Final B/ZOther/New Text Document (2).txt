@@ -1,0 +1,272 @@
+User-form html:
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4 col-3">
+      <h4 class="page-title">Add User:</h4>
+    </div>
+  </div>
+  <form (ngSubmit)="createOrUpdateUser()" class="needs-validation" novalidate>
+    <input [(ngModel)]="user.id" id="id" name="id" type="hidden"/>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input [(ngModel)]="user.name" class="form-control" id="name" name="name" type="text"/>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input [(ngModel)]="user.email" class="form-control" id="email" name="email" type="email"/>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input [(ngModel)]="user.password" class="form-control" id="password" name="password" type="password"/>
+    </div>
+    <div class="form-group">
+      <label for="cell">Cell:</label>
+      <input [(ngModel)]="user.cell" class="form-control" id="cell" name="cell" type="text"/>
+    </div>
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input [(ngModel)]="user.age" class="form-control" id="age" name="age" type="number"/>
+    </div>
+
+    <div class="form-group">
+      <label for="gender">Gender:</label>
+      <select [(ngModel)]="user.gender" class="form-control" id="gender" name="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="birthday">Birthday:</label>
+      <input [(ngModel)]="user.birthday" class="form-control" id="birthday" name="birthday" type="date"/>
+    </div>
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input [(ngModel)]="user.address" class="form-control" id="address" name="address" type="text"/>
+    </div>
+    <div class="form-group">
+      <label for="image">Image:</label>
+      <input [(ngModel)]="user.image" class="form-control" id="image" name="image" type="text"/>
+    </div>
+    <div class="form-group">
+      <label>Role:</label>
+      <select [(ngModel)]="user.role" class="form-control" name="role">
+        <option *ngFor="let option of userRoleOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div *ngIf="isDoctor()">
+      <div class="form-group">
+        <label for="doctorDegree">Doctor Degree:</label>
+        <input [(ngModel)]="user.doctorDegree" class="form-control" id="doctorDegree" name="doctorDegree" type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="doctorSpeciality">Doctor Speciality:</label>
+        <input [(ngModel)]="user.doctorSpeciality" class="form-control" id="doctorSpeciality" name="doctorSpeciality"
+               type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="doctorLicense">Doctor License:</label>
+        <input [(ngModel)]="user.doctorLicense" class="form-control" id="doctorLicense" name="doctorLicense"
+               type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="department">Department:</label>
+        <select [(ngModel)]="user.departmentId" class="form-control" id="department" name="department" type="text">
+          <option value=" "> </option>
+          <option value="Child Development">CHILD DEVELOPMENT</option>
+          <option value="General Surgery">GENERAL SURGERY</option>
+          <option value="Orthopedics Development">ORTHOPEDICS DEVELOPMENT</option>
+          <option value="Neuro Surgery">NEURO SURGERY</option>
+          <option value="Cardiac & Vascular Surgery">CARDIAC & VASCULAR SURGERY</option>
+        </select>
+      </div>
+    </div>
+    <div *ngIf="isNurse()">
+      <div class="form-group">
+        <label for="nurseDegree">Nurse Degree:</label>
+        <input [(ngModel)]="user.nurseDegree" class="form-control" id="nurseDegree" name="nurseDegree" type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="nurseSpeciality">Nurse Speciality:</label>
+        <input [(ngModel)]="user.nurseSpeciality" class="form-control" id="nurseSpeciality" name="nurseSpeciality"
+               type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="nurseLicense">Nurse License:</label>
+        <input [(ngModel)]="user.nurseLicense" class="form-control" id="nurseLicense" name="nurseLicense" type="text"/>
+      </div>
+    </div>
+
+    <button class="btn btn-primary m-3" type="submit">Add User</button>
+  </form>
+</div>
+
+
+User-form component:
+import { Component, OnInit } from '@angular/core';
+import { UserModel, UserRoleMap, Role } from "../user.model";
+import { ActivatedRoute, Router } from "@angular/router";
+import { UserService } from "../user.service";
+import { Observable } from "rxjs";
+import { ApiResponse } from "../../util/api.response.model";
+
+@Component({
+  selector: 'app-user-form',
+  templateUrl: './user-form.component.html',
+  styleUrl: './user-form.component.css'
+})
+export class UserFormComponent implements OnInit {
+  user: UserModel = new UserModel();
+  id?: number;
+  imageFile?: File;
+
+  userRoleOptions = UserRoleMap;
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
+    if (this.id) {
+      this.userService.findById(this.id).subscribe({
+        next: response => {
+          if (response && response.successful) {
+            this.user = response.data['user'];
+            this.user.image = '';
+          } else {
+            alert(response?.message || 'Not Successful');
+          }
+        },
+        error: error => {
+          alert(error.error?.message || `An error occurred`);
+        }
+      });
+    }
+  }
+
+  onImagePicked(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.imageFile = input.files[0];
+    }
+  }
+
+  createOrUpdateUser(): void {
+    const userObservable: Observable<ApiResponse> = this.id
+      ? this.userService.updateUser(this.user, this.imageFile)
+      : this.userService.saveUser(this.user, this.imageFile);
+
+    userObservable.subscribe({
+      next: (response: ApiResponse) => {
+        if (response && response.successful) {
+          this.user = new UserModel();
+          alert(response?.message || 'Successful');
+          this.router.navigate(['/user-list']);
+        } else {
+          alert(response?.message || 'Not Successful');
+        }
+      },
+      error: error => {
+        alert(error.error?.message || `An error occurred`);
+      }
+    });
+  }
+
+  isDoctor(): boolean {
+    return this.user.role === Role.DOCTOR;
+  }
+
+  isNurse(): boolean {
+    return this.user.role === Role.NURSE;
+  }
+}
+
+
+Now i need to department in user-form html has come from department-list html.
+
+Department-list html:
+<div class="container">
+  <h2>Department List</h2>
+
+  <!-- Button to navigate to Add Department -->
+  <button class="btn btn-success mb-3" (click)="navigateToAddDepartment()">Add Department</button>
+
+  <!-- Department table -->
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Department Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let department of departments">
+      <td>{{department.id}}</td>
+      <td>{{department.departmentName}}</td>
+      <td>{{department.description}}</td>
+      <td>
+        <!-- Update/Edit Button -->
+        <button class="btn btn-primary" (click)="editDepartment(department.id)">Edit</button>
+        <!-- Delete Button -->
+        <button class="btn btn-danger" (click)="deleteDepartment(department.id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+departmetn-list component:
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DepartmentService } from '../department.service';
+import { DepartmentModel } from '../department.model';
+
+@Component({
+  selector: 'app-department-list',
+  templateUrl: './department-list.component.html'
+})
+export class DepartmentListComponent implements OnInit {
+  departments: DepartmentModel[] = [];
+
+  constructor(private departmentService: DepartmentService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.departmentService.getDepartments().subscribe(response => {
+      if (response.successful) {
+        this.departments = response.data.departments;
+      } else {
+        alert('Error fetching departments: ' + response.message);
+      }
+    });
+  }
+
+  // Navigate to Add Department page
+  navigateToAddDepartment(): void {
+    this.router.navigate(['/departments/add']);
+  }
+
+  // Navigate to Edit/Update Department page
+  editDepartment(id: number): void {
+    this.router.navigate([`/departments/update/${id}`]);
+  }
+
+  // Delete Department
+  deleteDepartment(id: number): void {
+    this.departmentService.deleteDepartment(id).subscribe(response => {
+      if (response.successful) {
+        this.departments = this.departments.filter(dept => dept.id !== id);
+      } else {
+        alert('Error deleting department: ' + response.message);
+      }
+    });
+  }
+}
+
+
+So do need what change are need you can but do not delete any line above of the code

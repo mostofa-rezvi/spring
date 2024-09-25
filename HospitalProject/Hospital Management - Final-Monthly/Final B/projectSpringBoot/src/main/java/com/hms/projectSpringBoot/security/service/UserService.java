@@ -62,6 +62,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
+
     @Transactional
     public ApiResponse save(User user, MultipartFile avatar) {
         ApiResponse response = new ApiResponse();
@@ -70,6 +71,9 @@ public class UserService implements UserDetailsService {
             if (emailDuplicate != null) {
                 return response.error("Email already exists");
             }
+
+            // Default role set as USER (or adjust to your needs)
+            user.setRole(Role.PATIENT);
 
             if (avatar != null && !avatar.isEmpty()) {
                 Path directoryPath = Paths.get(imagesDir);

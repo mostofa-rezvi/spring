@@ -59,7 +59,7 @@ export class AppointmenthomeComponent implements OnInit {
         this.appointment.doctor = selectedDoctor;
       }
       if (selectedDepartment) {
-        this.appointment.department = selectedDepartment;
+        // this.appointment.department = selectedDepartment;
       }
 
       this.appointmentService.createAppointment(this.appointment)
