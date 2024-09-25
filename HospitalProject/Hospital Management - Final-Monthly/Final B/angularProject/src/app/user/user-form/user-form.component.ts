@@ -12,6 +12,7 @@ import {DepartmentService} from "../../shared/department/department.service";
   styleUrl: './user-form.component.css'
 })
 export class UserFormComponent implements OnInit {
+
   user: UserModel = new UserModel();
   id?: number;
   imageFile?: File;
@@ -21,7 +22,8 @@ export class UserFormComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private departmentService: DepartmentService
   ) {}
 
   ngOnInit(): void {
@@ -83,7 +85,7 @@ export class UserFormComponent implements OnInit {
   fetchDepartments(): void {
     this.departmentService.getDepartments().subscribe(response => {
       if (response.successful) {
-        this.departments = response.data.departments; // Store departments
+        this.departmentService = response.data.departments; // Store departments
       } else {
         alert('Error fetching departments: ' + response.message);
       }

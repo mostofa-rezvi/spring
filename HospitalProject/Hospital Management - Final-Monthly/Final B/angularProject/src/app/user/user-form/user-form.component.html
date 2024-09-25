@@ -85,7 +85,7 @@
       <div class="form-group">
         <label for="department">Department:</label>
         <select [(ngModel)]="user.departmentId" class="form-control" id="department" name="department">
-          <option *ngFor="let department of departments" [value]="department.id">{{ department.departmentName }}</option>
+          <option *ngFor="let department of fetchDepartments" [value]="department.id">{{ department.departmentName }}</option>
         </select>
       </div>
 
