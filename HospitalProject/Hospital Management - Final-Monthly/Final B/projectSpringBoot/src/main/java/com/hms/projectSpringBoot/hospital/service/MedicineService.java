@@ -39,7 +39,7 @@ public class MedicineService {
             }
             apiResponse.setSuccessful(true);
             apiResponse.setMessage("Medicine fetched successfully.");
-            apiResponse.setData("medicine", medicine);
+//            apiResponse.setData("medicine", medicine);
             return apiResponse;
         } catch (Exception e) {
             apiResponse.setMessage(e.getMessage());
