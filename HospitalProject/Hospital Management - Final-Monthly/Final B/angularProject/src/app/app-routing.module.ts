@@ -69,6 +69,15 @@ import {DepartmentListComponent} from "./shared/department/department-list/depar
 import {
   ManufacturerListComponent
 } from "./Component/pharmacist/manufacturer/manufacturer-list/manufacturer-list.component";
+import {
+  ManufacturerUpdateComponent
+} from "./Component/pharmacist/manufacturer/manufacturer-update/manufacturer-update.component";
+import {
+  ManufacturerAddComponent
+} from "./Component/pharmacist/manufacturer/manufacturer-add/manufacturer-add.component";
+import {MedicineListComponent} from "./Component/pharmacist/medicine/medicine-list/medicine-list.component";
+import {MedicineAddComponent} from "./Component/pharmacist/medicine/medicine-add/medicine-add.component";
+import {MedicineUpdateComponent} from "./Component/pharmacist/medicine/medicine-update/medicine-update.component";
 
 const routes: Routes = [
   {path: 'activities', component: ActivitiesComponent},
@@ -223,7 +232,15 @@ const routes: Routes = [
   { path: 'departments/add', component: DepartmentAddComponent },
   { path: 'departments/update/:id', component: DepartmentUpdateComponent },
 
-  {path: 'manufacturer', component: ManufacturerListComponent}
+  { path: 'manufacturers', component: ManufacturerListComponent },
+  { path: 'manufacturers/add', component: ManufacturerAddComponent },
+  { path: 'manufacturers/update/:id', component: ManufacturerUpdateComponent },
+
+  { path: 'medicines', component: MedicineListComponent },
+  { path: 'medicines/add', component: MedicineAddComponent },
+  { path: 'medicines/update/:id', component: MedicineUpdateComponent },
+
+
 
 
 ];

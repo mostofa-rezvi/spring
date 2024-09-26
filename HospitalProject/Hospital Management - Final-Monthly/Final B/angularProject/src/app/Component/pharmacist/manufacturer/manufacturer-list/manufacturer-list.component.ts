@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Manufacturer} from "../manufacturer.model";
 import {ApiResponse} from "../../../../util/api.response.model";
 import {ManufacturerService} from "../manufacturer.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-manufacturer-list',
@@ -12,7 +13,10 @@ export class ManufacturerListComponent implements OnInit {
   manufacturers: Manufacturer[] = [];
   errorMessage: string | undefined = '';
 
-  constructor(private manufacturerService: ManufacturerService) {}
+  constructor(
+    private manufacturerService: ManufacturerService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadManufacturers();
@@ -48,5 +52,9 @@ export class ManufacturerListComponent implements OnInit {
         }
       );
     }
+  }
+
+  editManufacturer(id: number): void {
+    this.router.navigate([`/manufacturers/update`, id]);
   }
 }
