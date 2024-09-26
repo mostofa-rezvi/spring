@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {Manufacturer} from "../manufacturer.model";
-import {ManufacturerService} from "../manufacturer.service";
-import {ApiResponse} from "../../../../util/api.response.model";
+import { Manufacturer } from "../manufacturer.model";
+import { ManufacturerService } from "../manufacturer.service";
+import { ApiResponse } from "../../../../util/api.response.model";
 
 @Component({
   selector: 'app-manufacturer-add',
@@ -16,7 +16,7 @@ export class ManufacturerAddComponent {
 
   constructor(private manufacturerService: ManufacturerService, private router: Router) {}
 
-  addManufacturer(): void {
+  onSubmit(): void {
     this.manufacturerService.createManufacturer(this.manufacturer).subscribe(
       (response: ApiResponse) => {
         if (response.successful) {

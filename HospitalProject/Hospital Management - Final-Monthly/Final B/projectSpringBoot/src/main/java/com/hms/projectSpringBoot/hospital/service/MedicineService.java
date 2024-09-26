@@ -73,6 +73,7 @@ public class MedicineService {
             medicine.setInstructions(medicineDetails.getInstructions());
             medicine.setMedicineStrength(medicineDetails.getMedicineStrength());
             medicine.setPrice(medicineDetails.getPrice());
+            medicine.setStock(medicineDetails.getStock());
             medicine.setUpdatedAt(LocalDateTime.now());
 
             Medicine updatedMedicine = medicineRepository.save(medicine);
@@ -98,6 +99,7 @@ public class MedicineService {
             return apiResponse;
         }
     }
+    
 
     public ApiResponse getMedicinesByManufacturer(Long manufacturerId) {
         ApiResponse apiResponse = new ApiResponse(false);
@@ -126,4 +128,60 @@ public class MedicineService {
             return apiResponse;
         }
     }
+
+    public ApiResponse addStock(Long id, int quantity) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            Medicine medicine = medicineRepository.findById(id)
+                    .orElse(null);
+
+            if (medicine == null) {
+                apiResponse.setMessage("Medicine not found.");
+                return apiResponse;
+            }
+
+            medicine.setStock(medicine.getStock() + quantity);  // Add stock
+            medicine.setUpdatedAt(LocalDateTime.now());
+
+            Medicine updatedMedicine = medicineRepository.save(medicine);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Stock added successfully.");
+            apiResponse.setData("medicine", updatedMedicine);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
+    }
+
+    public ApiResponse subtractStock(Long id, int quantity) {
+        ApiResponse apiResponse = new ApiResponse(false);
+        try {
+            Medicine medicine = medicineRepository.findById(id)
+                    .orElse(null);
+
+            if (medicine == null) {
+                apiResponse.setMessage("Medicine not found.");
+                return apiResponse;
+            }
+
+            if (medicine.getStock() < quantity) {
+                apiResponse.setMessage("Insufficient stock.");
+                return apiResponse;
+            }
+
+            medicine.setStock(medicine.getStock() - quantity);  // Subtract stock
+            medicine.setUpdatedAt(LocalDateTime.now());
+
+            Medicine updatedMedicine = medicineRepository.save(medicine);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Stock subtracted successfully.");
+            apiResponse.setData("medicine", updatedMedicine);
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
+    }
+
 }

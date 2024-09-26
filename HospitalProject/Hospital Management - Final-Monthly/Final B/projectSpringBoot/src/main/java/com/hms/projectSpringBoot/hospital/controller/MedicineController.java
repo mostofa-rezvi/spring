@@ -17,7 +17,7 @@ public class MedicineController {
     @Autowired
     private MedicineService medicineService;
 
-    @GetMapping
+    @GetMapping("/")
     public ApiResponse getAllMedicines() {
         return medicineService.getAllMedicines();
     }
@@ -27,7 +27,7 @@ public class MedicineController {
         return medicineService.getMedicineById(id);
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ApiResponse createMedicine(@RequestBody Medicine medicine) {
         return medicineService.saveMedicine(medicine);
     }
@@ -51,4 +51,15 @@ public class MedicineController {
     public ApiResponse searchMedicinesByName(@RequestParam String name) {
         return medicineService.searchMedicinesByName(name);
     }
+
+    @PutMapping("/{id}/add-stock")
+    public ApiResponse addStock(@PathVariable Long id, @RequestParam int quantity) {
+        return medicineService.addStock(id, quantity);
+    }
+
+    @PutMapping("/{id}/subtract-stock")
+    public ApiResponse subtractStock(@PathVariable Long id, @RequestParam int quantity) {
+        return medicineService.subtractStock(id, quantity);
+    }
+
 }

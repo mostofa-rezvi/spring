@@ -25,6 +25,7 @@ public class Medicine {
     private String instructions;
     private String medicineStrength;
     private int price;
+    private int stock;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -18,6 +18,10 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String name;
+    private int phone;
+    private String email;
+    private String address;
     private LocalDateTime invoiceDate;
     private int totalAmount;
     private int amountPaid;
