@@ -41,6 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/departments").permitAll()
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/api/appointments/save").permitAll()
+                        .requestMatchers("/api/bills").permitAll()
                         .requestMatchers("/api/**").permitAll() //TODO: remove this line
                         //.requestMatchers("/api/**").hasAnyRole("ADMIN", "PATIENT", "DOCTOR", "NURSE", "RECEPTIONIST", "PHARMACIST")
                         .anyRequest().authenticated())

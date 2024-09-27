@@ -78,6 +78,12 @@ import {
 import {MedicineListComponent} from "./Component/pharmacist/medicine/medicine-list/medicine-list.component";
 import {MedicineAddComponent} from "./Component/pharmacist/medicine/medicine-add/medicine-add.component";
 import {MedicineUpdateComponent} from "./Component/pharmacist/medicine/medicine-update/medicine-update.component";
+import {
+  MedicineBillCreateComponent
+} from "./Component/pharmacist/medicine-bill/medicine-bill-create/medicine-bill-create.component";
+import {
+  MedicineBillPdfComponent
+} from "./Component/pharmacist/medicine-bill/medicine-bill-pdf/medicine-bill-pdf.component";
 
 const routes: Routes = [
   {path: 'activities', component: ActivitiesComponent},
@@ -240,7 +246,8 @@ const routes: Routes = [
   { path: 'medicines/add', component: MedicineAddComponent },
   { path: 'medicines/update/:id', component: MedicineUpdateComponent },
 
-
+  {path: 'medicine-bill', component: MedicineBillCreateComponent},
+  {path: 'medicine-bill/invoice/:id', component:MedicineBillPdfComponent}
 
 
 ];
