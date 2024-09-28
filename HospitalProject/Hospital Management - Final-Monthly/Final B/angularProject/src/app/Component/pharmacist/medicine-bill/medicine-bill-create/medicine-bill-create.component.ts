@@ -101,7 +101,7 @@ export class MedicineBillCreateComponent {
         next: (response: ApiResponse) => {
           if (response.message) {
             console.log('Bill created successfully', response);
-            this.router.navigate(['/bills']); // Navigate to the bills list page after success
+            this.router.navigate(['/medicine-bill-list']); // Navigate to the bills list page after success
           } else {
             // Handle API error response
             this.apiError = response.message;

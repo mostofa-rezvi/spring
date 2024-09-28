@@ -1,7 +1,5 @@
 Medicine Bill where add medicine and generate bills.
 	
-when manufacturer delete, under all medicine are deleted
-
 Prescription
 	Creat and View
 	
