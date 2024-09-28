@@ -122,3 +122,71 @@ textarea:focus {
     flex-direction: column;
   }
 }
+
+.medicine-list .medicine-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.medicine-group .row {
+  display: flex;
+  justify-content: space-between;
+  width: 48%; /* Each column should take approximately half the width of the container */
+  margin-bottom: 10px; /* Add some space between rows */
+}
+
+.medicine-list .medicine-group {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.medicine-group .row {
+  margin-bottom: 10px; /* Adds spacing between rows */
+}
+
+/* Optional: Style the Remove Medicine button to look more like a card action */
+.remove-medicine-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-medicine-button:hover {
+  background-color: #ff1a1a;
+}
+
+.patient-info-amount {
+  border: 1px solid #ddd; /* Creates a border around the card */
+  border-radius: 8px; /* Rounds the corners */
+  padding: 20px; /* Adds padding inside the card */
+  margin-bottom: 15px; /* Adds space below the card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Creates a subtle shadow effect */
+  background-color: #f9f9f9; /* Adds a light background color */
+}
+
+.patient-info-amount h3 {
+  margin-top: 0; /* Removes extra top margin from the h3 headings */
+}
+
+/* Optional: Style the form buttons within the patient information card */
+.form-buttons .submit-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.form-buttons .submit-button:hover {
+  background-color: #45a049;
+}

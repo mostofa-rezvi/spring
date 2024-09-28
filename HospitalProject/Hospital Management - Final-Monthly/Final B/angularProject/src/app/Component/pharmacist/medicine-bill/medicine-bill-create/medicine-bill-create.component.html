@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group">
-          <label for="balance">Balance:</label>
+          <label for="balance">Due Balance:</label>
           <input type="number" id="balance" [(ngModel)]="bill.balance" name="balance" required
                  [value]="calculateBalance()">
         </div>
@@ -71,30 +71,35 @@
       <!-- Medicine List Section (Right Column - 8/12) -->
       <div class="column medicine-list" style="flex: 0 0 66.67%; max-width: 66.67%;">
         <h3>Medicine List</h3>
-        <div *ngFor="let medicine of medicines; let i = index" class="medicine-group mt-5">
-          <div class="form-group">
-            <label for="medicineName-{{i}}">Medicine Name:</label>
-            <input type="text" id="medicineName-{{i}}" [(ngModel)]="medicine.medicineName" name="medicineName-{{i}}"
-                   required>
+        <div *ngFor="let medicine of medicines; let i = index" class="medicine-group">
+
+          <div class="row">
+            <div class="form-group">
+              <label for="medicineName-{{i}}">Medicine Name:</label>
+              <input type="text" id="medicineName-{{i}}" [(ngModel)]="medicine.medicineName" name="medicineName-{{i}}"
+                     required>
+            </div>
+
+            <div class="form-group">
+              <label for="dosageForm-{{i}}">Dosage Form:</label>
+              <input type="text" id="dosageForm-{{i}}" [(ngModel)]="medicine.dosageForm" name="dosageForm-{{i}}"
+                     required>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="dosageForm-{{i}}">Dosage Form:</label>
-            <input type="text" id="dosageForm-{{i}}" [(ngModel)]="medicine.dosageForm" name="dosageForm-{{i}}" required>
-          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="medicineStrength-{{i}}">Medicine Strength:</label>
+              <input type="text" id="medicineStrength-{{i}}" [(ngModel)]="medicine.medicineStrength"
+                     name="medicineStrength-{{i}}" required>
+            </div>
 
-          <div class="form-group">
-            <label for="medicineStrength-{{i}}">Medicine Strength:</label>
-            <input type="text" id="medicineStrength-{{i}}" [(ngModel)]="medicine.medicineStrength"
-                   name="medicineStrength-{{i}}" required>
+            <div class="form-group">
+              <label for="price-{{i}}">Price:</label>
+              <input type="number" id="price-{{i}}" [(ngModel)]="medicine.price" name="price-{{i}}"
+                     (input)="calculateTotal()" required>
+            </div>
           </div>
-
-          <div class="form-group">
-            <label for="price-{{i}}">Price:</label>
-            <input type="number" id="price-{{i}}" [(ngModel)]="medicine.price" name="price-{{i}}"
-                   (input)="calculateTotal()" required>
-          </div>
-
           <button type="button" class="remove-medicine-button" (click)="removeMedicine(i)">Remove Medicine</button>
         </div>
 

@@ -84,6 +84,9 @@ import {
 import {
   MedicineBillPdfComponent
 } from "./Component/pharmacist/medicine-bill/medicine-bill-pdf/medicine-bill-pdf.component";
+import {
+  MedicineBillListComponent
+} from "./Component/pharmacist/medicine-bill/medicine-bill-list/medicine-bill-list.component";
 
 const routes: Routes = [
   {path: 'activities', component: ActivitiesComponent},
@@ -247,7 +250,8 @@ const routes: Routes = [
   { path: 'medicines/update/:id', component: MedicineUpdateComponent },
 
   {path: 'medicine-bill', component: MedicineBillCreateComponent},
-  {path: 'medicine-bill/invoice/:id', component:MedicineBillPdfComponent}
+  {path: 'medicine-bill-list', component: MedicineBillListComponent},
+  {path: 'medicine-bill/invoice/:id', component:MedicineBillPdfComponent},
 
 
 ];
