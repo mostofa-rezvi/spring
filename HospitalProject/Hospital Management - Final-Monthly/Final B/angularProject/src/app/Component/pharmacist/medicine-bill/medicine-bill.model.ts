@@ -1,3 +1,5 @@
+import {Medicine} from "../medicine/medicine.model";
+
 export class MedicineBill {
   id!: number;
   name!: string;
@@ -13,11 +15,5 @@ export class MedicineBill {
   createdAt!: string;
   updatedAt!: string;
 
-  medicineList!: {
-    id: number;
-    medicineName: string;
-    dosageForm: string;
-    medicineStrength: string;
-    price: string;
-  }
+  medicineList: Medicine[] = [];
 }

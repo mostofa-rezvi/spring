@@ -1,121 +1,104 @@
-import {Component} from '@angular/core';
-import {MedicineBillService} from '../medicine-bill.service';
-import {Router} from '@angular/router';
-import {ApiResponse} from "../../../../util/api.response.model";
+import { Component, OnInit } from '@angular/core';
+import { MedicineBillService } from '../medicine-bill.service';
+import { Router } from '@angular/router';
+import { ApiResponse } from "../../../../util/api.response.model";
+import { MedicineBill } from "../medicine-bill.model";
+import { Medicine } from "../../medicine/medicine.model";
+import { MedicineService } from "../../medicine/medicine.service";
 
 @Component({
   selector: 'app-medicine-bill-create',
   templateUrl: './medicine-bill-create.component.html',
   styleUrls: ['./medicine-bill-create.component.css']
 })
-export class MedicineBillCreateComponent {
+export class MedicineBillCreateComponent implements OnInit {
 
-  bill: {
-    id: number;
-    name: string;
-    phone: number;
-    email: string;
-    address: string;
-    invoiceDate: Date;
-    totalAmount: number;
-    amountPaid: number;
-    balance: number;
-    status: string;
-    description: string;
-  } = {
-    id: 0,
-    name: '',
-    phone: 0,
-    email: '',
-    address: '',
-    invoiceDate: new Date(),
-    totalAmount: 0,
-    amountPaid: 0,
-    balance: 0,
-    status: '',
-    description: ''
-  };
 
-  medicines: Array<{
-    id: number;
-    medicineName: string;
-    dosageForm: string;
-    medicineStrength: string;
-    price: number
-  }> = [];
-
+  bill: MedicineBill = new MedicineBill();
+  availableMedicines: Medicine[] = [];  // All available medicines
+  selectedMedicines: Medicine[] = [];  // Medicines selected for the bill
+  selectedMedicineId: number | null = null; // Holds the selected medicine ID temporarily
   totalAmount: number = 0;
-  apiError: string | undefined = ''; // To store any potential errors from the API
+  apiError: string | undefined = '';
 
-  constructor(private billService: MedicineBillService, private router: Router) {
-  }
+  constructor(
+    private billService: MedicineBillService,
+    private medicineService: MedicineService,
+    private router: Router
+  ) { }
 
-  ngOnInit() {
-  }
-
-  // Method to add a new medicine entry to the medicine list
-  addMedicine() {
-    this.medicines.push({
-      id: 0,
-      medicineName: '',
-      dosageForm: '',
-      medicineStrength: '',
-      price: 0
+  ngOnInit(): void {
+    // Load available medicines from the service
+    this.medicineService.getAllMedicines().subscribe({
+      next: (response: ApiResponse) => {
+        this.availableMedicines = response.data['medicines'];
+      },
+      error: (err) => {
+        console.error(err);
+        this.apiError = 'Failed to load medicines';
+      }
     });
   }
 
-  // Method to remove a specific medicine entry by index
-  removeMedicine(index: number) {
-    this.medicines.splice(index, 1);
-    this.calculateTotal();
+  addMedicine() {
+    let medicine: Medicine = new Medicine();
+    this.selectedMedicines.push(medicine);
+    this.calculateTotal();  // Update the total amount after adding the medicine
   }
 
-  // Calculate total amount by summing up all medicine prices
+  onMedicineSelect(selectedMedicine: Medicine, event: Event) {
+    const selectedMedicineId = (event.target as HTMLSelectElement).value;
+    const availableMedicine = this.availableMedicines.find(med => med.id === +selectedMedicineId);
+    if (availableMedicine) {
+      selectedMedicine.price = availableMedicine.price;
+    }
+  }
+  
+  
+
+  removeMedicine(index: number) {
+    // Remove the selected medicine from the list
+    this.selectedMedicines.splice(index, 1);
+    this.calculateTotal();  // Update the total after removing the medicine
+  }
+
   calculateTotal() {
-    this.totalAmount = this.medicines.reduce((sum, medicine) => sum + Number(medicine.price), 0);
+    // Calculate the total amount based on the selected medicines
+    this.totalAmount = this.selectedMedicines.reduce((sum, medicine) => sum + medicine.price, 0);
     this.bill.totalAmount = this.totalAmount;
   }
 
-  // Calculate balance after amount paid
   calculateBalance() {
+    // Calculate balance due based on total amount and amount paid
     return this.bill.totalAmount - this.bill.amountPaid;
   }
 
-  // Handle form submission to create a bill with medicine list
-  onSubmit() {
-    const billData = {
-      ...this.bill,
-      medicineList: this.medicines
-    };
+  getSelectedMedicinePrice(): number | undefined {
+    const selectedMedicine = this.availableMedicines.find(med => med.id === this.selectedMedicineId);
+    return selectedMedicine ? selectedMedicine.price : undefined;
+  }
 
-    this.billService.createBill({
-      ...this.bill,
-      medicineList: this.medicines.map(medicine => ({
-        id: medicine.id,
-        medicineName: medicine.medicineName,
-        dosageForm: medicine.dosageForm,
-        medicineStrength: medicine.medicineStrength,
-        price: medicine.price.toString() // Convert price to string
-      }))
-    }).subscribe({
-        next: (response: ApiResponse) => {
-          if (response.message) {
-            console.log('Bill created successfully', response);
-            this.router.navigate(['/medicine-bill-list']); // Navigate to the bills list page after success
-          } else {
-            // Handle API error response
-            this.apiError = response.message;
-            console.error('Error creating bill:', response.message);
-          }
-        },
-        error:
-          (err) => {
-            // Handle request error
-            this.apiError = 'Error connecting to the server';
-            console.error('Error creating bill:', err);
-          }
+  onSubmit() {
+    // Set selected medicines to the bill before submitting
+    this.bill.medicineList = [...this.selectedMedicines];
+
+    console.log(this.bill);
+
+    this.billService.createBill(this.bill).subscribe({
+      next: (response: ApiResponse) => {
+        if (response.message) {
+          this.router.navigate(['/medicine-bill-list']);
+        } else {
+          this.apiError = response.message;
+        }
+      },
+      error: (err) => {
+        this.apiError = 'Error connecting to the server';
       }
-    )
-    ;
+    });
+  }
+
+  isMedicine(): boolean {
+    return true;
   }
 }

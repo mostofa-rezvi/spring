@@ -20,21 +20,8 @@ export class MedicineBillService {
     return this.http.get<ApiResponse>(`${this.apiUrl}/${id}`);
   }
 
-  createBill(bill: {
-    totalAmount: number;
-    medicineList: { medicineStrength: string; price: string; dosageForm: string; id: number; medicineName: string }[];
-    address: string;
-    amountPaid: number;
-    balance: number;
-    phone: number;
-    name: string;
-    description: string;
-    id: number;
-    invoiceDate: Date;
-    email: string;
-    status: string
-  })  : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.apiUrl}`, bill);
+  createBill(bill: MedicineBill)  : Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${this.apiUrl}/create`, bill);
   }
 
   updateBill(id: number, bill: MedicineBill): Observable<ApiResponse> {

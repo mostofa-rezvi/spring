@@ -12,13 +12,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/bills")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class BillController {
 
     @Autowired
     private BillService billService;
 
-    @GetMapping
+    @GetMapping("/")
     public ApiResponse getAllBills() {
         return billService.getAllBills();
     }
@@ -28,7 +28,7 @@ public class BillController {
         return billService.getBillById(id);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ApiResponse createBill(@RequestBody Bill bill) {
         return billService.createBill(bill);
     }
