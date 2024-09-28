@@ -133,6 +133,16 @@
           <li>
             <a href="medicines"><i class="fa fa-hospital-o"></i> <span>Medicines</span></a>
           </li>
+          <li class="submenu">
+            <a href="#"><i class="fa fa-user-md"></i> <span> Medicine Bills </span> <span
+              class="menu-arrow"></span></a>
+            <ul style="display: none;">
+              <a [routerLink]="['medicine-bill']"><i class="fa fa-user-md"></i> <span>Create Bill </span></a>
+              <a [routerLink]="['medicine-bill-list']"><i class="fa fa-list-ul"></i> <span> List of Bills</span></a>
+            </ul>
+          </li>
+
+
 
           <li class="submenu">
             <a href="#"><i class="fa fa-wheelchair"></i> <span> Nurse </span> <span

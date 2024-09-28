@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Medicine } from './medicine.model';
-import { ApiResponse } from "../../../util/api.response.model"; // Assuming ApiResponse is an interface with successful and data fields
+import { ApiResponse } from "../../../util/api.response.model";
 
 @Injectable({
   providedIn: 'root',

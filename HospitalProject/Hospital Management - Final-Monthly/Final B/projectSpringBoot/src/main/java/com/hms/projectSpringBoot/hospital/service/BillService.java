@@ -2,7 +2,9 @@ package com.hms.projectSpringBoot.hospital.service;
 
 import com.hms.projectSpringBoot.hospital.entity.Appointment;
 import com.hms.projectSpringBoot.hospital.entity.Bill;
+import com.hms.projectSpringBoot.hospital.entity.Medicine;
 import com.hms.projectSpringBoot.hospital.repository.BillRepository;
+import com.hms.projectSpringBoot.hospital.repository.MedicineRepository;
 import com.hms.projectSpringBoot.security.entity.User;
 import com.hms.projectSpringBoot.security.repository.UserRepository;
 import com.hms.projectSpringBoot.util.ApiResponse;
@@ -20,6 +22,8 @@ public class BillService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MedicineRepository medicineRepository;
 
     public ApiResponse getAllBills() {
         ApiResponse apiResponse = new ApiResponse(false);

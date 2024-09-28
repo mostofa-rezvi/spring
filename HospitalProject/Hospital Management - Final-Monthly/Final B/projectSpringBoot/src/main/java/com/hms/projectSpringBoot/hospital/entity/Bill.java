@@ -4,6 +4,7 @@ import com.hms.projectSpringBoot.security.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,17 +23,18 @@ public class Bill {
     private int phone;
     private String email;
     private String address;
-    private LocalDateTime invoiceDate;
+    private Date invoiceDate;
     private int totalAmount;
     private int amountPaid;
     private int balance;
     private String status;
     private String description;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id")
     private User patient;
 
     @ManyToOne(fetch = FetchType.EAGER)
