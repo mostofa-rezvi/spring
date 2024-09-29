@@ -67,6 +67,9 @@ import {
 import {
   MedicineBillListComponent
 } from "./Component/pharmacist/medicine-bill/medicine-bill-list/medicine-bill-list.component";
+import { ReportCreateComponent } from './Component/laboratorist/report/report-create/report-create.component';
+import { ReportListComponent } from './Component/laboratorist/report/report-list/report-list.component';
+import { ReportUpdateComponent } from './Component/laboratorist/report/report-update/report-update.component';
 
 const routes: Routes = [
 
@@ -192,18 +195,17 @@ const routes: Routes = [
 
 
   // Admin part
-  // Doctor Crud
   {
-    path: 'user-add', component: UserFormComponent, canActivate: [AuthGuard]
+    path: 'user-add', component: UserFormComponent
   },
   {
-    path: 'user-update/:id', component: UserFormComponent, canActivate: [AuthGuard]
+    path: 'user-update/:id', component: UserFormComponent
   },
   {
-    path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]
+    path: 'user-list', component: UserListComponent
   },
   {
-    path: 'userForm', component: UserFormComponent, canActivate: [AuthGuard]
+    path: 'userForm', component: UserFormComponent
   },
 
   // Department Part
@@ -251,6 +253,13 @@ const routes: Routes = [
   { path: 'medicine-bill', component: MedicineBillCreateComponent },
   { path: 'medicine-bill-list', component: MedicineBillListComponent },
   { path: 'medicine-bill/invoice/:id', component: MedicineBillPdfComponent },
+
+  { path: 'reports', component: ReportListComponent },
+  { path: 'reports/create', component: ReportCreateComponent },
+  { path: 'reports/update/:id', component: ReportUpdateComponent },
+
+
+
 
 
 ];

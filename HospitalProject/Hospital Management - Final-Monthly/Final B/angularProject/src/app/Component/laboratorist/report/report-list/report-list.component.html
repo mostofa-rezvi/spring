@@ -1,0 +1,41 @@
+<div class="container">
+    <h2>Report List</h2>
+
+    <div *ngIf="loading" class="alert alert-info">Loading reports...</div>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <table class="table table-bordered" *ngIf="!loading && reports.length > 0">
+        <thead>
+            <tr>
+                <th>Report Name</th>
+                <th>Description</th>
+                <th>Summary</th>
+                <th>Created By</th>
+                <th>Finalized</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let report of reports; ">
+                <td>{{ report.reportName }}</td>
+                <td>{{ report.description }}</td>
+                <td>{{ report.summary }}</td>
+                <td>{{ report.createdById }}</td>
+                <td>{{ report.isFinalized ? 'Yes' : 'No' }}</td>
+
+                <td>
+                    <button class="btn btn-danger" (click)="deleteReport(report.id!)">
+                        Delete
+                    </button>
+                    <button [routerLink]="['/reports/update/', report.id]" class="btn btn-primary">
+                        Update
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="!loading && reports.length === 0" class="alert alert-warning">
+        No reports found.
+    </div>
+</div>

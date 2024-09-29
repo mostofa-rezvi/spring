@@ -71,6 +71,9 @@ import { MedicineUpdateComponent } from './Component/pharmacist/medicine/medicin
 import { MedicineBillCreateComponent } from './Component/pharmacist/medicine-bill/medicine-bill-create/medicine-bill-create.component';
 import { MedicineBillListComponent } from './Component/pharmacist/medicine-bill/medicine-bill-list/medicine-bill-list.component';
 import { MedicineBillPdfComponent } from './Component/pharmacist/medicine-bill/medicine-bill-pdf/medicine-bill-pdf.component';
+import { ReportUpdateComponent } from './Component/laboratorist/report/report-update/report-update.component';
+import { ReportCreateComponent } from './Component/laboratorist/report/report-create/report-create.component';
+import { ReportListComponent } from './Component/laboratorist/report/report-list/report-list.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +125,9 @@ import { MedicineBillPdfComponent } from './Component/pharmacist/medicine-bill/m
     MedicineBillCreateComponent,
     MedicineBillListComponent,
     MedicineBillPdfComponent,
+    ReportUpdateComponent,
+    ReportCreateComponent,
+    ReportListComponent,
   ],
   imports: [
     BrowserModule,

@@ -118,6 +118,7 @@ public class UserService implements UserDetailsService {
 
             if (avatar != null && !avatar.isEmpty()) {
                 Path directoryPath = Paths.get(imagesDir);
+
                 if (!Files.exists(directoryPath)) {
                     Files.createDirectories(directoryPath);
                 }

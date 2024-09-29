@@ -17,7 +17,7 @@ public class ManufacturerController {
     @Autowired
     private ManufacturerService manufacturerService;
 
-    @GetMapping
+    @GetMapping("/")
     public ApiResponse getAllManufacturers() {
         return manufacturerService.getAllManufacturers();
     }
@@ -27,7 +27,7 @@ public class ManufacturerController {
         return manufacturerService.getManufacturerById(id);
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ApiResponse createManufacturer(@RequestBody Manufacturer manufacturer) {
         return manufacturerService.createManufacturer(manufacturer);
     }

@@ -14,7 +14,7 @@ export class ManufacturerService {
   constructor(private http: HttpClient) {}
 
   getManufacturers(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.apiUrl);
+    return this.http.get<ApiResponse>(`${this.apiUrl}/`);
   }
 
   getManufacturerById(id: number): Observable<ApiResponse> {

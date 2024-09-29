@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Medicine } from "../medicine.model";
 import { MedicineService } from "../medicine.service";
+import { ManufacturerService } from '../../../admin/manufacturer/manufacturer.service';
+import { Manufacturer } from '../../../admin/manufacturer/manufacturer.model';
 
 @Component({
   selector: 'app-medicine-add',
   templateUrl: './medicine-add.component.html',
 })
-export class MedicineAddComponent {
+export class MedicineAddComponent implements OnInit {
+  manufacturer: Manufacturer = new Manufacturer();
+  manufacturers: Manufacturer[] = [];
+
   medicine: {
     medicineStrength: string;
     instructions: string;
@@ -16,25 +20,46 @@ export class MedicineAddComponent {
     id: number;
     stock: number;
     medicineName: string;
-    manufacturer: { name: string; id: number }
+    manufacturer: { id: number }
   } = {
-    id: 0,
-    medicineName: '',
-    dosageForm: '',
-    instructions: '',
-    medicineStrength: '',
-    price: 0,
-    stock: 0,
-    manufacturer: { id: 0, name: '' } // Set this later
-  };
+      id: 0,
+      medicineName: '',
+      dosageForm: '',
+      instructions: '',
+      medicineStrength: '',
+      price: 0,
+      stock: 0,
+      manufacturer: { id: 0 }
+    };
 
-  constructor(private medicineService: MedicineService, private router: Router) {}
+  constructor(
+    private medicineService: MedicineService,
+    private router: Router,
+    private manufacturerService: ManufacturerService
+  ) { }
+
+  ngOnInit(): void {
+    this.manufacturerService.getManufacturers().subscribe({
+      next: (response) => {
+        this.manufacturers = response.data['manufacturers']; 
+      },
+      error: (error) => {
+        console.error("Error fetching manufacturers", error);
+        alert('Failed to load manufacturers.');
+      }
+    });
+  }
 
   onSubmit(): void {
+    if (!this.medicine.manufacturer.id) {
+      alert('Please select a manufacturer.');
+      return;
+    }
+
     this.medicineService.addMedicine(this.medicine).subscribe({
       next: () => {
         alert('Medicine added successfully!');
-        this.router.navigate(['/medicines']);
+        this.router.navigate(['/medicines']); 
       },
       error: (error) => {
         console.error(error);

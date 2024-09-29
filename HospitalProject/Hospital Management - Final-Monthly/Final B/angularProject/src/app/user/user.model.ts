@@ -26,7 +26,7 @@ export enum Role {
   NURSE = 'NURSE',
   RECEPTIONIST = 'RECEPTIONIST',
   PHARMACIST = 'PHARMACIST',
-  LABORATORIST = 'LABORATORIST'
+  LAB = 'LAB'
 }
 
 export const UserRoleMap: { value: Role, label: string }[] = [
@@ -36,5 +36,5 @@ export const UserRoleMap: { value: Role, label: string }[] = [
   { value: Role.NURSE, label: 'Nurse' },
   { value: Role.RECEPTIONIST, label: 'Receptionist' },
   { value: Role.PHARMACIST, label: 'Pharmacist' },
-  { value: Role.LABORATORIST, label: 'Laboratorist' }
-];
+  { value: Role.LAB, label: 'Lab' }
+]

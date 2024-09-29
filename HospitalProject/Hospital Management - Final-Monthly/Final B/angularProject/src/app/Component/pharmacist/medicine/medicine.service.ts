@@ -28,7 +28,7 @@ export class MedicineService {
     id: number;
     stock: number;
     medicineName: string;
-    manufacturer: { name: string; id: number }
+    manufacturer: {id: number }
   }): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.apiUrl, medicine);
   }

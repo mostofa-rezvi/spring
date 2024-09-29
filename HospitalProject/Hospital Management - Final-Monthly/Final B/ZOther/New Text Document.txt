@@ -4,3 +4,9 @@ Prescription
 	Creat and View
 	
 Creat: Patient name and Medicine List add one by one
+
+
+appointment	> doctor dropdown
+		> department dropdown
+
+Bill	> Medicine Strength > DropDown

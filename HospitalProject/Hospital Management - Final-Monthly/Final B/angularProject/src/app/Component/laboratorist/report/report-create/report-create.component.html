@@ -1,0 +1,40 @@
+<div class="container">
+    <h2>Create Report</h2>
+    <form (ngSubmit)="createReport()">
+        <div class="form-group">
+            <label for="reportName">Report Name:</label>
+            <input type="text" class="form-control" id="reportName" [(ngModel)]="report.reportName" name="reportName"
+                required />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="report.description" name="description"
+                required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="summary">Summary:</label>
+            <textarea class="form-control" id="summary" [(ngModel)]="report.summary" name="summary" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="diagnosticsId">Diagnostics ID:</label>
+            <input type="number" class="form-control" id="diagnosticsId" [(ngModel)]="report.diagnosticsId"
+                name="diagnosticsId" required />
+        </div>
+
+        <div class="form-group">
+            <label for="createdById">Created By (User ID):</label>
+            <input type="number" class="form-control" id="createdById" [(ngModel)]="report.createdById"
+                name="createdById" required />
+        </div>
+
+        <div class="form-group">
+            <label for="isFinalized">Finalized:</label>
+            <input type="checkbox" id="isFinalized" [(ngModel)]="report.isFinalized" name="isFinalized" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Report</button>
+    </form>
+</div>
