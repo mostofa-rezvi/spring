@@ -70,6 +70,9 @@ import {
 import { ReportCreateComponent } from './Component/laboratorist/report/report-create/report-create.component';
 import { ReportListComponent } from './Component/laboratorist/report/report-list/report-list.component';
 import { ReportUpdateComponent } from './Component/laboratorist/report/report-update/report-update.component';
+import { TestCreateComponent } from './Component/laboratorist/test/test-create/test-create.component';
+import { TestListComponent } from './Component/laboratorist/test/test-list/test-list.component';
+import { TestUpdateComponent } from './Component/laboratorist/test/test-update/test-update.component';
 
 const routes: Routes = [
 
@@ -258,7 +261,9 @@ const routes: Routes = [
   { path: 'reports/create', component: ReportCreateComponent },
   { path: 'reports/update/:id', component: ReportUpdateComponent },
 
-
+  { path: 'tests', component: TestListComponent },
+  { path: 'tests/create', component: TestCreateComponent },
+  { path: 'tests/update/:id', component: TestUpdateComponent },
 
 
 
