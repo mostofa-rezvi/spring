@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Component} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {ApiResponse} from "../../util/api.response.model";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,10 @@ import {ApiResponse} from "../../util/api.response.model";
 export class RegisterComponent {
   selectedFile: File | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private router: Router
+  ) {
+  }
 
   onFileChange(event: any) {
     this.selectedFile = event.target.files[0];
@@ -24,15 +28,23 @@ export class RegisterComponent {
 
     console.log('from submit', userData);
     const formData: FormData = new FormData();
-    formData.append('user', new Blob([JSON.stringify(userData)], { type: 'application/json' }));
+    formData.append('user', new Blob([JSON.stringify(userData)], {type: 'application/json'}));
+
     if (this.selectedFile) {
       formData.append('image', this.selectedFile, this.selectedFile.name);
     }
 
     this.http.post<ApiResponse>('http://localhost:8080/api/user/saveUser', formData)
       .subscribe(response => {
-        console.log(response);
-        // Handle success or error response
-      });
+          console.log(response);
+          alert('Registration successful!');
+          // Handle success or error response
+          this.router.navigate(['/login']);
+        },
+        error => {
+          console.error(error);
+          // Optionally handle error response
+          alert('Registration failed. Please try again.');
+        });
   }
 }

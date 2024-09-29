@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Medicine } from '../medicine.model';
 import { MedicineService } from '../medicine.service';
 import { ApiResponse } from '../../../../util/api.response.model';
-import { Manufacturer } from '../../manufacturer/manufacturer.model';
+import { Manufacturer } from '../../../admin/manufacturer/manufacturer.model';
 
 @Component({
   selector: 'app-medicine-list',

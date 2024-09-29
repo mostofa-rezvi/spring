@@ -2,7 +2,83 @@
   <div class="sidebar-inner slimscroll">
     <div class="sidebar-menu" id="sidebar-menu">
       <ul>
-        <li class="menu-title">Main</li>
+        <li class="menu-title">Dashboard</li>
+
+
+
+        <ng-container *ngIf="(authService.getRole() | async) === Role.LABORATORIST">
+
+
+          <li>
+            <a href="patientprofile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+          </li>
+
+          <li class="menu-title">Editor</li>
+          <li>
+            <a href="doappointment"><i class="fa fa-calendar-check-o"></i>
+              <span>Appointment</span></a>
+          </li>
+
+          <li class="menu-title">Settings</li>
+          
+          <li>
+            <a href="activities"><i class="fa fa-bell-o"></i> <span>Activities</span></a>
+          </li>
+          <li>
+            <a href="changepassword"><i class="fa fa-cog"></i> <span>Settings</span></a>
+          </li>
+          <li>
+            <a href="salary"><i class="fa fa-money"></i> <span> Salary Settings</span></a>
+          </li>
+          <li>
+            <a href="leave"><i class="fa fa-cogs"></i> <span> Leave Type</span></a>
+          </li>
+
+        </ng-container>
+
+
+
+
+
+
+
+
+        <ng-container *ngIf="(authService.getRole() | async) === Role.DOCTOR">
+
+
+          <li>
+            <a href="patientprofile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+          </li>
+
+          <li class="menu-title">Editor</li>
+          <li>
+            <a href="doappointment"><i class="fa fa-calendar-check-o"></i>
+              <span>Appointment</span></a>
+          </li>
+
+          <li class="menu-title">Settings</li>
+
+          <li>
+            <a href="activities"><i class="fa fa-bell-o"></i> <span>Activities</span></a>
+          </li>
+          <li>
+            <a href="changepassword"><i class="fa fa-cog"></i> <span>Settings</span></a>
+          </li>
+          <li>
+            <a href="salary"><i class="fa fa-money"></i> <span> Salary Settings</span></a>
+          </li>
+          <li>
+            <a href="leave"><i class="fa fa-cogs"></i> <span> Leave Type</span></a>
+          </li>
+
+        </ng-container>
+
+
+
+
+
+
+
 
 
         <ng-container *ngIf="(authService.getRole() | async) === Role.NURSE">
@@ -35,40 +111,12 @@
         </ng-container>
 
 
-        <ng-container *ngIf="(authService.getRole() | async) === Role.RECEPTIONIST">
-
-          <li>
-            <a href="receptionist-profile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-          </li>
-          <li class="submenu">
-            <a href="listappointment"><i class="fa fa-calendar-check-o"></i> <span>Appointment</span> <span
-              class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <a href="addappointment"><i class="fa fa-calendar-check-o"></i>
-                <span>Appointment Add</span></a>
-              <a href="listappointment"><i class="fa fa-list-ul"></i> <span> Appointments
-                                        List</span></a>
-            </ul>
-          </li>
 
 
-          <li>
-            <a href="payroll"><i class="fa fa-book"></i> <span> Payroll </span></a>
-          </li>
-          <li>
-            <a href="activities"><i class="fa fa-bell-o"></i> <span>Activities</span></a>
-          </li>
-          <li>
-            <a href="changepassword"><i class="fa fa-cog"></i> <span>Settings</span></a>
-          </li>
-          <li>
-            <a href="salary"><i class="fa fa-money"></i> <span> Salary Settings</span></a>
-          </li>
-          <li>
-            <a href="leave"><i class="fa fa-cogs"></i> <span> Leave Type</span></a>
-          </li>
 
-        </ng-container>
+
+
+
 
 
         <ng-container *ngIf="(authService.getRole() | async) === Role.PATIENT">
@@ -101,41 +149,89 @@
         </ng-container>
 
 
-        <ng-container *ngIf="(authService.getRole() | async) === Role.ADMIN">
+
+
+
+
+
+
+
+
+        <!-- Done -->
+        <ng-container *ngIf="(authService.getRole() | async) === Role.RECEPTIONIST">
 
           <li>
-            <a href="adminprofile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+            <a href="receptionist-profile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+          </li>
+          
+
+          <li class="menu-title">Editor</li>
+
+          <li>
+            <a [routerLink]="['/doappointment']"><i class="fa fa-user-md"></i> <span> Create Appointment </span></a>
+          </li>
+
+          <li>
+            <a [routerLink]="['/appointment-list']"><i class="fa fa-list-ul"></i> <span> Assign Appointment</span></a>
+          </li>
+
+          <li>
+            <a [routerLink]="['/departmenthome']"><i class="fa fa-hospital-o"></i> <span> Departments </span></a>
+          </li>
+
+          <li>
+            <a [routerLink]="['/doctorshome']"><i class="fa fa-user-md"></i> <span> Doctors </span></a>
+          </li>
+
+          <li class="menu-title">Settings</li>
+
+          <li>
+            <a href="activities"><i class="fa fa-bell-o"></i> <span>Activities</span></a>
+          </li>
+          <li>
+            <a href="changepassword"><i class="fa fa-cog"></i> <span>Settings</span></a>
+          </li>
+          <li>
+            <a href="salary"><i class="fa fa-money"></i> <span> Salary Settings</span></a>
+          </li>
+          <li>
+            <a href="leave"><i class="fa fa-cogs"></i> <span> Leave Type</span></a>
+          </li>
+
+        </ng-container>
+
+
+
+
+
+
+
+        <!-- Done -->
+        <ng-container *ngIf="(authService.getRole() | async) === Role.PHARMACIST">
+
+          <li>
+            <a href="#"><i class="fa fa-dashboard"></i> <span>Profile</span></a>
+          </li>
+
+
+          <li class="menu-title">Editor</li>
+
+          <li>
+            <a href="medicine-bill"><i class="fa fa-user-md"></i> <span>Create Medicine Bill</span></a>
           </li>
 
           <li class="submenu">
-            <a href="#"><i class="fa fa-user-md"></i> <span> User </span> <span
-              class="menu-arrow"></span></a>
+            <a href="#"><i class="fa fa-user-md"></i> <span> Medicines </span> <span
+                class="menu-arrow"></span></a>
             <ul style="display: none;">
-              <a [routerLink]="['/user-add']"><i class="fa fa-user-md"></i> <span>New User</span></a>
-              <a [routerLink]="['/user-list']"><i class="fa fa-list-ul"></i> <span> User List</span></a>
+              <a [routerLink]="['medicines/add']"><i class="fa fa-list-ul"></i> <span> Add Medicine </span></a>
+              <a [routerLink]="['medicines']"><i class="fa fa-user-md"></i> <span> List of Medicine </span></a>
             </ul>
           </li>
 
           <li class="submenu">
-            <a href="#"><i class="fa fa-user-md"></i> <span> Appointment </span> <span
-              class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <a [routerLink]="['/doappointment']"><i class="fa fa-user-md"></i> <span>Create Appointment </span></a>
-              <a [routerLink]="['/appointment-list']"><i class="fa fa-list-ul"></i> <span> Assign Appointment</span></a>
-            </ul>
-          </li>
-          <li>
-            <a href="departments"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
-          </li>
-          <li>
-            <a href="manufacturers"><i class="fa fa-hospital-o"></i> <span>Manufacturers</span></a>
-          </li>
-          <li>
-            <a href="medicines"><i class="fa fa-hospital-o"></i> <span>Medicines</span></a>
-          </li>
-          <li class="submenu">
-            <a href="#"><i class="fa fa-user-md"></i> <span> Medicine Bills </span> <span
-              class="menu-arrow"></span></a>
+            <a href="#"><i class="fa fa-calendar-check-o"></i> <span> Medicine Bills </span> <span
+                class="menu-arrow"></span></a>
             <ul style="display: none;">
               <a [routerLink]="['medicine-bill']"><i class="fa fa-user-md"></i> <span>Create Bill </span></a>
               <a [routerLink]="['medicine-bill-list']"><i class="fa fa-list-ul"></i> <span> List of Bills</span></a>
@@ -143,36 +239,70 @@
           </li>
 
 
+          <li class="menu-title">Settings</li>
 
-          <li class="submenu">
-            <a href="#"><i class="fa fa-wheelchair"></i> <span> Nurse </span> <span
-              class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <a href="#"><i class="fa fa-wheelchair"></i> <span>Nurse Crud</span></a>
-              <a href="#"><i class="fa fa-list-ul"></i> <span> Nurse List</span></a>
-            </ul>
+          <li>
+            <a href="activities"><i class="fa fa-bell-o"></i> <span>Activities</span></a>
+          </li>        
+          <li>
+            <a href="salary"><i class="fa fa-money"></i> <span> Salary</span></a>
           </li>
-          <li class="submenu">
-            <a href="#"><i class="fa fa-calendar-check-o"></i> <span> Receptionist </span> <span
-              class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <a href="#"><i class="fa fa-calendar-check-o"></i> <span>Receptionist
-                                        Crud</span></a>
-              <a href="#"><i class="fa fa-list-ul"></i> <span> Receptionist
-                                        List</span></a>
-            </ul>
+          <li>
+            <a href="leave"><i class="fa fa-cogs"></i> <span> Leave Type</span></a>
+          </li>
+          <li>
+            <a href="changepassword"><i class="fa fa-cog"></i> <span>Change Password</span></a>
           </li>
 
+        </ng-container>
+
+
+
+
+
+
+
+
+
+        <!-- Done -->
+        <ng-container *ngIf="(authService.getRole() | async) === Role.ADMIN">
+
+          
+          <li>
+            <a href="adminprofile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+          </li>
+
+
+          <li class="menu-title">Editor</li>
+
+
           <li class="submenu">
-            <a href="#"><i class="fa fa-address-card-o"></i> <span>Patient</span> <span
-              class="menu-arrow"></span></a>
+            <a href="#"><i class="fa fa-user-md"></i> <span> User </span> <span class="menu-arrow"></span></a>
             <ul style="display: none;">
-              <a href="#"><i class="fa fa-calendar-check-o"></i> <span>Patient
-                                        Crud</span></a>
-              <a href="#"><i class="fa fa-list-ul"></i> <span> Patient List</span></a>
+              <a [routerLink]="['/user-add']"><i class="fa fa-user-md"></i> <span>New User</span></a>
+              <a [routerLink]="['/user-list']"><i class="fa fa-list-ul"></i> <span> User List</span></a>
             </ul>
           </li>
 
+          <li>
+            <a href="manufacturers"><i class="fa fa-hospital-o"></i> <span>Manufacturers</span></a>
+          </li>
+
+          <li>
+            <a href="departments"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
+          </li>
+
+          <li class="submenu">
+            <a href="#"><i class="fa fa-user-md"></i> <span> Appointment </span> <span class="menu-arrow"></span></a>
+            <ul style="display: none;">
+              <a [routerLink]="['/doappointment']"><i class="fa fa-user-md"></i> <span>Create Appointment </span></a>
+              <a [routerLink]="['/appointment-list']"><i class="fa fa-list-ul"></i> <span> Assign Appointment</span></a>
+            </ul>
+          </li>
+          
+
+
+          <li class="menu-title">Settings</li>
 
           <li>
             <a href="payroll"><i class="fa fa-book"></i> <span> Payroll </span></a>
@@ -190,7 +320,16 @@
             <a href="leave"><i class="fa fa-cogs"></i> <span> Leave Type</span></a>
           </li>
 
+
         </ng-container>
+
+
+
+
+
+
+
+
 
 
         <!-- <ng-container
@@ -214,6 +353,36 @@
 
         </ng-container> -->
 
+
+        <!-- // Need Leater -->
+        <!-- <li class="submenu">
+          <a href="#"><i class="fa fa-wheelchair"></i> <span> Nurse </span> <span
+            class="menu-arrow"></span></a>
+          <ul style="display: none;">
+            <a href="#"><i class="fa fa-wheelchair"></i> <span>Nurse Crud</span></a>
+            <a href="#"><i class="fa fa-list-ul"></i> <span> Nurse List</span></a>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#"><i class="fa fa-calendar-check-o"></i> <span> Receptionist </span> <span
+            class="menu-arrow"></span></a>
+          <ul style="display: none;">
+            <a href="#"><i class="fa fa-calendar-check-o"></i> <span>Receptionist
+                                      Crud</span></a>
+            <a href="#"><i class="fa fa-list-ul"></i> <span> Receptionist
+                                      List</span></a>
+          </ul>
+        </li>
+
+        <li class="submenu">
+          <a href="#"><i class="fa fa-address-card-o"></i> <span>Patient</span> <span
+            class="menu-arrow"></span></a>
+          <ul style="display: none;">
+            <a href="#"><i class="fa fa-calendar-check-o"></i> <span>Patient
+                                      Crud</span></a>
+            <a href="#"><i class="fa fa-list-ul"></i> <span> Patient List</span></a>
+          </ul>
+        </li> -->
 
       </ul>
     </div>

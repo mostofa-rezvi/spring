@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "../user.service";
 import { Observable } from "rxjs";
 import { ApiResponse } from "../../util/api.response.model";
-import {DepartmentService} from "../../shared/department/department.service";
-import {DepartmentModel} from "../../shared/department/department.model";
+import {DepartmentService} from "../../Component/admin/department/department.service";
+import {DepartmentModel} from "../../Component/admin/department/department.model";
 
 @Component({
   selector: 'app-user-form',

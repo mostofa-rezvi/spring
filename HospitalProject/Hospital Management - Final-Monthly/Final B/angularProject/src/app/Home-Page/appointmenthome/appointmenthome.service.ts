@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {RecepAppointment} from "../../Component/ReceptionistDashBoard/Model/recepappointment.model";
+import {AppointmentModel} from "../../Component/receptionist/appointment/appointment.model";
+import {Root} from "./appointmenthome.model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class AppointmenthomeService {
     return this.http.get<any[]>(`${this.apiUrl}/doctors?departmentId=${departmentId}`);
   }
 
-  createAppointment(appointment: RecepAppointment): Observable<RecepAppointment> {
-    return this.http.post<RecepAppointment>(`${this.apiUrl}/appointments`, appointment);
+  createAppointment(appointment: Root): Observable<AppointmentModel> {
+    return this.http.post<AppointmentModel>(`${this.apiUrl}/appointments`, appointment);
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppointmenthomeService } from './appointmenthome.service';
-import {RecepAppointment} from "../../Component/ReceptionistDashBoard/Model/recepappointment.model";
+import {AppointmentModel} from "../../Component/receptionist/appointment/appointment.model";
+import {Root} from "./appointmenthome.model";
 
 @Component({
   selector: 'app-appointmenthome',
@@ -11,7 +12,7 @@ import {RecepAppointment} from "../../Component/ReceptionistDashBoard/Model/rece
 export class AppointmenthomeComponent implements OnInit {
   departments: any[] = [];
   doctors: any[] = [];
-  appointment: RecepAppointment = new RecepAppointment();
+  appointment: Root = new Root();
   selectedDoctorId?: string;
   selectedDepartmentId?: string;
 
@@ -56,7 +57,7 @@ export class AppointmenthomeComponent implements OnInit {
 
       // Set the appointment's doctor and department
       if (selectedDoctor) {
-        this.appointment.doctor = selectedDoctor;
+        this.appointment.doctors = selectedDoctor;
       }
       if (selectedDepartment) {
         // this.appointment.department = selectedDepartment;

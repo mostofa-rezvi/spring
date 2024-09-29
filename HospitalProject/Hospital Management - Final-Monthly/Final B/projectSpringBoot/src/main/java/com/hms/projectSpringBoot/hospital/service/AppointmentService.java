@@ -55,7 +55,7 @@ public class AppointmentService {
     public ApiResponse createAppointment(Appointment appointment) {
         ApiResponse apiResponse = new ApiResponse(false);
         try {
-            if (appointment.getRequestedBy() != null && appointment.getRequestedBy().getId() != null) {
+            if (appointment.getRequestedBy() != null ) {
                 User user = userRepository.findById(appointment.getRequestedBy().getId()).orElse(null);
 
                 if (user == null || user.getRole() == null) {
@@ -77,7 +77,7 @@ public class AppointmentService {
     public ApiResponse updateAppointment(Appointment appointment) {
         ApiResponse apiResponse = new ApiResponse(false);
         try {
-            if (appointment.getRequestedBy() != null && appointment.getRequestedBy().getId() != null) {
+            if (appointment.getRequestedBy().getId() != null) {
                 User user = userRepository.findById(appointment.getRequestedBy().getId()).orElse(null);
 
                 if (user == null || user.getRole() == null) {
