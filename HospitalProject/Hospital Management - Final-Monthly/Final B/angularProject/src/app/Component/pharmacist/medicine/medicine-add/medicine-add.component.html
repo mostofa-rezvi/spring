@@ -32,7 +32,7 @@
 
     <div class="form-group">
       <label for="manufacturer">Manufacturer:</label>
-      <select [(ngModel)]="manufacturer.manufacturerName" class="form-control" id="manufacturer" name="manufacturer">
+      <select [(ngModel)]="medicine.manufacturer.id" class="form-control" id="manufacturer" name="manufacturer">
         <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer.id">{{ manufacturer.manufacturerName }}</option>
       </select>
     </div>

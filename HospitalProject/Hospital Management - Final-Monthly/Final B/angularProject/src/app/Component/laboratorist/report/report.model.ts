@@ -2,9 +2,10 @@ export class Report {
     id!: number;
 
     reportName!: string;
+    reportResult!: string;
+    
     description!: string;
     sampleId!: string;
-    reportResult!: string;
     interpretation!: string;
 
     testDate!: Date;

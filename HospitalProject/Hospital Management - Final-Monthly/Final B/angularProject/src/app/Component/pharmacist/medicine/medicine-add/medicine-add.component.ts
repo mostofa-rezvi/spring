@@ -51,6 +51,7 @@ export class MedicineAddComponent implements OnInit {
   }
 
   onSubmit(): void {
+    //this.medicine.manufacturer.id = this.manufacturer.id;
     if (!this.medicine.manufacturer.id) {
       alert('Please select a manufacturer.');
       return;

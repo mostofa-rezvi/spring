@@ -52,9 +52,10 @@ export class MedicineBillCreateComponent implements OnInit {
     if (availableMedicine) {
       selectedMedicine.price = availableMedicine.price;
     }
+    this.calculateTotal();
   }
-  
-  
+
+
 
   removeMedicine(index: number) {
     // Remove the selected medicine from the list
@@ -63,9 +64,13 @@ export class MedicineBillCreateComponent implements OnInit {
   }
 
   calculateTotal() {
-    // Calculate the total amount based on the selected medicines
-    this.totalAmount = this.selectedMedicines.reduce((sum, medicine) => sum + medicine.price, 0);
+    this.totalAmount = this.selectedMedicines.reduce((sum, medicine) => {
+      const price = medicine.price || 0; // Default to 0 if price is undefined
+      return sum + price;
+    }, 0);
     this.bill.totalAmount = this.totalAmount;
+    console.log(this.totalAmount);
+    console.log(this.bill.totalAmount);
   }
 
   calculateBalance() {

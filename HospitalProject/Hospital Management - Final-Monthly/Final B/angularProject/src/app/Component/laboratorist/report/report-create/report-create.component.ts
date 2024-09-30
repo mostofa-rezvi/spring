@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../report.service';
 import { Report } from '../report.model';
-import { UserModel } from '../../../../user/user.model';
+import { Role, UserModel } from '../../../../user/user.model';
 import { Test } from '../../test/test.model';
 import { UserService } from '../../../../user/user.service';
 import { TestService } from '../../test/test.service';
@@ -13,13 +13,20 @@ import { ApiResponse } from '../../../../util/api.response.model';
   styleUrls: ['./report-create.component.css']
 })
 export class ReportCreateComponent implements OnInit {
-  users: UserModel[] = []; // Change type to UserModel
+  users: UserModel[] = [];
   tests: Test[] = [];
   selectedUser!: UserModel;
+  userName!: string;
+  userNames: string[] = [];
+  
   selectedTest!: Test;
   reportName!: string;
   reportResult: string = '';
-  reportResults: string[] = []; // Store report results
+  reportResults: string[] = [];
+
+  sampleId: string = '';
+  description: string = '';
+  interpretation: string = '';
 
   constructor(
     private userService: UserService,
@@ -36,9 +43,11 @@ export class ReportCreateComponent implements OnInit {
     this.userService.findAllUsers().subscribe(
       (response: ApiResponse) => {
         if (response.successful) {
-          this.users = response.data;
+          if (Array.isArray(response.data['users'])) {
+            this.users = response.data['users'];
+          }
         } else {
-          console.error('Error fetching users:', response.message);
+          console.error('Error fetching users:', response.data);
         }
       },
       error => {
@@ -49,15 +58,19 @@ export class ReportCreateComponent implements OnInit {
 
   loadTests(): void {
     this.testService.getAllTests().subscribe(
-      (data: Test[]) => {
-        this.tests = data;
+      (response: ApiResponse) => {
+        if (Array.isArray(response.data['tests'])) {
+          this.tests = response.data['tests'];
+        } else {
+          console.error('Tests data is not an array:', response.data);
+        }
       },
-      error => {
+      (error) => {
         console.error('Error fetching tests!', error);
       }
     );
   }
-
+  
   onTestSelect(): void {
     if (this.selectedTest) {
       this.reportName = 'Report - ' + this.selectedTest.testName;
@@ -65,13 +78,16 @@ export class ReportCreateComponent implements OnInit {
     }
   }
 
-  loadReportResults(): void {
-    this.reportResults = ['Result 1', 'Result 2'];
+  onUserSelect(): void {
+    // console.log('Selected user:', this.selectedUser);
+    if (this.selectedUser) {
+      this.userName = this.selectedUser.role === Role.PATIENT ? this.selectedUser.name : '';
+    }
   }
 
-  onUserSelect(): void {
-    console.log('Selected user:', this.selectedUser);
-    this.loadUsers();
+  loadReportResults(): void {
+    this.reportResults = [
+      'Result 1 - Red Blood Cell Count (RBC): 5.2 million cells/mcL', 'Result 2'];
   }
 
 
@@ -79,10 +95,10 @@ export class ReportCreateComponent implements OnInit {
     const report: Report = {
       id: 0,
       reportName: this.reportName,
-      description: '',
-      sampleId: '',
+      description: this.description,
+      sampleId: this.sampleId,
       reportResult: this.reportResult,
-      interpretation: '',
+      interpretation: this.interpretation,
       testDate: new Date(),
       createdAt: new Date(),
       updatedAt: new Date(),

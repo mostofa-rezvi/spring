@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MedicineBillService} from '../medicine-bill.service';
 import {Router} from '@angular/router';
 import {ApiResponse} from "../../../../util/api.response.model";
+import { MedicineBill } from '../medicine-bill.model';
 
 @Component({
   selector: 'app-medicine-bill-list',
@@ -10,19 +11,7 @@ import {ApiResponse} from "../../../../util/api.response.model";
 })
 export class MedicineBillListComponent implements OnInit {
 
-  bills: Array<{
-    id: number;
-    name: string;
-    phone: number;
-    email: string;
-    address: string;
-    invoiceDate: Date;
-    totalAmount: number;
-    amountPaid: number;
-    balance: number;
-    status: string;
-    description: string;
-  }> = [];
+  bills: MedicineBill[] = [];
 
   apiError: string | undefined = ''; // To handle errors from the API
 
@@ -38,7 +27,7 @@ export class MedicineBillListComponent implements OnInit {
     this.billService.getAllBills().subscribe({
       next: (response: ApiResponse) => {
         if (response.data) {
-          this.bills = response.data;
+          this.bills = response.data['bills'];
         } else {
           this.apiError = 'Failed to load bills';
           console.error('Error fetching bills:', response.message);

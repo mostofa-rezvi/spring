@@ -30,7 +30,7 @@ export class MedicineService {
     medicineName: string;
     manufacturer: {id: number }
   }): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl, medicine);
+    return this.http.post<ApiResponse>(`${this.apiUrl}/`, medicine);
   }
 
   updateMedicine(id: number, medicine: Medicine): Observable<ApiResponse> {

@@ -1,9 +1,11 @@
 1. all > test > test list > (click) update > do not show any data 
 
-2. pharmachist > medicine bill > list of bills
 
-3. pharmachist > add medicine
 
-4. receptionist > appointment create
+To-Do
 
-5. 
+Report add on Diagonstic to doctor
+
+Doctor > Prescription (diago.) > made this
+Doctor > Patient > test add, medicine add > generate Prescription
+ 

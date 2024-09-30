@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Report } from './report.model';
+import { ApiResponse } from '../../../util/api.response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class ReportService {
 
   constructor(private http: HttpClient) { }
 
-  getReports(): Observable<Report[]> {
-    return this.http.get<Report[]>(this.baseUrl);
+  getReports(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl);
   }
 
   getReportById(id: number): Observable<Report> {

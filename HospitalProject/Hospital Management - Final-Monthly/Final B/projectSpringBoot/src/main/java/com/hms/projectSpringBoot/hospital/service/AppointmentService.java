@@ -63,6 +63,9 @@ public class AppointmentService {
                     return apiResponse;
                 }
             }
+            if (appointment.getDoctor() != null && appointment.getDoctor().getId() == null) {
+                appointment.setDoctor(null);
+            }
             appointmentRepository.save(appointment);
             apiResponse.setSuccessful(true);
             apiResponse.setMessage("Appointment created successfully.");
