@@ -24,14 +24,10 @@ export class TestService {
   }
 
   updateTest(id: number, test: Test): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/${id}`, test);
+    return this.http.put<any>(`${this.baseUrl}/update/${id}`, test);
   }
 
   deleteTest(id: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
-  }
-
-  getTestsByDiagnosticsId(diagnosticsId: number): Observable<Test[]> {
-    return this.http.get<Test[]>(`${this.baseUrl}/diagnostics/${diagnosticsId}`);
   }
 }

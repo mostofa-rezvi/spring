@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
-    List<Report> findByDiagnosticsId(Long diagnosticsId);
+    List<Report> findByTestEntityId(Long testId);
 
-    List<Report> findByCreatedById(Long userId);
+    List<Report> findByPatientId(Long patientId);
 }

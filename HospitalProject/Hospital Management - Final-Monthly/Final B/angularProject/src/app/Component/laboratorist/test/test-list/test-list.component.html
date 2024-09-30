@@ -9,7 +9,6 @@
                 <th>Description</th>
                 <th>Result</th>
                 <th>Instructions</th>
-                <th>Diagnostics ID</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,7 +19,6 @@
                 <td>{{ test.description }}</td>
                 <td>{{ test.result }}</td>
                 <td>{{ test.instructions }}</td>
-                <td>{{ test.diagnostics.id }}</td>
                 <td>
                     <button class="btn btn-danger" (click)="deleteTest(test.id)">Delete</button>
                     <a [routerLink]="['/tests/update', test.id]" class="btn btn-warning">Edit</a>

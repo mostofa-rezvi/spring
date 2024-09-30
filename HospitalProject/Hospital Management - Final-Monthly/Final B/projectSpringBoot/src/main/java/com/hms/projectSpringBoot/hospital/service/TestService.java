@@ -73,7 +73,6 @@ public class TestService {
                 existingTest.setDescription(updatedTest.getDescription());
                 existingTest.setResult(updatedTest.getResult());
                 existingTest.setInstructions(updatedTest.getInstructions());
-                existingTest.setDiagnostics(updatedTest.getDiagnostics());
                 existingTest.setUpdatedAt(LocalDateTime.now());
 
                 testRepository.save(existingTest);
@@ -107,7 +106,4 @@ public class TestService {
         }
     }
 
-    public List<TestEntity> getTestsByDiagnosticsId(Long diagnosticsId) {
-        return testRepository.findByDiagnosticsId(diagnosticsId);
-    }
 }

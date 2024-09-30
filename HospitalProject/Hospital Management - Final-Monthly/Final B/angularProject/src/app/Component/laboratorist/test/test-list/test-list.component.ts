@@ -7,19 +7,37 @@ import { Test } from '../test.model';
   templateUrl: './test-list.component.html',
 })
 export class TestListComponent implements OnInit {
-  tests: Test[] = []; // Array to hold the list of tests
-  errorMessage: string = ''; // To hold error messages
+  tests: Test[] = [];
+  errorMessage: string = '';
 
   constructor(private testService: TestService) { }
 
   ngOnInit() {
-    this.getAllTests(); // Fetch all tests on component initialization
+    this.getAllTests(); 
   }
+
+  // getAllTests() {
+  //   this.testService.getAllTests().subscribe(
+  //     (response) => {
+  //       this.tests = response.data || []; // Assuming response.data contains the tests
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching tests:', error);
+  //       this.errorMessage = 'Could not fetch tests. Please try again later.';
+  //     }
+  //   );
+  // } 
 
   getAllTests() {
     this.testService.getAllTests().subscribe(
       (response) => {
-        this.tests = response.data || []; // Assuming response.data contains the tests
+        if (response.data && Array.isArray(response.data)) {
+          this.tests = response.data; // Ensure that this is an array
+        } else if (response.data && response.data.tests) {
+          this.tests = response.data.tests; // Adjust based on the response structure
+        } else {
+          this.tests = []; // Handle any case where no data is returned
+        }
       },
       (error) => {
         console.error('Error fetching tests:', error);
@@ -27,6 +45,8 @@ export class TestListComponent implements OnInit {
       }
     );
   }
+
+  
 
   deleteTest(id: number) {
     this.testService.deleteTest(id).subscribe(

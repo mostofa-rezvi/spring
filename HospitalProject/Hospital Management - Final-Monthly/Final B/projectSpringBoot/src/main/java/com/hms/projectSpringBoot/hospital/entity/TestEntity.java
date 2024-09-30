@@ -25,10 +25,6 @@ public class TestEntity {
     private String result;
     private String instructions;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "diagnostics_id", nullable = false)
-    private Diagnostics diagnostics;
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

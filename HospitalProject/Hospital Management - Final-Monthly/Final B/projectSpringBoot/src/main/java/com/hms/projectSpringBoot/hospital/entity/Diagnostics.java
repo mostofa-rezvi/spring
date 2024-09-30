@@ -38,12 +38,4 @@ public class Diagnostics {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id", nullable = false)
     private User patient;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "diagnostics", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<TestEntity> tests;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "diagnostics", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Report> reports;
 }

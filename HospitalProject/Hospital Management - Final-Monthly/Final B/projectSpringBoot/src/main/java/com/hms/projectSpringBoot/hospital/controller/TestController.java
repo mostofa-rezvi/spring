@@ -30,7 +30,7 @@ public class TestController {
         return testService.createTest(testEntity);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ApiResponse updateTest(@PathVariable Long id, @RequestBody TestEntity updatedTest) {
         return testService.updateTest(id, updatedTest);
     }
@@ -38,10 +38,5 @@ public class TestController {
     @DeleteMapping("/{id}")
     public ApiResponse deleteTest(@PathVariable Long id) {
         return testService.deleteTest(id);
-    }
-
-    @GetMapping("/diagnostics/{diagnosticsId}")
-    public List<TestEntity> getTestsByDiagnosticsId(@PathVariable Long diagnosticsId) {
-        return testService.getTestsByDiagnosticsId(diagnosticsId);
     }
 }

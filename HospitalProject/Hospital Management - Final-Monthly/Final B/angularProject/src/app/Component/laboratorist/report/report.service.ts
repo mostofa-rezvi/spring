@@ -1,41 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Report } from '../report/report.model';
+import { Report } from './report.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ReportService {
-  private baseUrl = 'http://localhost:8080/api/reports';  // Update with your actual backend URL
+  private baseUrl = 'http://localhost:8080/api/reports'; 
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   constructor(private http: HttpClient) { }
 
-  getAllReports(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+  getReports(): Observable<Report[]> {
+    return this.http.get<Report[]>(this.baseUrl);
   }
 
-  getReportById(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/reports/${id}`);
+  getReportById(id: number): Observable<Report> {
+    return this.http.get<Report>(`${this.baseUrl}/${id}`);
   }
 
-  createReport(report: Report): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, report);
+  createReport(report: Report): Observable<Report> {
+    return this.http.post<Report>(this.baseUrl, report, this.httpOptions);
   }
 
-  updateReport(id: number, report: Report): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, report);
+  updateReport(report: Report): Observable<Report> {
+    return this.http.put<Report>(`${this.baseUrl}/${report.id}`, report, this.httpOptions);
   }
 
-  deleteReport(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
-  }
-
-  getReportsByDiagnosticsId(diagnosticsId: number): Observable<Report[]> {
-    return this.http.get<Report[]>(`${this.baseUrl}/diagnostics/${diagnosticsId}`);
-  }
-
-  getReportsByCreatedById(userId: number): Observable<Report[]> {
-    return this.http.get<Report[]>(`${this.baseUrl}/createdBy/${userId}`);
+  deleteReport(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

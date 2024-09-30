@@ -8,8 +8,10 @@ import { Test } from '../test.model';
   templateUrl: './test-update.component.html',
 })
 export class TestUpdateComponent implements OnInit {
-  test: Test | null = null; // To hold the test being updated
-  errorMessage: string = ''; // To hold error messages
+  test: Test = new Test(); 
+  testId!: number; 
+  private errorMessage: string | undefined = '';
+  successMessage: string = '';
 
   constructor(
     private testService: TestService,
@@ -17,35 +19,32 @@ export class TestUpdateComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    const id = this.route.snapshot.params['id']; // Get the test ID from the route parameters
-    this.getTestById(id); // Fetch the test data for the given ID
-  }
+  ngOnInit(): void {
 
-  getTestById(id: number) {
-    this.testService.getTestById(id).subscribe(
-      (response) => {
-        this.test = response.data; // Assuming response.data contains the test
+    this.testId = +this.route.snapshot.paramMap.get('id')!;
+
+    this.testService.getTestById(this.testId).subscribe({
+      next: (response) => {
+        this.test = response.data['/tests'];
       },
-      (error) => {
-        console.error('Error fetching test:', error);
-        this.errorMessage = 'Could not fetch test. Please try again later.';
+      error: () => {
+        alert('Failed to load medicine details');
+        this.router.navigate(['/tests']); 
       }
-    );
+    });
   }
 
-  updateTest() {
-    if (this.test) {
-      this.testService.updateTest(this.test.id, this.test).subscribe(
-        (response) => {
-          console.log('Test updated successfully!', response);
-          this.router.navigate(['/tests']); // Redirect to tests list after updating
-        },
-        (error) => {
-          console.error('Error updating test:', error);
-          this.errorMessage = 'Could not update test. Please try again later.';
-        }
-      );
-    }
+  updateTest(): void {
+    this.testService.updateTest(this.testId, this.test).subscribe({
+      next: () => {
+        alert('Test updated successfully!');
+        this.router.navigate(['/tests']);
+      },
+      error: (error) => {
+        console.error(error);
+        alert('Failed to update test.');
+      },
+    });
   }
+
 }

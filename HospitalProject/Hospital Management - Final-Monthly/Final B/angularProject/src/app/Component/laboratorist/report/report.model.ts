@@ -1,13 +1,20 @@
 export class Report {
-    id?: number;
+    id!: number;
+
     reportName!: string;
     description!: string;
-    summary!: string;
+    sampleId!: string;
+    reportResult!: string;
+    interpretation!: string;
 
-    diagnosticsId!: number;
-    createdById!: number;
+    testDate!: Date;
+    createdAt!: Date;
+    updatedAt!: Date;
 
-    createdAt?: Date;
-    updatedAt?: Date;
-    isFinalized!: boolean;
+    user!: {
+        id: number;
+    };
+    test!: {
+        id: number;
+    };
 }

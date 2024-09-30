@@ -52,6 +52,7 @@ public class ReportService {
         ApiResponse apiResponse = new ApiResponse(false);
         try {
             report.setCreatedAt(LocalDateTime.now());
+            report.setUpdatedAt(LocalDateTime.now());
             Report createdReport = reportRepository.save(report);
             apiResponse.setSuccessful(true);
             apiResponse.setMessage("Report created successfully.");
@@ -71,10 +72,12 @@ public class ReportService {
                 Report existingReport = report.get();
                 existingReport.setReportName(updatedReport.getReportName());
                 existingReport.setDescription(updatedReport.getDescription());
-                existingReport.setSummary(updatedReport.getSummary());
-                existingReport.setDiagnostics(updatedReport.getDiagnostics());
-                existingReport.setCreatedBy(updatedReport.getCreatedBy());
-                existingReport.setFinalized(updatedReport.isFinalized());
+                existingReport.setSampleId(updatedReport.getSampleId());
+                existingReport.setReportResult(updatedReport.getReportResult());
+                existingReport.setInterpretation(updatedReport.getInterpretation());
+                existingReport.setPatient(updatedReport.getPatient());
+                existingReport.setTestEntity(updatedReport.getTestEntity()); // Added test entity
+                existingReport.setTestDate(updatedReport.getTestDate()); // Added test date
                 existingReport.setUpdatedAt(LocalDateTime.now());
 
                 reportRepository.save(existingReport);
@@ -108,11 +111,11 @@ public class ReportService {
         }
     }
 
-    public List<Report> getReportsByDiagnosticsId(Long diagnosticsId) {
-        return reportRepository.findByDiagnosticsId(diagnosticsId);
+    public List<Report> getReportsByTestEntityId(Long testId) {
+        return reportRepository.findByTestEntityId(testId);
     }
 
-    public List<Report> getReportsByCreatedById(Long userId) {
-        return reportRepository.findByCreatedById(userId);
+    public List<Report> getReportsByPatientId(Long patientId) {
+        return reportRepository.findByPatientId(patientId);
     }
 }

@@ -1,40 +1,47 @@
-<div class="container">
+<div class="report-create">
     <h2>Create Report</h2>
-    <form (ngSubmit)="createReport()">
-        <div class="form-group">
-            <label for="reportName">Report Name:</label>
-            <input type="text" class="form-control" id="reportName" [(ngModel)]="report.reportName" name="reportName"
-                required />
-        </div>
 
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea class="form-control" id="description" [(ngModel)]="report.description" name="description"
-                required></textarea>
-        </div>
+    <div class="form-group">
+        <label for="userSelect">Select Patient</label>
+        <select id="userSelect" [(ngModel)]="selectedUser" (change)="onUserSelect()">
+            <option *ngFor="let user of users" [ngValue]="user">
+                {{ user.name }} ({{ user.mobile }} - {{ user.email }})
+            </option>
+        </select>
+    </div>
 
-        <div class="form-group">
-            <label for="summary">Summary:</label>
-            <textarea class="form-control" id="summary" [(ngModel)]="report.summary" name="summary" required></textarea>
+    <div class="form-group">
+        <label for="patientDetails">Patient Details</label>
+        <div>
+            <strong>Name:</strong> {{ selectedUser?.name }}<br />
+            <strong>Mobile:</strong> {{ selectedUser?.mobile }}<br />
+            <strong>Email:</strong> {{ selectedUser?.email }}<br />
+            <strong>Address:</strong> {{ selectedUser?.address }}<br />
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="diagnosticsId">Diagnostics ID:</label>
-            <input type="number" class="form-control" id="diagnosticsId" [(ngModel)]="report.diagnosticsId"
-                name="diagnosticsId" required />
-        </div>
+    <div class="form-group">
+        <label for="testSelect">Select Test</label>
+        <select id="testSelect" [(ngModel)]="selectedTest" (change)="onTestSelect()">
+            <option *ngFor="let test of tests" [ngValue]="test">
+                {{ test.name }} - {{ test.description }} (Instructions: {{ test.instructions }})
+            </option>
+        </select>
+    </div>
 
-        <div class="form-group">
-            <label for="createdById">Created By (User ID):</label>
-            <input type="number" class="form-control" id="createdById" [(ngModel)]="report.createdById"
-                name="createdById" required />
-        </div>
+    <div class="form-group">
+        <label for="reportName">Report Name</label>
+        <input type="text" id="reportName" [value]="reportName" readonly />
+    </div>
 
-        <div class="form-group">
-            <label for="isFinalized">Finalized:</label>
-            <input type="checkbox" id="isFinalized" [(ngModel)]="report.isFinalized" name="isFinalized" />
-        </div>
+    <div class="form-group">
+        <label for="reportResult">Select Report Result</label>
+        <select id="reportResult" [(ngModel)]="reportResult">
+            <option *ngFor="let result of reportResults" [value]="result">
+                {{ result }}
+            </option>
+        </select>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Create Report</button>
-    </form>
+    <button (click)="createReport()">Create Report</button>
 </div>

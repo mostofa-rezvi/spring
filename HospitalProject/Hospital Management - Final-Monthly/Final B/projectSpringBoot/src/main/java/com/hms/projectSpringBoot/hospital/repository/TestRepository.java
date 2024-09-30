@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface TestRepository extends JpaRepository<TestEntity, Long> {
-    List<TestEntity> findByDiagnosticsId(Long diagnosticsId);
 }

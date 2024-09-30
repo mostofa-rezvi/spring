@@ -17,25 +17,26 @@ import java.time.LocalDateTime;
 @Table(name = "reports")
 public class Report {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String reportName;
     private String description;
-    private String summary;
+    private String sampleId;
+    private String reportResult;
+    private String interpretation;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "diagnostics_id", nullable = false)
-    private Diagnostics diagnostics;
+    @JoinColumn(name = "patient_id")
+    private User patient;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "created_by", nullable = false)
-    private User createdBy;
+    @JoinColumn(name = "test_id")
+    private TestEntity testEntity;
 
+    private LocalDateTime testDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private boolean isFinalized;
 
 }

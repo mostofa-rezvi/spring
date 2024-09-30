@@ -40,13 +40,13 @@ public class ReportController {
         return reportService.deleteReport(id);
     }
 
-    @GetMapping("/diagnostics/{diagnosticsId}")
-    public List<Report> getReportsByDiagnosticsId(@PathVariable Long diagnosticsId) {
-        return reportService.getReportsByDiagnosticsId(diagnosticsId);
+    @GetMapping("/test/{testId}")
+    public List<Report> getReportsByTestEntityId(@PathVariable Long testId) {
+        return reportService.getReportsByTestEntityId(testId);
     }
 
-    @GetMapping("/createdBy/{userId}")
-    public List<Report> getReportsByCreatedById(@PathVariable Long userId) {
-        return reportService.getReportsByCreatedById(userId);
+    @GetMapping("/patient/{patientId}")
+    public List<Report> getReportsByPatientId(@PathVariable Long patientId) {
+        return reportService.getReportsByPatientId(patientId);
     }
 }
