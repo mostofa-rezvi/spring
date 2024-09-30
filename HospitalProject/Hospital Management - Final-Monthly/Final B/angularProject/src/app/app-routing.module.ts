@@ -265,8 +265,12 @@ const routes: Routes = [
   { path: 'tests/create', component: TestCreateComponent },
   { path: 'tests/update/:id', component: TestUpdateComponent },
 
+  
 
 
+
+
+  
 ];
 
 @NgModule({
