@@ -41,10 +41,6 @@ import {LeavetypeComponent} from "./shared/Settings/leavetype/leavetype.componen
 import {ChngpassComponent} from "./shared/Settings/chngpass/chngpass.component";
 import {AdminpayrollComponent} from "./shared/payroll/adminpayroll.component";
 import {
-  EditprofiledocComponent
-} from "./Component/doctor/DoctorProfile/editprofiledoc/editprofiledoc.component";
-import {MyprofiledocComponent} from "./Component/doctor/DoctorProfile/myprofiledoc/myprofiledoc.component";
-import {
   EditprofilerecepComponent
 } from "./Component/receptionist/ReceptionistProfile/editprofilerecep/editprofilerecep.component";
 import {
@@ -78,6 +74,9 @@ import { TestUpdateComponent } from './Component/laboratorist/test/test-update/t
 import { AdminProfileComponent } from './Component/admin/Profile/admin-profile/admin-profile.component';
 import { AdminProfileUpdateComponent } from './Component/admin/Profile/admin-profile-update/admin-profile-update.component';
 import { ReportViewComponent } from './Component/laboratorist/report/report-view/report-view.component';
+import { PrescriptionCreateComponent } from './Component/doctor/prescription/prescription-create/prescription-create.component';
+import { PrescriptionListComponent } from './Component/doctor/prescription/prescription-list/prescription-list.component';
+import { PrescriptionViewComponent } from './Component/doctor/prescription/prescription-view/prescription-view.component';
 
 @NgModule({
   declarations: [
@@ -102,8 +101,6 @@ import { ReportViewComponent } from './Component/laboratorist/report/report-view
     EditprofilepntComponent,
     MyprofilerecepComponent,
     EditprofilerecepComponent,
-    MyprofiledocComponent,
-    EditprofiledocComponent,
     ChilddepartmentComponent,
     GeneraldepartmentComponent,
     OrthopedicsdepartmentComponent,
@@ -136,6 +133,9 @@ import { ReportViewComponent } from './Component/laboratorist/report/report-view
     AdminProfileComponent,
     AdminProfileUpdateComponent,
     ReportViewComponent,
+    PrescriptionCreateComponent,
+    PrescriptionListComponent,
+    PrescriptionViewComponent,
   ],
   imports: [
     BrowserModule,

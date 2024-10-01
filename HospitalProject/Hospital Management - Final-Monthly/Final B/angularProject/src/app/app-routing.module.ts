@@ -23,10 +23,6 @@ import { SalarysettingsComponent } from "./shared/Settings/salarysettings/salary
 import { LeavetypeComponent } from "./shared/Settings/leavetype/leavetype.component";
 import { ChngpassComponent } from "./shared/Settings/chngpass/chngpass.component";
 import { AdminpayrollComponent } from "./shared/payroll/adminpayroll.component";
-import { MyprofiledocComponent } from "./Component/doctor/DoctorProfile/myprofiledoc/myprofiledoc.component";
-import {
-  EditprofiledocComponent
-} from "./Component/doctor/DoctorProfile/editprofiledoc/editprofiledoc.component";
 import { MyprofilenrsComponent } from "./Component/nurse/NurseProfile/myprofilenrs/myprofilenrs.component";
 import { EditprofilenrsComponent } from "./Component/nurse/NurseProfile/editprofilenrs/editprofilenrs.component";
 import { MyprofilepntComponent } from "./Component/patient/PatientProfile/myprofilepnt/myprofilepnt.component";
@@ -71,6 +67,9 @@ import { TestCreateComponent } from './Component/laboratorist/test/test-create/t
 import { TestListComponent } from './Component/laboratorist/test/test-list/test-list.component';
 import { TestUpdateComponent } from './Component/laboratorist/test/test-update/test-update.component';
 import { ReportViewComponent } from './Component/laboratorist/report/report-view/report-view.component';
+import { PrescriptionCreateComponent } from './Component/doctor/prescription/prescription-create/prescription-create.component';
+import { PrescriptionListComponent } from './Component/doctor/prescription/prescription-list/prescription-list.component';
+import { PrescriptionViewComponent } from './Component/doctor/prescription/prescription-view/prescription-view.component';
 
 const routes: Routes = [
 
@@ -117,13 +116,7 @@ const routes: Routes = [
 
 
   // Doctor
-  {
-    path: 'doctorprofile', component: MyprofiledocComponent, canActivate: [AuthGuard]
-  },
-  {
-    path: 'doctorprofileedit', component: EditprofiledocComponent, canActivate: [AuthGuard]
-  },
-
+ 
   // Nurse
   {
     path: 'nurseprofile', component: MyprofilenrsComponent, canActivate: [AuthGuard]
@@ -256,7 +249,11 @@ const routes: Routes = [
   { path: 'tests', component: TestListComponent },
   { path: 'tests/create', component: TestCreateComponent },
   { path: 'tests/update/:id', component: TestUpdateComponent },
-
+  
+  { path: 'prescriptions/create', component: PrescriptionCreateComponent },
+  { path: 'prescriptions', component: PrescriptionListComponent },
+  { path: 'prescriptions/:id', component: PrescriptionViewComponent },
+  
 
 
 

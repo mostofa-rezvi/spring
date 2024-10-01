@@ -1,12 +1,9 @@
 1. appointment create
-2. labratorist > test update
-
+2. labratorist > test update 
+3. Medical Report > List > View
+4. Doctor > Prescription create, list, view
 
 
 To-Do
-
-Report add on Diagonstic to doctor
-
-Doctor > Prescription (diago.) > made this
-Doctor > Patient > test add, medicine add > generate Prescription
+Patient > see ? prescription and reports
  

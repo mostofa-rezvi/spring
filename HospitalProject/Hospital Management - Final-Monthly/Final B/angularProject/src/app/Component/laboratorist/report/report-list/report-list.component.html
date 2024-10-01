@@ -24,8 +24,12 @@
                 <td>{{ report.interpretation }}</td>
                 <td>{{ report.testDate | date:'short' }}</td>
                 <td>
-                    <button (click)="deleteReport(report.id)">Delete</button>
-                    <a [routerLink]="['/reports', report.id]">View</a>
+                    <div class="row">
+                        <button (click)="deleteReport(report.id)">Delete</button>
+                    </div>
+                    <div class="row">
+                        <a [routerLink]="['/reports', report.id]" class="mt-1">View</a>
+                    </div>
                 </td>
             </tr>
         </tbody>

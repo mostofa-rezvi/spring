@@ -1,0 +1,51 @@
+<div class="container">
+    <h2>Create Prescription</h2>
+
+    <div class="form-group">
+        <label for="patient">Select Patient:</label>
+        <select class="form-control" [(ngModel)]="selectedPatientId">
+            <option *ngFor="let patient of patients" [value]="patient.id">
+                {{ patient.name }}
+            </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="medicines">Select Medicines:</label>
+        <select class="form-control" [(ngModel)]="selectedMedicines">
+            <option *ngFor="let medicine of medicines" [ngValue]="medicine">
+                {{ medicine.medicineName }}
+            </option>
+        </select>
+    </div>
+
+    <div *ngFor="let medicine of selectedMedicines; let i = index" class="selected-medicine">
+        <p>
+            <strong>Medicine:</strong> {{ medicine.medicineName }} <br />
+            <strong>Strength:</strong> {{ medicine.medicineStrength }} <br />
+            <strong>Instructions:</strong> {{ medicine.instructions }}
+        </p>
+        <button type="button" (click)="removeMedicine(i)">Remove Medicine</button>
+    </div>
+
+
+    <div class="form-group">
+        <label for="tests">Select Tests:</label>
+        <select class="form-control" [(ngModel)]="selectedTests">
+            <option *ngFor="let test of tests" [ngValue]="test">
+                {{ test.testName }}
+            </option>
+        </select>
+    </div>
+
+    <div *ngFor="let test of selectedTests" class="selected-test">
+        <p><strong>Test:</strong> {{ test.testName }}</p>
+    </div>
+
+    <div class="form-group">
+        <label for="notes">Notes:</label>
+        <textarea class="form-control" [(ngModel)]="prescription.notes"></textarea>
+    </div>
+
+    <button class="btn btn-primary" (click)="createPrescription()">Create Prescription</button>
+</div>

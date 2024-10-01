@@ -15,16 +15,23 @@
 
           <li class="menu-title">Editor</li>
           <li>
-            <a href="doappointment"><i class="fa fa-calendar-check-o"></i>
-              <span>Appointment</span></a>
-          </li>
-          <li>
             <a href="tests"><i class="fa fa-calendar-check-o"></i>
               <span>Test Lists</span></a>
           </li>
 
+          <li class="submenu">
+            <a href="#"><i class="fa fa-user-md"></i> <span> Medical Report </span> <span class="menu-arrow"></span></a>
+            <ul style="display: none;">
+              <a [routerLink]="['reports']"><i class="fa fa-list-ul"></i> <span> List of Report </span></a>
+              <a [routerLink]="['reports/create']"><i class="fa fa-user-md"></i> <span> Create Report </span></a>
+            </ul>
+          </li>
+
+
+
+
           <li class="menu-title">Settings</li>
-          
+
           <li>
             <a href="activities"><i class="fa fa-bell-o"></i> <span>Activities</span></a>
           </li>
@@ -59,6 +66,24 @@
             <a href="doappointment"><i class="fa fa-calendar-check-o"></i>
               <span>Appointment</span></a>
           </li>
+          <li class="submenu">
+            <a href="#"><i class="fa fa-user-md"></i> <span> Prescription </span> <span class="menu-arrow"></span></a>
+            <ul style="display: none;">
+              <a [routerLink]="['prescriptions/create']"><i class="fa fa-list-ul"></i> <span> Create Prescription </span></a>
+              <a [routerLink]="['prescriptions']"><i class="fa fa-user-md"></i> <span> Prescription List </span></a>
+            </ul>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-calendar-check-o"></i>
+              <span> Medicines</span></a>
+          </li>
+          
+          <li>
+            <a href="#"><i class="fa fa-calendar-check-o"></i>
+              <span> Departments</span></a>
+          </li>
+
+
 
           <li class="menu-title">Settings</li>
 
@@ -128,26 +153,30 @@
           <li>
             <a href="patientprofile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
           </li>
+
+          <li class="menu-title">Editor</li>
+
           <li>
             <a href="doappointment"><i class="fa fa-calendar-check-o"></i>
               <span>Appointment</span></a>
           </li>
-
-
           <li>
-            <a href="payroll"><i class="fa fa-book"></i> <span> Payroll </span></a>
+            <a href="#"><i class="fa fa-calendar-check-o"></i>
+              <span>Prescription</span></a>
           </li>
+          <li>
+            <a href="#"><i class="fa fa-calendar-check-o"></i>
+              <span>Reports</span></a>
+          </li>
+
+          <li class="menu-title">Settings</li>
+
+
           <li>
             <a href="activities"><i class="fa fa-bell-o"></i> <span>Activities</span></a>
           </li>
           <li>
-            <a href="changepassword"><i class="fa fa-cog"></i> <span>Settings</span></a>
-          </li>
-          <li>
-            <a href="salary"><i class="fa fa-money"></i> <span> Salary Settings</span></a>
-          </li>
-          <li>
-            <a href="leave"><i class="fa fa-cogs"></i> <span> Leave Type</span></a>
+            <a href="changepassword"><i class="fa fa-cog"></i> <span>Change Password</span></a>
           </li>
 
         </ng-container>
@@ -167,7 +196,7 @@
           <li>
             <a href="receptionist-profile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
           </li>
-          
+
 
           <li class="menu-title">Editor</li>
 
@@ -225,8 +254,7 @@
           </li>
 
           <li class="submenu">
-            <a href="#"><i class="fa fa-user-md"></i> <span> Medicines </span> <span
-                class="menu-arrow"></span></a>
+            <a href="#"><i class="fa fa-user-md"></i> <span> Medicines </span> <span class="menu-arrow"></span></a>
             <ul style="display: none;">
               <a [routerLink]="['medicines/add']"><i class="fa fa-list-ul"></i> <span> Add Medicine </span></a>
               <a [routerLink]="['medicines']"><i class="fa fa-user-md"></i> <span> List of Medicine </span></a>
@@ -247,7 +275,7 @@
 
           <li>
             <a href="activities"><i class="fa fa-bell-o"></i> <span>Activities</span></a>
-          </li>        
+          </li>
           <li>
             <a href="salary"><i class="fa fa-money"></i> <span> Salary</span></a>
           </li>
@@ -271,7 +299,7 @@
         <!-- Done -->
         <ng-container *ngIf="(authService.getRole() | async) === Role.ADMIN">
 
-          
+
           <li>
             <a href="adminprofile"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
           </li>
@@ -303,7 +331,7 @@
               <a [routerLink]="['/appointment-list']"><i class="fa fa-list-ul"></i> <span> Assign Appointment</span></a>
             </ul>
           </li>
-          
+
 
 
           <li class="menu-title">Settings</li>

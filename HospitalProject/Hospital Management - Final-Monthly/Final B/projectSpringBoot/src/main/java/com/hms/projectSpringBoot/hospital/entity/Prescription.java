@@ -38,10 +38,13 @@ public class Prescription {
     @JoinColumn(name = "patient_id")
     private User patient;
 
-    // new add
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "prescription_id")
     private List<Medicine> medicines;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "test_id")
+    private List<TestEntity> TestEntityList;
 
 }
