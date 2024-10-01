@@ -1,9 +1,12 @@
+import { UserModel } from "../../../user/user.model";
+import { Test } from "../test/test.model";
+
 export class Report {
-    id!: number;
+  id!: number;
 
     reportName!: string;
     reportResult!: string;
-    
+
     description!: string;
     sampleId!: string;
     interpretation!: string;
@@ -12,10 +15,6 @@ export class Report {
     createdAt!: Date;
     updatedAt!: Date;
 
-    user!: {
-        id: number;
-    };
-    test!: {
-        id: number;
-    };
+    user!: UserModel;
+    test!: Test;
 }

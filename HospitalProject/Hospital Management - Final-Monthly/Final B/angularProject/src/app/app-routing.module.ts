@@ -14,7 +14,6 @@ import {
   OrthopedicsdepartmentComponent
 } from './Home-Page/DoctorsDepartment/orthopedicsdepartment/orthopedicsdepartment.component';
 import { AuthGuard } from './security/guard/authguard.guard';
-import { RoleGuard } from './security/guard/role.guard';
 import { WelcomepageComponent } from './Login-Page/welcomepage/welcomepage.component';
 import { UserFormComponent } from "./user/user-form/user-form.component";
 import { UserListComponent } from "./user/user-list/user-list.component";
@@ -24,8 +23,6 @@ import { SalarysettingsComponent } from "./shared/Settings/salarysettings/salary
 import { LeavetypeComponent } from "./shared/Settings/leavetype/leavetype.component";
 import { ChngpassComponent } from "./shared/Settings/chngpass/chngpass.component";
 import { AdminpayrollComponent } from "./shared/payroll/adminpayroll.component";
-import { MyprofileComponent } from "./Component/admin/Profile/myprofile/myprofile.component";
-import { EditprofileComponent } from "./Component/admin/Profile/editprofile/editprofile.component";
 import { MyprofiledocComponent } from "./Component/doctor/DoctorProfile/myprofiledoc/myprofiledoc.component";
 import {
   EditprofiledocComponent
@@ -73,6 +70,7 @@ import { ReportUpdateComponent } from './Component/laboratorist/report/report-up
 import { TestCreateComponent } from './Component/laboratorist/test/test-create/test-create.component';
 import { TestListComponent } from './Component/laboratorist/test/test-list/test-list.component';
 import { TestUpdateComponent } from './Component/laboratorist/test/test-update/test-update.component';
+import { ReportViewComponent } from './Component/laboratorist/report/report-view/report-view.component';
 
 const routes: Routes = [
 
@@ -117,13 +115,6 @@ const routes: Routes = [
 
   // Profile Part
 
-  // Admin
-  {
-    path: 'adminprofile', component: MyprofileComponent, canActivate: [AuthGuard]
-  },
-  {
-    path: 'adminprofileedit', component: EditprofileComponent, canActivate: [AuthGuard]
-  },
 
   // Doctor
   {
@@ -260,17 +251,18 @@ const routes: Routes = [
   { path: 'reports', component: ReportListComponent },
   { path: 'reports/create', component: ReportCreateComponent },
   { path: 'reports/update/:id', component: ReportUpdateComponent },
+  { path: 'reports/:id', component: ReportViewComponent },
 
   { path: 'tests', component: TestListComponent },
   { path: 'tests/create', component: TestCreateComponent },
   { path: 'tests/update/:id', component: TestUpdateComponent },
 
-  
 
 
 
 
-  
+
+
 ];
 
 @NgModule({

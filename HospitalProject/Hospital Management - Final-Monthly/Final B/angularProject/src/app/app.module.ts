@@ -40,8 +40,6 @@ import {SalarysettingsComponent} from "./shared/Settings/salarysettings/salaryse
 import {LeavetypeComponent} from "./shared/Settings/leavetype/leavetype.component";
 import {ChngpassComponent} from "./shared/Settings/chngpass/chngpass.component";
 import {AdminpayrollComponent} from "./shared/payroll/adminpayroll.component";
-import {MyprofileComponent} from "./Component/admin/Profile/myprofile/myprofile.component";
-import {EditprofileComponent} from "./Component/admin/Profile/editprofile/editprofile.component";
 import {
   EditprofiledocComponent
 } from "./Component/doctor/DoctorProfile/editprofiledoc/editprofiledoc.component";
@@ -77,6 +75,9 @@ import { ReportListComponent } from './Component/laboratorist/report/report-list
 import { TestCreateComponent } from './Component/laboratorist/test/test-create/test-create.component';
 import { TestListComponent } from './Component/laboratorist/test/test-list/test-list.component';
 import { TestUpdateComponent } from './Component/laboratorist/test/test-update/test-update.component';
+import { AdminProfileComponent } from './Component/admin/Profile/admin-profile/admin-profile.component';
+import { AdminProfileUpdateComponent } from './Component/admin/Profile/admin-profile-update/admin-profile-update.component';
+import { ReportViewComponent } from './Component/laboratorist/report/report-view/report-view.component';
 
 @NgModule({
   declarations: [
@@ -93,8 +94,6 @@ import { TestUpdateComponent } from './Component/laboratorist/test/test-update/t
     LeavetypeComponent,
     ChngpassComponent,
     AdminpayrollComponent,
-    MyprofileComponent,
-    EditprofileComponent,
     DepartmenthomeComponent,
     DoctorshomeComponent,
     MyprofilenrsComponent,
@@ -134,6 +133,9 @@ import { TestUpdateComponent } from './Component/laboratorist/test/test-update/t
     TestCreateComponent,
     TestListComponent,
     TestUpdateComponent,
+    AdminProfileComponent,
+    AdminProfileUpdateComponent,
+    ReportViewComponent,
   ],
   imports: [
     BrowserModule,

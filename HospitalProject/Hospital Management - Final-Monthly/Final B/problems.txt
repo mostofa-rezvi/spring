@@ -1,4 +1,5 @@
-1. all > test > test list > (click) update > do not show any data 
+1. appointment create
+2. labratorist > test update
 
 
 

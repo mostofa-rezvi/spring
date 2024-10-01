@@ -6,6 +6,7 @@ import { Test } from '../../test/test.model';
 import { UserService } from '../../../../user/user.service';
 import { TestService } from '../../test/test.service';
 import { ApiResponse } from '../../../../util/api.response.model';
+import { isDate } from 'node:util/types';
 
 @Component({
   selector: 'app-report-create',
@@ -102,8 +103,33 @@ export class ReportCreateComponent implements OnInit {
       testDate: new Date(),
       createdAt: new Date(),
       updatedAt: new Date(),
-      user: { id: this.selectedUser.id },
-      test: { id: this.selectedTest.id }
+      user: {
+        id: this.selectedUser.id,
+        name: '',
+        email: '',
+        password: '',
+        cell: 0,
+        age: 0,
+        gender: '',
+        birthday: new Date(),
+        address: '',
+        image: '',
+        doctorDegree: '',
+        doctorSpeciality: '',
+        doctorLicense: '',
+        nurseDegree: '',
+        nurseSpeciality: '',
+        nurseLicense: '',
+        departmentId: 0,
+        role: Role.ADMIN
+      },
+      test: {
+        id: this.selectedTest.id,
+        testName: '',
+        description: '',
+        result: '',
+        instructions: ''
+      }
     };
 
     this.reportService.createReport(report).subscribe(

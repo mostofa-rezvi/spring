@@ -1,0 +1,45 @@
+<div class="report-view" id="printable-report">
+    <h1 class="report-title">Blood Test Report</h1>
+
+    <div class="report-details" *ngIf="report">
+        <p><strong>Report ID:</strong> {{ report.id }}</p>
+        <p><strong>Patient Name:</strong> {{ user.name }}</p>
+        <p><strong>Sample ID:</strong> {{ report.sampleId }}</p>
+        <p><strong>Test Date:</strong> {{ report.testDate | date:'longDate' }}</p>
+        <p><strong>Doctor:</strong> {{ user.role === Role.DOCTOR }}</p>
+    </div>
+
+    <hr>
+
+    <div class="result-section">
+        <h2>Test Results</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Report Name</th>
+                    <th>Description</th>
+                    <th>Result</th>
+                    <th>Interpretation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let result of report.reportResult">
+                    <td>{{ report.reportName }}</td>
+                    <td>{{ report.description }}</td>
+                    <td>{{ report.reportResult }}</td>
+                    <td>{{ report.interpretation }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Overall Interpretation:</strong> {{ report.interpretation }}</p>
+    </div>
+
+    <div class="signature-section">
+        <p><strong>Authorized Signature:</strong> ______________________</p>
+        <p><strong>Date:</strong> {{ report.testDate | date:'longDate' }}</p>
+    </div>
+
+    <button class="print-button" (click)="printReport()">Print Report</button>
+</div>
