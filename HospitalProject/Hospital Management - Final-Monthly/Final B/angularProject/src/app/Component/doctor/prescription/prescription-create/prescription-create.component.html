@@ -4,11 +4,20 @@
     <!-- Select Patient -->
     <div class="form-group">
         <label for="patient">Select Patient:</label>
-        <select class="form-control" [(ngModel)]="selectedPatientId" (change)="onUserSelect()">
-            <option *ngFor="let patient of patients" [value]="patient.id">
+        <select class="form-control" [(ngModel)]="selectedUser" (change)="onUserSelect()">
+            <option *ngFor="let patient of patients" [value]="patient">
                 {{ patient.name }}
             </option>
         </select>
+    </div>
+
+    <!-- Display Selected Patient Details -->
+    <div *ngIf="selectedUser && selectedUser.id">
+        <p>
+            <strong>Selected Patient:</strong> {{ selectedUser.name }} <br />
+            <strong>Age:</strong> {{ selectedUser.age }} <br />
+            <strong>Gender:</strong> {{ selectedUser.gender }}
+        </p>
     </div>
 
     <!-- Select Medicines -->
@@ -28,7 +37,7 @@
             <strong>Strength:</strong> {{ medicine.medicineStrength }} <br />
             <strong>Instructions:</strong> {{ medicine.instructions }}
         </p>
-        <button type="button" (click)="removeMedicine(i)">Remove Medicine</button>
+        <button type="button" class="btn btn-danger" (click)="removeMedicine(i)">Remove Medicine</button>
     </div>
 
     <!-- Select Tests -->
@@ -42,21 +51,19 @@
     </div>
 
     <!-- Display Selected Test Details -->
-    <div class="form-group">
-        <label for="testDetails">Test Details:</label>
-        <div *ngIf="selectedTest">
+    <div *ngIf="selectedTest">
+        <p>
             <strong>Test Name:</strong> {{ selectedTest.testName }}<br />
             <strong>Description:</strong> {{ selectedTest.description }}<br />
             <strong>Instructions:</strong> {{ selectedTest.instructions }}<br />
-        </div>
+        </p>
     </div>
 
     <!-- Display Selected Tests -->
-        <!-- Display Selected Tests -->
-        <div *ngFor="let test of selectedTests; let i = index" class="selected-test">
-            <p><strong>Test:</strong> {{ test.testName }}</p>
-            <button type="button" (click)="removeTest(i)">Remove Test</button>
-        </div>
+    <div *ngFor="let test of selectedTests; let i = index" class="selected-test">
+        <p><strong>Test:</strong> {{ test.testName }}</p>
+        <button type="button" class="btn btn-danger" (click)="removeTest(i)">Remove Test</button>
+    </div>
 
     <!-- Notes -->
     <div class="form-group">
@@ -65,5 +72,5 @@
     </div>
 
     <!-- Create Prescription Button -->
-    <button class="btn btn-primary" (click)="createPrescription()">Create Prescription</button>
+    <button class="btn btn-primary" (click)="createPrescription(prescription)">Create Prescription</button>
 </div>
