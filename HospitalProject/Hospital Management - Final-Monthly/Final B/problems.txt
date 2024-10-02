@@ -1,6 +1,8 @@
-1. appointment create
-2. labratorist > test update 
-3. Medical Report > List > View
+1. labratorist > test update
+2. labratorist  > Medical Report > List > View
+
+3. Receptionist > Assign to
+
 4. Doctor > Prescription create, list, view
 
 

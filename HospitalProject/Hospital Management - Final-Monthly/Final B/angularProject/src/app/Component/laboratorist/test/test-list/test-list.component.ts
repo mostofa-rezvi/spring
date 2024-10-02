@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TestService } from '../test.service';
 import { Test } from '../test.model';
+import { Router } from '@angular/router';
+import test from 'node:test';
 
 @Component({
   selector: 'app-test-list',
@@ -10,7 +12,9 @@ export class TestListComponent implements OnInit {
   tests: Test[] = [];
   errorMessage: string = '';
 
-  constructor(private testService: TestService) { }
+  constructor(private testService: TestService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.getAllTests(); 
@@ -32,11 +36,11 @@ export class TestListComponent implements OnInit {
     this.testService.getAllTests().subscribe(
       (response) => {
         if (response.data && Array.isArray(response.data)) {
-          this.tests = response.data; // Ensure that this is an array
+          this.tests = response.data; 
         } else if (response.data && response.data.tests) {
-          this.tests = response.data.tests; // Adjust based on the response structure
+          this.tests = response.data.tests;
         } else {
-          this.tests = []; // Handle any case where no data is returned
+          this.tests = [];
         }
       },
       (error) => {
@@ -46,7 +50,10 @@ export class TestListComponent implements OnInit {
     );
   }
 
-  
+    updateTest(id:number){
+      this.router.navigate(['/tests/update', id]);
+    }
+  // <!-- [routerLink]="['/tests/update', test.id]" -->
 
   deleteTest(id: number) {
     this.testService.deleteTest(id).subscribe(

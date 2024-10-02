@@ -1,4 +1,4 @@
-Pharmacist:
+*Pharmacist:
 pha@gmail.com
 
 
@@ -6,7 +6,7 @@ Lab:
 rblannk@gmail.com
 
 
-Admin:
+*Admin:
 admin@gmail.com
 
 
@@ -20,3 +20,26 @@ child@gmail.com
 
 Doctor:
 raju@gmail.com
+
+
+
+
+Result 1 - Red Blood Cell Count (RBC): 5.2 million cells/mcL
+Interpretation: Normal results; indicates healthy blood production.
+
+Result 2 - Glucose & Calcium: Glucose: 90 mg/dL & Calcium: 9.2 mg/dL
+Interpretation: Normal results; indicates balanced metabolic function.
+
+Result 3 - Total Cholesterol: 180 mg/dL
+nterpretation: Desirable cholesterol levels; good cardiovascular health.
+
+Result 4 - Urine Protein: 2.5 g/dL
+Interpretation: Normal liver function; no signs of liver damage.
+
+Result 5 - Blood Urea Nitrogen (BUN): 7.0 mg/dL
+Interpretation: Normal thyroid function; no signs of hypo- or hyperthyroidism.
+
+Result 6 - Serum Creatinine: 0.7 mg/dL
+Interpretation: Normal range; indicates good long-term blood sugar control.
+
+Result 7 - Electrolyte Differentials (Sodium/Potassium): Sodium (Na+): 140 mmol/L

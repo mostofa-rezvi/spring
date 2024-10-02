@@ -88,7 +88,14 @@ export class ReportCreateComponent implements OnInit {
 
   loadReportResults(): void {
     this.reportResults = [
-      'Result 1 - Red Blood Cell Count (RBC): 5.2 million cells/mcL', 'Result 2'];
+      'Result 1 - Red Blood Cell Count (RBC): 5.2 million cells/mcL', 
+      'Result 2 - Glucose: 90 mg/dL & Calcium: 9.2 mg/dL',
+      'Result 3 - Total Cholesterol: 180 mg/dL',
+      'Result 4 - Urine Protein: 2.5 g/dL',
+      'Result 5 - Blood Urea Nitrogen: 7.0 mg/dL',
+      'Result 6 - Serum Creatinine: 0.7 mg/dL',
+      'Result 7 - Electrolyte Differentials: 135/90 mmol/L (Na+: 140/13)'
+    ];
   }
 
 
@@ -135,6 +142,7 @@ export class ReportCreateComponent implements OnInit {
     this.reportService.createReport(report).subscribe(
       (newReport: Report) => {
         console.log('Report created successfully!', newReport);
+        alert('Report created successfully');
       },
       error => {
         console.error('Error creating report!', error);

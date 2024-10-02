@@ -1,6 +1,7 @@
 <div class="container">
   <h2>Update Test</h2>
   <form (ngSubmit)="updateTest()">
+    <input type="hidden" id="id" [(ngModel)]="test.id" name="id" required class="form-control" />
     <div class="form-group">
       <label for="testName">Test Name</label>
       <input type="text" id="testName" [(ngModel)]="test.testName" name="testName" required class="form-control" />

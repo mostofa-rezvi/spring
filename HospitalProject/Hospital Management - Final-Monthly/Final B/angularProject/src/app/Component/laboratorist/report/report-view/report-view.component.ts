@@ -12,7 +12,7 @@ import { Test } from '../../test/test.model';
   styleUrls: ['./report-view.component.css']
 })
 export class ReportViewComponent implements OnInit {
-  report: Report = new Report();
+  reports: Report = new Report();
   user: UserModel = new UserModel();
   test: Test = new Test();
 
@@ -21,78 +21,37 @@ export class ReportViewComponent implements OnInit {
     private reportService: ReportService
   ) { }
 
-  // ngOnInit(): void {
-  //   this.loadReport();
-  // }
-
-
-  // loadReport(): void {
-  //   const reportId = this.route.snapshot.paramMap.get('id');
-  //   if (reportId) {
-  //     this.reportService.getReports().subscribe(
-  //       (response: ApiResponse) => {
-  //         if (response.data && response.data['report']) {
-  //           this.report = response.data['report'];
-  //           this.user = response.data['user'];
-  //           this.test = response.data['test'];
-  //         } else {
-  //           console.error('Report data not found in the response');
-  //         }
-  //       },
-  //       (error) => {
-  //         console.error('Error fetching report:', error);
-  //       }
-  //     );
-  //   } else {
-  //     console.error('Report ID not found in the route!');
-  //   }
-  // }
-
-  // ngOnInit(): void {
-  //   const reportId = this.route.snapshot.paramMap.get('id');
-  //   if (reportId) {
-  //     this.reportService.getReportById(+reportId).subscribe(
-  //       (data: Report) => {
-  //         console.log('Report data:', data);
-  //         this.report = { ...data };
-  //       },
-  //       error => {
-  //         console.error('Error fetching report!', error);
-  //       }
-  //     );
-  //   }
-  // }
-
   ngOnInit(): void {
-    // const reportId = this.route.snapshot.paramMap.get('id');
-    this.reportService.getReports().subscribe(
-      (response: ApiResponse) => {
+    const reportId = this.route.snapshot.params['id'];
+
+    this.reportService.getById(reportId).subscribe({
+      next: (response: ApiResponse) => {
         if (response.successful) {
-          this.report = response.data['reports'];
+          this.reports = response.data.report;
+          console.log('Report fetched:', this.reports);
         } else {
           console.error(response.data);
+
         }
       },
-      error => {
+      error: (error) => {
         console.error('Error fetching reports!', error);
+
       }
-    );    
+    });
   }
-
-
-  // printReport() {
-  //   window.print();
-  // }
 
   printReport() {
     const printContents = document.getElementById('printable-report')!.innerHTML;
     const originalContents = document.body.innerHTML;
 
     document.body.innerHTML = printContents;
-    window.print();
 
-    document.body.innerHTML = originalContents;
-    window.location.reload();
+    setTimeout(() => {
+      window.print();
+      document.body.innerHTML = originalContents;
+      window.location.reload();
+    }, 500);
   }
 
   protected readonly Role = Role;

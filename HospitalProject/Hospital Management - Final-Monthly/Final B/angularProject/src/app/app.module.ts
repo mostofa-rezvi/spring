@@ -142,11 +142,11 @@ import { PrescriptionViewComponent } from './Component/doctor/prescription/presc
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch(), withInterceptorsFromDi()),
+    provideHttpClient(withFetch()),
     AuthService,
     StorageUtil,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

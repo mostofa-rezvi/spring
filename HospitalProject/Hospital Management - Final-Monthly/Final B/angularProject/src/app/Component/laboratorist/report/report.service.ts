@@ -22,6 +22,14 @@ export class ReportService {
     return this.http.get<ApiResponse>(this.baseUrl);
   }
 
+
+  getById(id: string): Observable<any> {
+
+    return this.http.get(this.baseUrl + "/" + id);
+
+  }
+
+
   getReportById(id: number): Observable<Report> {
     return this.http.get<Report>(`${this.baseUrl}/${id}`);
   }

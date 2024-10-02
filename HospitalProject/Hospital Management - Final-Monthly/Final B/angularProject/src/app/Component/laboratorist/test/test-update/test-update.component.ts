@@ -20,12 +20,14 @@ export class TestUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    this.testId = +this.route.snapshot.paramMap.get('id')!;
-
+    this.test= new Test(); 
+    this.testId = this.route.snapshot.params['id'];
+    console.log(this.testId );
     this.testService.getTestById(this.testId).subscribe({
-      next: (response) => {
-        this.test = response.data['/tests'];
+      next: response => {
+        this.test = response;
+       // this.router.navigate(['/tests']);
+        console.log(this.test);
       },
       error: () => {
         alert('Failed to load medicine details');
@@ -46,5 +48,6 @@ export class TestUpdateComponent implements OnInit {
       },
     });
   }
+
 
 }

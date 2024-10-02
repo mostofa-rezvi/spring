@@ -10,7 +10,6 @@
       <th>Strength</th>
       <th>Price</th>
       <th>Stock</th>
-      <th>Manufacturer</th>
       <th>Actions</th>
     </tr>
     </thead>
@@ -23,7 +22,6 @@
       <td>{{ medicine.medicineStrength }}</td>
       <td>{{ medicine.price }}</td>
       <td>{{ medicine.stock }}</td>
-      <td>{{ medicine.manufacturer.name }}</td>
       <td>
         <button (click)="updateStock(medicine.id)" class="btn btn-warning">Add Stock</button>
         <button (click)="navigateToUpdate(medicine.id)" class="btn btn-info">Update</button>

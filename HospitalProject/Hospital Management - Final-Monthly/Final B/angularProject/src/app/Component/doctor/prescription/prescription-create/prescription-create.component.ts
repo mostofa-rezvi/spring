@@ -20,6 +20,7 @@ export class PrescriptionCreateComponent implements OnInit {
   prescription: Prescription = new Prescription();
   medicines: Medicine[] = [];
   tests: Test[] = [];
+
   selectedMedicines: Medicine[] = [];
   selectedTests: Test[] = [];
   selectedPatientId!: number;
@@ -29,24 +30,26 @@ export class PrescriptionCreateComponent implements OnInit {
     private userService: UserService,
     private medicineService: MedicineService,
     private testService: TestService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.userService.findUsersByRole('PATIENT').subscribe((response: ApiResponse) => {
-      if (response.successful && Array.isArray(response.data)) {
-        this.patients = response.data as UserModel[];
-      } else {
-        console.error('Failed to fetch patients:', response.message);
-      }
-    });
+    this.userService.findUsersByRole('PATIENT').subscribe(
+      (response: ApiResponse) => {
+        if (response.successful && Array.isArray(response.data)) {
+          this.patients = response.data as UserModel[];
+        } else {
+          console.error('Failed to fetch patients:', response.message);
+        }
+      });
 
-    this.medicineService.getAllMedicines().subscribe((response: ApiResponse) => {
-      if (response.successful && Array.isArray(response.data)) {
-        this.medicines = response.data as Medicine[];
-      } else {
-        console.error('Failed to fetch medicines:', response.message);
-      }
-    });
+    this.medicineService.getAllMedicines().subscribe(
+      (response: ApiResponse) => {
+        if (response.successful && Array.isArray(response.data)) {
+          this.medicines = response.data as Medicine[];
+        } else {
+          console.error('Failed to fetch medicines:', response.message);
+        }
+      });
 
     this.testService.getAllTests().subscribe((data: Test[]) => {
       this.tests = data;

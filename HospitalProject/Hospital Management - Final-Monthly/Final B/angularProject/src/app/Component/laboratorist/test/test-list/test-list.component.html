@@ -21,7 +21,9 @@
                 <td>{{ test.instructions }}</td>
                 <td>
                     <button class="btn btn-danger" (click)="deleteTest(test.id)">Delete</button>
-                    <a [routerLink]="['/tests/update', test.id]" class="btn btn-warning">Edit</a>
+                    <a (click)="updateTest(test.id)" class="btn btn-warning">Edit</a>
+                    <!-- (click)="updateLocation(location.id)" -->
+                    <!-- [routerLink]="['/tests/update', test.id]" -->
                 </td>
             </tr>
         </tbody>

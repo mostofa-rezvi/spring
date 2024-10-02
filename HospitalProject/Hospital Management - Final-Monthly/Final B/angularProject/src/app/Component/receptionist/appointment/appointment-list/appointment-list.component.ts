@@ -10,14 +10,15 @@ import {app} from "../../../../../../server";
 @Component({
   selector: 'app-appointment-list',
   templateUrl: './appointment-list.component.html',
-  styleUrls: ['./appointment-list.component.css'] // Fixed typo from styleUrl to styleUrls
+  styleUrls: ['./appointment-list.component.css'] 
 })
+
 export class AppointmentListComponent implements OnInit {
   appointments: AppointmentModel[] = [];
   filteredAppointments: AppointmentModel[] = [];
   doctors: UserModel[] = [];
   isLoading = true;
-  searchTerm: string = ''; // Added search term for filtering
+  searchTerm: string = ''; 
 
   constructor(
     private appointmentService: AppointmentService,
@@ -35,7 +36,7 @@ export class AppointmentListComponent implements OnInit {
       next: (response: ApiResponse) => {
         if (response.successful) {
           this.appointments = response.data['appointments'];
-          this.filteredAppointments = this.appointments; // Initialize filtered appointments
+          this.filteredAppointments = this.appointments; 
         } else {
           alert(response.message || 'Failed to load appointments');
         }
@@ -81,7 +82,7 @@ export class AppointmentListComponent implements OnInit {
       next: (response: ApiResponse) => {
         if (response.successful) {
           alert('Doctor assigned successfully');
-          this.fetchAppointments(); // Refresh appointments after assignment
+          this.fetchAppointments();
         } else {
           alert(response.message || 'Failed to assign doctor');
         }
@@ -93,7 +94,6 @@ export class AppointmentListComponent implements OnInit {
     });
   }
 
-  // New search functionality
   searchAppointments(): void {
     if (this.searchTerm) {
       this.filteredAppointments = this.appointments.filter(appointment =>
@@ -101,7 +101,7 @@ export class AppointmentListComponent implements OnInit {
         (appointment.doctor?.name?.toLowerCase().includes(this.searchTerm.toLowerCase()) || false)
       );
     } else {
-      this.filteredAppointments = this.appointments; // Reset to all appointments if search term is empty
+      this.filteredAppointments = this.appointments; 
     }
   }
 }
