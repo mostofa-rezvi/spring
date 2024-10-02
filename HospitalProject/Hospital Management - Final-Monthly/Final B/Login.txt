@@ -1,27 +1,27 @@
 *Pharmacist:
 pha@gmail.com
 
-
-Lab:
+*Lab:
 rblannk@gmail.com
-
 
 *Admin:
 admin@gmail.com
 
-
-Receptionist:
+*Receptionist:
 recep@gmail.com
-
 
 Patient:
 child@gmail.com
-
 
 Doctor:
 raju@gmail.com
 
 
+Hospital Appointment
+Pharmacy
+laboratory
+
+c
 
 
 Result 1 - Red Blood Cell Count (RBC): 5.2 million cells/mcL

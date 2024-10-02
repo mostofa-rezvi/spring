@@ -74,15 +74,13 @@
             </ul>
           </li>
           <li>
-            <a href="#"><i class="fa fa-calendar-check-o"></i>
-              <span> Medicines</span></a>
+            <a href="medicine-bill-list"><i class="fa fa-calendar-check-o"></i>
+              <span> Medicines List</span></a>
           </li>
           
           <li>
-            <a href="#"><i class="fa fa-calendar-check-o"></i>
-              <span> Departments</span></a>
+            <a [routerLink]="['/departmentR']"><i class="fa fa-hospital-o"></i> <span> Departments </span></a>
           </li>
-
 
 
           <li class="menu-title">Settings</li>
@@ -209,11 +207,11 @@
           </li>
 
           <li>
-            <a [routerLink]="['/departmenthome']"><i class="fa fa-hospital-o"></i> <span> Departments </span></a>
+            <a [routerLink]="['/departmentR']"><i class="fa fa-hospital-o"></i> <span> Departments </span></a>
           </li>
 
           <li>
-            <a [routerLink]="['/doctorshome']"><i class="fa fa-user-md"></i> <span> Doctors </span></a>
+            <a><i class="fa fa-user-md"></i> <span> Doctors </span></a>
           </li>
 
           <li class="menu-title">Settings</li>

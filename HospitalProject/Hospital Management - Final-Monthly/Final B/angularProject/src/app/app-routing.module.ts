@@ -70,6 +70,7 @@ import { ReportViewComponent } from './Component/laboratorist/report/report-view
 import { PrescriptionCreateComponent } from './Component/doctor/prescription/prescription-create/prescription-create.component';
 import { PrescriptionListComponent } from './Component/doctor/prescription/prescription-list/prescription-list.component';
 import { PrescriptionViewComponent } from './Component/doctor/prescription/prescription-view/prescription-view.component';
+import { DepartmentComponent } from './Component/receptionist/department/department.component';
 
 const routes: Routes = [
 
@@ -116,7 +117,7 @@ const routes: Routes = [
 
 
   // Doctor
- 
+
   // Nurse
   {
     path: 'nurseprofile', component: MyprofilenrsComponent, canActivate: [AuthGuard]
@@ -173,7 +174,7 @@ const routes: Routes = [
 
   // For All
   { path: 'doappointment', component: AppointmentCreateComponent },
-
+  { path: 'departmentR', component: DepartmentComponent },
 
 
 
@@ -249,11 +250,11 @@ const routes: Routes = [
   { path: 'tests', component: TestListComponent },
   { path: 'tests/create', component: TestCreateComponent },
   { path: 'tests/update/:id', component: TestUpdateComponent },
-  
+
   { path: 'prescriptions/create', component: PrescriptionCreateComponent },
   { path: 'prescriptions', component: PrescriptionListComponent },
   { path: 'prescriptions/:id', component: PrescriptionViewComponent },
-  
+
 
 
 

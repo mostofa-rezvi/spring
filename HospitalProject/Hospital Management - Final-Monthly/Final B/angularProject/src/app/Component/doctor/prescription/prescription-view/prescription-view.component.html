@@ -10,7 +10,7 @@
       </ul>
       <h4>Tests:</h4>
       <ul>
-        <li *ngFor="let test of prescription.test">
+        <li *ngFor="let test of prescription.test ? [prescription.test] : []">
           {{ test.testName }}
         </li>
       </ul>

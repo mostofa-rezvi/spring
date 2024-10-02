@@ -15,12 +15,13 @@ import { isDate } from 'node:util/types';
 })
 export class ReportCreateComponent implements OnInit {
   users: UserModel[] = [];
-  tests: Test[] = [];
   selectedUser!: UserModel;
   userName!: string;
   userNames: string[] = [];
-  
+
+  tests: Test[] = [];  
   selectedTest!: Test;
+  
   reportName!: string;
   reportResult: string = '';
   reportResults: string[] = [];

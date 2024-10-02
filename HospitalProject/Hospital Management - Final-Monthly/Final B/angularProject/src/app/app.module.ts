@@ -77,6 +77,7 @@ import { ReportViewComponent } from './Component/laboratorist/report/report-view
 import { PrescriptionCreateComponent } from './Component/doctor/prescription/prescription-create/prescription-create.component';
 import { PrescriptionListComponent } from './Component/doctor/prescription/prescription-list/prescription-list.component';
 import { PrescriptionViewComponent } from './Component/doctor/prescription/prescription-view/prescription-view.component';
+import { DepartmentComponent } from './Component/receptionist/department/department.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +137,7 @@ import { PrescriptionViewComponent } from './Component/doctor/prescription/presc
     PrescriptionCreateComponent,
     PrescriptionListComponent,
     PrescriptionViewComponent,
+    DepartmentComponent,
   ],
   imports: [
     BrowserModule,

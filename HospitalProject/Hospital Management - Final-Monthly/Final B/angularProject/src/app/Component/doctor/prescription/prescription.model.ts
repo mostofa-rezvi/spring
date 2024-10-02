@@ -9,11 +9,11 @@ export class Prescription {
     createdAt!: Date;
     updatedAt!: Date;
 
-    test: Test [] = [];
+    test!: Test;
 
     medicine: Medicine [] = [];
 
-    doctor: UserModel [] = [];
+    user!: UserModel;
 
 }
 

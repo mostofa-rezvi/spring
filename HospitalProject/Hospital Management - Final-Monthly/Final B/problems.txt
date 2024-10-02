@@ -1,5 +1,4 @@
 1. labratorist > test update
-2. labratorist  > Medical Report > List > View
 
 3. Receptionist > Assign to
 
