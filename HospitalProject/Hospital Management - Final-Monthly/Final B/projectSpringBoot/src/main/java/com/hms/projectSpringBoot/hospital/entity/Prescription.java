@@ -30,9 +30,9 @@ public class Prescription {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "doctor_id")
-    private User doctor;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "doctor_id")
+//    private User doctor;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id")

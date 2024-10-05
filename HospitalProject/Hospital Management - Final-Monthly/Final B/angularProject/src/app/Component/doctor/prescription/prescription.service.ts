@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Prescription } from './prescription.model';
+import { ApiResponse } from '../../../util/api.response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,12 @@ export class PrescriptionService {
 
   constructor(private http: HttpClient) {}
 
-  getAllPrescriptions(): Observable<Prescription[]> {
-    return this.http.get<Prescription[]>(this.apiUrl);
+  getById(id: string): Observable<any> {
+    return this.http.get(this.apiUrl + "/" + id);
+  }
+
+  getAllPrescriptions(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.apiUrl);
   }
 
   getPrescriptionById(id: number): Observable<Prescription> {

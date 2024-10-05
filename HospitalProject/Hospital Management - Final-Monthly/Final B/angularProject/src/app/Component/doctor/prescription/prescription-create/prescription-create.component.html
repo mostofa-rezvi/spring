@@ -3,22 +3,36 @@
 
     <!-- Select Patient -->
     <div class="form-group">
-        <label for="patient">Select Patient:</label>
-        <select class="form-control" [(ngModel)]="selectedUser" (change)="onUserSelect()">
-            <option *ngFor="let patient of patients" [value]="patient">
-                {{ patient.name }}
+        <label for="userSelect">Select Patient</label>
+        <select id="userSelect" class="form-control" [(ngModel)]="selectedUser" (change)="onUserSelect()">
+            <option *ngFor="let user of users" [ngValue]="user">
+                {{ user.name }}
             </option>
         </select>
     </div>
 
-    <!-- Display Selected Patient Details -->
-    <div *ngIf="selectedUser && selectedUser.id">
-        <p>
-            <strong>Selected Patient:</strong> {{ selectedUser.name }} <br />
-            <strong>Age:</strong> {{ selectedUser.age }} <br />
-            <strong>Gender:</strong> {{ selectedUser.gender }}
-        </p>
+    <!-- Display Selected Patient Details in a Card -->
+    <div *ngIf="selectedUser" class="card p-2 mb-3">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Patient Details</h5>
+            <div class="d-flex justify-content-start align-items-center flex-wrap">
+                <div class="mr-5">
+                    <strong>Name:</strong> {{ selectedUser.name }}
+                </div>
+                <div class="mr-3">
+                    <strong>Mobile:</strong> {{ selectedUser.cell }}
+                </div>
+                <div class="mr-3">
+                    <strong>Email:</strong> {{ selectedUser.email }}
+                </div>
+                <div>
+                    <strong>Address:</strong> {{ selectedUser.address }}
+                </div>
+            </div>
+        </div>
     </div>
+
+
 
     <!-- Select Medicines -->
     <div class="form-group">
@@ -30,15 +44,25 @@
         </select>
     </div>
 
-    <!-- Display Selected Medicines -->
-    <div *ngFor="let medicine of selectedMedicines; let i = index" class="selected-medicine">
-        <p>
-            <strong>Medicine:</strong> {{ medicine.medicineName }} <br />
-            <strong>Strength:</strong> {{ medicine.medicineStrength }} <br />
-            <strong>Instructions:</strong> {{ medicine.instructions }}
-        </p>
-        <button type="button" class="btn btn-danger" (click)="removeMedicine(i)">Remove Medicine</button>
+    <!-- Display Selected Medicines in Card Form -->
+    <div class="selected-medicine">
+        <div class="row">
+            <div class="col-md-4" *ngFor="let medicine of selectedMedicines; let i = index">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ medicine.medicineName }}</h5>
+                        <p class="card-text">
+                            <strong>Strength:</strong> {{ medicine.medicineStrength }} <br />
+                            <strong>Instructions:</strong> {{ medicine.instructions }}
+                        </p>
+                        <button type="button" class="btn btn-danger" (click)="removeMedicine(i)">Remove
+                            Medicine</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 
     <!-- Select Tests -->
     <div class="form-group">
@@ -50,20 +74,25 @@
         </select>
     </div>
 
-    <!-- Display Selected Test Details -->
-    <div *ngIf="selectedTest">
-        <p>
-            <strong>Test Name:</strong> {{ selectedTest.testName }}<br />
-            <strong>Description:</strong> {{ selectedTest.description }}<br />
-            <strong>Instructions:</strong> {{ selectedTest.instructions }}<br />
-        </p>
+
+    <!-- Display Selected Tests in Card Form -->
+    <div class="selected-tests">
+        <div class="row">
+            <div class="col-md-4" *ngFor="let test of selectedTests; let i = index">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ test.testName }}</h5>
+                        <p class="card-text">
+                            <strong>Description:</strong> {{ test.description }} <br />
+                            <strong>Instructions:</strong> {{ test.instructions }}
+                        </p>
+                        <button type="button" class="btn btn-danger" (click)="removeTest(i)">Remove Test</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Display Selected Tests -->
-    <div *ngFor="let test of selectedTests; let i = index" class="selected-test">
-        <p><strong>Test:</strong> {{ test.testName }}</p>
-        <button type="button" class="btn btn-danger" (click)="removeTest(i)">Remove Test</button>
-    </div>
 
     <!-- Notes -->
     <div class="form-group">

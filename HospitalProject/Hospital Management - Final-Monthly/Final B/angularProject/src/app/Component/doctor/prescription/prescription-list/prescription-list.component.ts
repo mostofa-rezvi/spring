@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PrescriptionService } from '../prescription.service';
 import { Prescription } from '../prescription.model';
 import { Router } from '@angular/router';
+import { ApiResponse } from '../../../../util/api.response.model';
 
 @Component({
   selector: 'app-prescription-list',
@@ -18,18 +19,23 @@ export class PrescriptionListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.fetchPrescriptions();
+    this.loadPrescriptions();
   }
 
-  fetchPrescriptions(): void {
+  loadPrescriptions(): void {
     this.prescriptionService.getAllPrescriptions().subscribe({
-      next: (prescriptions: Prescription[]) => {
-        this.prescriptions = prescriptions;
+      next: (response: ApiResponse) => {
+        if (response.successful) {
+          this.prescriptions = response.data['prescriptions'];
+          console.log('Loaded prescriptions:', this.prescriptions);
+        } else {
+          alert(response.data);
+        }
       },
       error: (error: any) => {
         console.error('Error fetching prescriptions:', error);
       }
-    });
+    })
   }
 
   viewPrescription(id: number): void {

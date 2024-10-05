@@ -71,7 +71,7 @@ public class PrescriptionService {
             }
             prescription.setPrescriptionDate(updatedPrescription.getPrescriptionDate());
             prescription.setNotes(updatedPrescription.getNotes());
-            prescription.setDoctor(updatedPrescription.getDoctor());
+//            prescription.setDoctor(updatedPrescription.getDoctor());
             prescription.setPatient(updatedPrescription.getPatient());
             prescription.setMedicines(updatedPrescription.getMedicines());
             prescription.setUpdatedAt(LocalDateTime.now());
@@ -104,10 +104,10 @@ public class PrescriptionService {
     public ApiResponse getPrescriptionsByDoctor(Long doctorId) {
         ApiResponse apiResponse = new ApiResponse(false);
         try {
-            List<Prescription> prescriptions = prescriptionRepository.findByDoctor_Id(doctorId);
+//            List<Prescription> prescriptions = prescriptionRepository.findByDoctor_Id(doctorId);
             apiResponse.setSuccessful(true);
             apiResponse.setMessage("Prescriptions fetched successfully.");
-            apiResponse.setData("prescriptions", prescriptions);
+//            apiResponse.setData("prescriptions", prescriptions);
         } catch (Exception e) {
             apiResponse.setMessage(e.getMessage());
         }

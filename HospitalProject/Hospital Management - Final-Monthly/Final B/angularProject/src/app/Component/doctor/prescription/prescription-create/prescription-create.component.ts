@@ -8,6 +8,7 @@ import { UserService } from '../../../../user/user.service';
 import { MedicineService } from '../../../pharmacist/medicine/medicine.service';
 import { TestService } from '../../../laboratorist/test/test.service';
 import { ApiResponse } from '../../../../util/api.response.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prescription-create',
@@ -16,147 +17,53 @@ import { ApiResponse } from '../../../../util/api.response.model';
 })
 export class PrescriptionCreateComponent implements OnInit {
 
-  prescription: Prescription = new Prescription();
+  users: UserModel[] = [];
+  selectedUser!: UserModel;
+  userName!: string;
+  userNames: string[] = [];
+
   medicines: Medicine[] = [];
   selectedMedicine!: Medicine;
   selectedMedicines: Medicine[] = [];
 
-  selectedTests: Test[] = [];
-  selectedTest!: Test;
   tests: Test[] = [];
+  selectedTest!: Test;
+  selectedTests: Test[] = [];
 
   patients: UserModel[] = [];
-  selectedUser!: UserModel;
-
-  userName!: string;
-  userNames: string[] = [];
+  
+  prescription: Prescription = new Prescription();
 
 
   constructor(
     private prescriptionService: PrescriptionService,
     private userService: UserService,
     private medicineService: MedicineService,
-    private testService: TestService
+    private testService: TestService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.loadPatients();
+    this.loadUsers();
     this.loadMedicines();
     this.loadTests();
   }
 
-  // loadPatients() {
-  //   this.userService.findUsersByRole('PATIENT').subscribe({
-  //     next: (response: ApiResponse) => {
-  //       if (response.successful && Array.isArray(response.data)) {
-  //         this.patients = response.data as UserModel[];
-  //       } else {
-  //         console.error('Failed to fetch patients:', response.message);
-  //       }
-  //     }
-  //   })
-  // }
-
-  // loadMedicines() {
-  //   this.medicineService.getAllMedicines().subscribe({
-  //     next: (response: ApiResponse) => {
-  //       if (response.successful && Array.isArray(response.data)) {
-  //         this.medicines = response.data as Medicine[];
-  //       } else {
-  //         console.error('Failed to fetch medicines:', response.message);
-  //       }
-  //     }
-  //   })
-  // }
-
-  // loadTests() {
-  //   this.testService.getAllTests().subscribe({
-  //     next: (response: ApiResponse) => {
-  //       if (response.successful && Array.isArray(response.data)) {
-  //         this.tests = response.data as Test[];
-  //       } else {
-  //         console.error('Failed to fetch tests:', response.message);
-  //       }
-  //     }
-  //   })
-  // }
-
-  // loadPatients() {
-  //   this.userService.findUsersByRole('PATIENT').subscribe({
-  //     next: (response: ApiResponse) => {
-  //       console.log('Patients API response:', response);  // Log the entire response for debugging
-  //       if (response.successful && Array.isArray(response.data)) {
-  //         this.patients = response.data as UserModel[];
-  //         console.log('Patients fetched successfully:', this.patients);
-  //       } else {
-  //         console.error('Failed to fetch patients:', response.message || 'Unexpected API response structure');
-  //         if (typeof response.data === 'object') {
-  //           console.log('Data is not an array, received object:', response.data);  // Debugging line
-  //         }
-  //       }
-  //     },
-  //     error: (err) => {
-  //       console.error('Error fetching patients:', err);
-  //     }
-  //   });
-  // }
-
-  // loadMedicines() {
-  //   this.medicineService.getAllMedicines().subscribe({
-  //     next: (response: ApiResponse) => {
-  //       console.log('Medicines API response:', response);  // Log the entire response for debugging
-  //       if (response.successful && Array.isArray(response.data)) {
-  //         this.medicines = response.data as Medicine[];
-  //         console.log('Medicines fetched successfully:', this.medicines);
-  //       } else {
-  //         console.error('Failed to fetch medicines:', response.message || 'Unexpected API response structure');
-  //         if (typeof response.data === 'object') {
-  //           console.log('Data is not an array, received object:', response.data);  // Debugging line
-  //         }
-  //       }
-  //     },
-  //     error: (err) => {
-  //       console.error('Error fetching medicines:', err);
-  //     }
-  //   });
-  // }
-
-  // loadTests() {
-  //   this.testService.getAllTests().subscribe({
-  //     next: (response: ApiResponse) => {
-  //       console.log('Tests API response:', response);  // Log the entire response for debugging
-  //       if (response.successful && Array.isArray(response.data)) {
-  //         this.tests = response.data as Test[];
-  //         console.log('Tests fetched successfully:', this.tests);
-  //       } else {
-  //         console.error('Failed to fetch tests:', response.message || 'Unexpected API response structure');
-  //         if (typeof response.data === 'object') {
-  //           console.log('Data is not an array, received object:', response.data);  // Debugging line
-  //         }
-  //       }
-  //     },
-  //     error: (err) => {
-  //       console.error('Error fetching tests:', err);
-  //     }
-  //   });
-  // }
-
-  loadPatients() {
-    this.userService.findUsersByRole('PATIENT').subscribe({
-      next: (response: ApiResponse) => {
-        if (response.successful && response.data) {
-          if (Array.isArray(response.data['PATIENT'])) {
-            this.patients = response.data['PATIENT'];
+  loadUsers(): void {
+    this.userService.findAllUsers().subscribe(
+      (response: ApiResponse) => {
+        if (response.successful) {
+          if (Array.isArray(response.data['users'])) {
+            this.users = response.data['users'];
           }
-          console.log('Patients fetched successfully:', this.patients);
         } else {
-          console.error('Failed to fetch patients:', response.message || 'Unexpected API response structure');
+          console.error('Error fetching users:', response.data);
         }
       },
-      error: (err) => {
-        console.error('Error fetching patients:', err);
+      error => {
+        console.error('Error fetching users!', error);
       }
-    });
+    );
   }
 
   loadMedicines() {
@@ -196,10 +103,6 @@ export class PrescriptionCreateComponent implements OnInit {
   }
 
 
-  // onUserSelect(): void {
-  //   this.selectedUser = this.patients.find(patient => patient.id === this.selectedPatientId) || new UserModel();
-  // }
-
   onUserSelect(): void {
     // console.log('Selected user:', this.selectedUser);
     if (this.selectedUser) {
@@ -233,6 +136,8 @@ export class PrescriptionCreateComponent implements OnInit {
         console.log('Prescription created successfully!', newPrescription);
         alert('Prescription created successfully');
         this.resetForm();
+
+        this.router.navigate(['/prescriptions', newPrescription.id]);
       },
       error: (error) => {
         console.error('Error creating prescription!', error);
@@ -247,7 +152,7 @@ export class PrescriptionCreateComponent implements OnInit {
     this.selectedTests = [];
     this.selectedUser = new UserModel();
     this.loadTests();
-    this.loadPatients();
+    this.loadUsers();
     this.loadMedicines();
   }
 }
