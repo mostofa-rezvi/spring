@@ -13,12 +13,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/room")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class RoomController {
 
     @Autowired
     private RoomService roomService;
 
-    @PostMapping("/saveroom")
+    @PostMapping("/save")
     public ResponseEntity<String> saveRoom(
             @RequestPart(value = "room") RoomEntity roomEntity,
             @RequestParam(value = "image", required = true) MultipartFile file
@@ -39,7 +40,7 @@ public class RoomController {
         try {
             RoomEntity roomEntity = roomService.findById(id);
             return ResponseEntity.ok(roomEntity);
-        } catch (RuntimeException e) {
+        } catch (RuntimeException exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }

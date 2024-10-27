@@ -1,5 +1,6 @@
 package com.rezvi.springbootproject.restController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rezvi.springbootproject.entity.HotelEntity;
 import com.rezvi.springbootproject.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/hotel")
@@ -20,15 +23,25 @@ public class HotelController {
 
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveHotel(
-            @RequestPart(value = "hotel") HotelEntity hotelEntity,
-            @RequestParam(value = "image", required = true) MultipartFile imageFile
+    public ResponseEntity<Map<String, String>> saveHotel(
+            @RequestPart(value = "hotel") String hotelJson,
+            @RequestParam(value = "image") MultipartFile imageFile
     ) throws IOException {
 
-        hotelService.saveHotel(hotelEntity, imageFile);
+        ObjectMapper objectMapper = new ObjectMapper();
+        HotelEntity hotel = objectMapper.readValue(hotelJson, HotelEntity.class);
 
-        return new ResponseEntity<>("Hotel added successfully with image.", HttpStatus.OK);
+        try {
+            hotelService.saveHotel(hotel, imageFile);
 
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Hotel added successfully");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception exception) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to add hotel: " + exception.getMessage());
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
@@ -50,7 +63,7 @@ public class HotelController {
         try {
             HotelEntity hotelEntity = hotelService.findHotelById(id);
             return ResponseEntity.ok(hotelEntity);
-        } catch (RuntimeException e) {
+        } catch (RuntimeException exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }

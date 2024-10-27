@@ -27,8 +27,8 @@ public class JwtService {
                 .parser()
                 .verifyWith(getSigninKey())
                 .build()
-                .parseSignedClaims(token)
-                .getPayload();
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     private SecretKey getSigninKey() {
@@ -38,15 +38,14 @@ public class JwtService {
 
     public String generateToken(UserEntity userEntity) {
 
-        String token = Jwts
+        return Jwts
                 .builder()
                 .subject(userEntity.getEmail())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))
+                .claim("role", userEntity.getRole())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))
                 .signWith(getSigninKey())
                 .compact();
-
-        return token;
     }
 
     public String extractUsername(String token) {
@@ -75,5 +74,9 @@ public class JwtService {
                 .orElse(false);
 
         return (username.equals(user.getUsername())) && !isTokenExpired(token) && validToken;
+    }
+
+    public String extractUserRole(String token) {
+        return extractClaim(token, claims -> claims.get("role", String.class));
     }
 }

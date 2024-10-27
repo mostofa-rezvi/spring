@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200/")
 public class AuthenticationController {
 
     private final AuthService authService;
@@ -31,5 +32,19 @@ public class AuthenticationController {
     public ResponseEntity<String> activateUser(@PathVariable("id") long id) {
         String response = authService.activateUser(id);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("register/admin")
+    public ResponseEntity<AuthenticationResponse> registerAdmin(
+            @RequestBody UserEntity userEntity
+    ) {
+        return ResponseEntity.ok(authService.register(userEntity));
+    }
+
+    @PostMapping("register/hotel")
+    public ResponseEntity<AuthenticationResponse> registerHotel(
+            @RequestBody UserEntity userEntity
+    ){
+        return ResponseEntity.ok(authService.register(userEntity));
     }
 }
