@@ -36,13 +36,20 @@ public class RoomService {
     public void saveRoom(RoomEntity roomEntity, MultipartFile imageFile) throws IOException {
         HotelEntity hotelEntity = hotelRepository.findById(roomEntity.getHotelEntity().getId())
                 .orElseThrow(() -> new RuntimeException("Hotel With this Id not Found"));
+
         System.out.println("Hotel " + hotelEntity.toString());
+
         if (imageFile != null && !imageFile.isEmpty()) {
             String imageFilename = saveImage(imageFile, roomEntity);
             roomEntity.setImage(imageFilename);
         }
+
         roomEntity.setHotelEntity(hotelEntity);
         roomRepository.save(roomEntity);
+    }
+
+    public void deleteRoom(long id) {
+        roomRepository.deleteById(id);
     }
 
     public RoomEntity findById(long id) {
@@ -60,6 +67,7 @@ public class RoomService {
 
     private String saveImage(MultipartFile file, RoomEntity roomEntity) throws IOException {
         Path uploadPath = Paths.get(uploadDir + "/room");
+
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }

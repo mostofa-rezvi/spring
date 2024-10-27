@@ -61,7 +61,7 @@ public class AuthService {
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 
         userEntity.setRole(Role.valueOf("USER"));
-        userEntity.setLock(false);
+        userEntity.setLock(true);
         userEntity.setActive(false);
 
         userRepository.save(userEntity);
@@ -73,6 +73,46 @@ public class AuthService {
         sendActivationEmail(userEntity);
 
         return new AuthenticationResponse(jwt, "User registration was successful");
+    }
+
+    public AuthenticationResponse registerAdmin(UserEntity userEntity) {
+        if (userRepository.findByEmail(userEntity.getUsername()).isPresent()) {
+            return new AuthenticationResponse(null, "User already exists.");
+        }
+
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        userEntity.setRole(Role.valueOf("ADMIN"));
+        userEntity.setLock(true);
+        userEntity.setActive(false);
+
+        userRepository.save(userEntity);
+
+        String jwt = jwtService.generateToken(userEntity);
+
+        saveUserToken(jwt, userEntity);
+        sendActivationEmail(userEntity);
+
+        return new AuthenticationResponse(jwt, "User registration was successful");
+    }
+
+    public AuthenticationResponse registerHotel(UserEntity userEntity) {
+        if (userRepository.findByEmail(userEntity.getUsername()).isPresent()) {
+            return new AuthenticationResponse(null, "User already Exists.");
+        }
+
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        userEntity.setRole(Role.valueOf("HOTEL"));
+        userEntity.setLock(false);
+        userEntity.setActive(false);
+
+        userRepository.save(userEntity);
+
+        String jwt = jwtService.generateToken(userEntity);
+
+        saveUserToken(jwt, userEntity);
+        sendActivationEmail(userEntity);
+
+        return new AuthenticationResponse(jwt, "User registration was successful.");
     }
 
     public AuthenticationResponse authenticate(UserEntity userEntity) {
@@ -116,8 +156,8 @@ public class AuthService {
 
         if (userEntity != null) {
             userEntity.setActive(true);
-
             userRepository.save(userEntity);
+
             return "User activated successfully!";
         } else {
             return "Invalid activation token!";

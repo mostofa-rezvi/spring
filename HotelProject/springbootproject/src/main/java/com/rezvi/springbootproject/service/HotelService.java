@@ -26,16 +26,19 @@ public class HotelService {
     private LocationRepository locationRepository;
 
     @Value("src/main/resources/static/images")
-    private  String uploadDir;
+    private String uploadDir;
 
 
-    public List<HotelEntity> getAllHotel(){
-        return  hotelRepository.findAll();
+    public List<HotelEntity> getAllHotel() {
+        return hotelRepository.findAll();
     }
 
+    @Transactional
     public void saveHotel(HotelEntity hotelEntity, MultipartFile imageFile) throws IOException {
-        LocationEntity locationEntity=locationRepository.findById(hotelEntity.getLocationEntity().getId())
-                .orElseThrow(()-> new RuntimeException("Location With this Id not Found"));
+        LocationEntity locationEntity = locationRepository.findById(hotelEntity.getLocationEntity().getId())
+                .orElseThrow(() -> new RuntimeException("Location With this Id not Found"));
+
+        System.out.println(locationEntity.toString());
 
         if (imageFile != null && !imageFile.isEmpty()) {
             String imageFilename = saveImage(imageFile, hotelEntity);
@@ -46,14 +49,14 @@ public class HotelService {
         hotelRepository.save(hotelEntity);
     }
 
-    public void deleteHotelById(int id){
+    public void deleteHotelById(int id) {
         hotelRepository.deleteById(id);
     }
 
-    public HotelEntity findHotelById(int id){
-        return  hotelRepository.findById(id)
+    public HotelEntity findHotelById(int id) {
+        return hotelRepository.findById(id)
                 .orElseThrow(
-                        ()->new RuntimeException("Hotel Not found With this ID")
+                        () -> new RuntimeException("Hotel Not found With this ID")
                 );
     }
 
@@ -80,20 +83,18 @@ public class HotelService {
     }
 
 
-    public List<HotelEntity> findHotelsByLocationName(String locationName){
+    public List<HotelEntity> findHotelsByLocationName(String locationName) {
         return hotelRepository.findHotelsByLocationName(locationName);
     }
 
-
-
-
     private String saveImage(MultipartFile file, HotelEntity hotelEntity) throws IOException {
-        Path uploadPath = Paths.get(uploadDir+"/hotel");
+        Path uploadPath = Paths.get(uploadDir + "/hotel");
+
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        String filename = hotelEntity.getName()+"_"+ UUID.randomUUID().toString() ;
+        String filename = hotelEntity.getName() + "_" + UUID.randomUUID().toString();
         Path filePath = uploadPath.resolve(filename);
 
         Files.copy(file.getInputStream(), filePath);

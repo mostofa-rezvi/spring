@@ -19,5 +19,4 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(
                         () -> new UsernameNotFoundException("User Not Found With this Email Address"));
     }
-
 }
